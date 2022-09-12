@@ -1,4 +1,5 @@
 import React from 'react'
+import ContactUs from '../components/ContactUs'
 import Faq from '../components/Faq'
 import FeaturedProducts from '../components/FeaturedProducts'
 import Hero from '../components/Hero'
@@ -11,8 +12,9 @@ const Landing = () => {
         <Hero/>
         <Video/>
         <WhatToDo/>
-        <FeaturedProducts/>
+        <FeaturedProducts Heading="Featured Products"/>
         <Faq/>
+        <ContactUs/>
     </>
   )
 }
