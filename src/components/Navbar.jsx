@@ -3,6 +3,7 @@ import Logo from '../assets/logo.png';
 import {AiOutlineSearch} from 'react-icons/ai';
 import {HiMenuAlt3, HiX} from 'react-icons/hi';
 import { Link } from 'react-router-dom';
+import { Transition } from '@windmill/react-ui';
 const Navbar = () => {
   const [toggle, setToggle] = useState(false);
   return (
@@ -31,8 +32,15 @@ const Navbar = () => {
               toggle ? <HiX className='relative text-2xl font-bold text-slate-700 cursor-pointer' onClick={()=>setToggle(false)}/> :
               <HiMenuAlt3 className='relative text-2xl font-bold text-slate-700 cursor-pointer' onClick={()=>setToggle(true)}/>
             }
-            {
-              toggle && 
+           <Transition
+                  show={toggle}
+                  enter="transition ease-out duration-300 transform"
+                  enterFrom="opacity-0 scale-95"
+                  enterTo="opacity-100 scale-100"
+                  leave="transition ease-in duration-100 transform"
+                  leaveFrom="opacity-100 scale-100"
+                  leaveTo="opacity-0 scale-95"
+                >
               <div className='absolute top-14 left-1/2 transform -translate-x-1/2 bg-white w-full rounded-xl p-5 shadow-md'>
               <div className='my-2'>
                 <Link to="/how-it-works" className='text-sm font-bold'>How it works</Link>
@@ -49,7 +57,7 @@ const Navbar = () => {
                 <a href="" className='bg-black text-white rounded-full px-5 py-1 text-sm font-normal'>Login</a>
               </div>
             </div>
-            }
+            </Transition>
             
           </div>
         </div>

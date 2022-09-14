@@ -5,6 +5,7 @@ import Navbar from './components/Navbar';
 import Landing from './pages/Landing';
 import HowItsWorks from './pages/HowItsWorks';
 import Collections from './pages/Collections';
+import ProductDetails from './pages/ProductDetails';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <Route path='/' element={<Landing/>}/>
       <Route path='/how-it-works' element={<HowItsWorks/>}/>
       <Route path='/view-collections' element={<Collections/>}/>
+      <Route path='/product-details' element={<ProductDetails/>}/>
       </Routes>
       <Footer/>
     </BrowserRouter>

@@ -1,9 +1,10 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 import vector from '../assets/label.png';
 
 const Product = ({img, tag, title, price}) => {
   return (
-    <a href=''>
+    <Link to='/product-details'>
       <div className='shadow-inner shadow-slate-300 w-full rounded-md relative'>
         <img src={img} className="w-full h-full md:w-80 md:h-80 p-1" alt="" />
         <div className='absolute top-0'>
@@ -15,7 +16,7 @@ const Product = ({img, tag, title, price}) => {
         <h1 className='text-md font-bold'>{title}</h1>
         <p className='text-md font-extrabold my-2'>$ {price}</p>
       </div>
-    </a>
+    </Link>
   )
 }
 
