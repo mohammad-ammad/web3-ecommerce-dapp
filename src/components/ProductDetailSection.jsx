@@ -2,9 +2,11 @@ import React from 'react'
 import p1 from '../assets/p1.png';
 import vector from '../assets/label.png';
 import matic from '../assets/matic.png';
+import { useState } from 'react';
 
-const ProductDetailSection = () => {
+const ProductDetailSection = ({setShowModal}) => {
   return (
+    <>
     <div className='w-full grid grid-cols-1 lg:grid-cols-3 gap-3 bg-slate-100 h-full pt-32 pb-10 px-5 md:px-10 lg:px-32'>
         <div>
             <p className='text-lg text-slate-800 font-bold mb-3'>Brand’s name</p>
@@ -50,9 +52,10 @@ const ProductDetailSection = () => {
                     <p className='text-2xl mr-2 text-purple-600 font-bold ml-2'>2056</p>
                 </div>
             </div>
-            <button className='bg-black text-white rounded-full px-5 py-1 text-sm font-normal'>Buy Now</button>
+            <button className='bg-black text-white rounded-full px-5 py-1 text-sm font-normal' onClick={() => setShowModal(true)}>Buy Now</button>
         </div>
     </div>
+</>
   )
 }
 

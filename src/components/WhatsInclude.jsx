@@ -38,7 +38,7 @@ const WhatsInclude = () => {
                 <img src={v2} className="w-7 my-3" alt="" srcset="" />
                 <p className='text-lg font-bold my-2 text-black'>NFT</p>
                 <div className='flex justify-start items-center'>
-                    <h4 className='text-xs font-bold text-slate-700 mr-3'>Contract Address</h4>
+                    <h4 className='text-xs font-bold text-slate-700 mr-1'>Contract Address</h4>
                     <p className='text-xs text-blue-500'>0x47e3cd892akl5c6r394d3fuf...</p>
                 </div>
                 <div className='flex justify-start items-center'>
@@ -60,7 +60,7 @@ const WhatsInclude = () => {
                 <p className='text-sm text-slate-700'>
                 Imagined by The Spot Room lab. Compatible with iPhone and Snapchat.
                 </p>
-                <div>
+                <div className='border-solid border-2 w-fit px-5 py-1 text-sm font-bold mt-3 cursor-pointer rounded-2xl border-slate-600'>
                     try now
                 </div>
             </div>
