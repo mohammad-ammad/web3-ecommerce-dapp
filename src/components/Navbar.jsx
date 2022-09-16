@@ -4,7 +4,7 @@ import {AiOutlineSearch} from 'react-icons/ai';
 import {HiMenuAlt3, HiX} from 'react-icons/hi';
 import { Link } from 'react-router-dom';
 import { Transition } from '@windmill/react-ui';
-const Navbar = () => {
+const Navbar = ({setShowModal}) => {
   const [toggle, setToggle] = useState(false);
   return (
     <>
@@ -25,7 +25,7 @@ const Navbar = () => {
             <a href="" className='text-sm font-bold'>Join Now</a>
           </div>
           <div className='hidden md:block mx-1'>
-            <a href="" className='bg-black text-white rounded-full px-5 py-1 text-sm font-normal'>Login</a>
+            <a href="javaScript:void(0)" onClick={()=>setShowModal(true)} className='bg-black text-white rounded-full px-5 py-1 text-sm font-normal'>Login</a>
           </div>
           <div className='block md:hidden'>
             {

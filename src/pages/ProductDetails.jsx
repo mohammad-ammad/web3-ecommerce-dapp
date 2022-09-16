@@ -6,9 +6,11 @@ import ContactUs from '../components/ContactUs'
 import ReviewModel from '../components/ReviewModel'
 import { useState } from 'react'
 import ConfirmOrderModel from '../components/ConfirmOrderModel'
+import AccountInfoModel from '../components/AccountInfoModel'
 const ProductDetails = () => {
   const [showModal, setShowModal] = useState(false);
   const [confirmModal, setConfirmModal] = useState(false);
+  const [accountInfo, setAccountInfo] = useState(false);
   return (
     <div>
         <ProductDetailSection setShowModal={setShowModal}/>
@@ -16,7 +18,8 @@ const ProductDetails = () => {
         <Faq/>
         <ContactUs/>
         <ReviewModel showModal={showModal} setShowModal={setShowModal} setConfirmModal={setConfirmModal}/>
-        <ConfirmOrderModel confirmModal={confirmModal} setConfirmModal={setConfirmModal} setShowModal={setShowModal}/>
+        <ConfirmOrderModel confirmModal={confirmModal} setConfirmModal={setConfirmModal} setShowModal={setShowModal} setAccountInfo={setAccountInfo}/>
+        <AccountInfoModel accountInfo={accountInfo} setAccountInfo={setAccountInfo} setConfirmModal={setConfirmModal}/>
     </div>
   )
 }

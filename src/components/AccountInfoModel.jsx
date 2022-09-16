@@ -1,25 +1,25 @@
 import { Transition } from '@windmill/react-ui';
 import React from 'react'
 import { HiX } from 'react-icons/hi';
-import ConfirmOrderContent from './ConfirmOrderContent';
+import AccountInfoContent from './AccountInfoContent';
 import {BsArrowLeft} from 'react-icons/bs'
+import {useNavigate} from 'react-router-dom';
 
-const ConfirmOrderModel = ({ confirmModal, setConfirmModal, setShowModal, setAccountInfo }) => {
-    const backHandler = () => 
-    {
-        setShowModal(true)
-        setConfirmModal(false)
-    }
-
-    const nextHandler = () => 
-    {
-      setAccountInfo(true)
-      setConfirmModal(false)
-    }
+const AccountInfoModel = ({ accountInfo, setAccountInfo, setConfirmModal }) => {
+  const navigate = useNavigate();
+  const nextHandler = () => 
+  {
+    navigate('/account-settings')
+  }
+  const backHandler = () => 
+  {
+    setAccountInfo(false);
+    setConfirmModal(true);
+  }
   return (
     <>
       <Transition
-        show={confirmModal}
+        show={accountInfo}
         enter="transition ease-out duration-300 transform"
         enterFrom="opacity-0 scale-95"
         enterTo="opacity-100 scale-100"
@@ -30,7 +30,7 @@ const ConfirmOrderModel = ({ confirmModal, setConfirmModal, setShowModal, setAcc
 
         <>
           <div
-            className="justify-center items-center flex overflow-x-hidden overflow-y-auto absolute md:fixed top-1/2 md:inset-0 z-50 outline-none focus:outline-none"
+            className="justify-center items-center flex overflow-x-hidden overflow-y-auto w-full fixed  inset-0 z-50 outline-none focus:outline-none"
           >
             <div className="relative w-auto my-6 mx-auto max-w-3xl">
               {/*content*/}
@@ -38,23 +38,23 @@ const ConfirmOrderModel = ({ confirmModal, setConfirmModal, setShowModal, setAcc
                 {/*header*/}
                 <div className="flex items-center justify-between p-5 border-b border-solid border-slate-200 rounded-t">
                   <h3 className="text-xl font-semibold">
-                    Confirm Order
+                    Account Information
                   </h3>
-                  <button onClick={() => setConfirmModal(false)}>
+                  <button onClick={() => setAccountInfo(false)}>
                     <HiX className='text-2xl' />
                   </button>
 
                 </div>
                 {/*body*/}
                 <div className="relative p-6 flex-auto">
-                  <ConfirmOrderContent/>
+                  <AccountInfoContent/>
                 </div>
                 {/*footer*/}
                 <div className="flex items-center justify-between p-6 border-t border-solid border-slate-200 rounded-b">
-                  <button onClick={backHandler} className='rounded-full px-6 py-2 text-sm font-bold text-black inline-flex justify-start items-center'>
+                <button onClick={backHandler} className='rounded-full px-6 py-2 text-sm font-bold text-black inline-flex justify-start items-center'>
                     <BsArrowLeft className='text-xl mr-2'/>Back
                  </button>
-                  <button className='bg-black text-white rounded-full px-6 py-2 text-sm font-normal' onClick={nextHandler}>Next</button>
+                  <button onClick={nextHandler} className='bg-black text-white rounded-full px-6 py-2 text-sm font-normal'>Next</button>
                 </div>
               </div>
             </div>
@@ -67,4 +67,4 @@ const ConfirmOrderModel = ({ confirmModal, setConfirmModal, setShowModal, setAcc
   )
 }
 
-export default ConfirmOrderModel
+export default AccountInfoModel

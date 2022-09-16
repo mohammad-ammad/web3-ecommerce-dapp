@@ -31,33 +31,6 @@ const ReviewOrderContent = () => {
             </p>
         </div>
     </div>
-    {/* <div>
-        <h1 className='text-md font-bold text-black'>Shipping Address:</h1>
-        <div className='grid grid-cols-1 lg:grid-cols-2 gap-3'>
-            <div className='bg-white shadow-inner shadow-slate-200 rounded-lg my-1'>
-                <input type="text" className='w-full p-2 text-xs bg-transparent outline-none' placeholder='Street Name' name="" id="" />
-            </div>
-            <div className='bg-white shadow-inner shadow-slate-200 rounded-lg my-1'>
-                <input type="text" className='w-full p-2 text-xs bg-transparent outline-none' placeholder='Room / apartment etc. (optional)' name="" id="" />
-            </div>
-        </div>
-        <div className='grid grid-cols-1 lg:grid-cols-2 gap-3'>
-            <div className='bg-white shadow-inner shadow-slate-200 rounded-lg my-1'>
-                <input type="text" className='w-full p-2 text-xs bg-transparent outline-none' placeholder='City name' name="" id="" />
-            </div>
-            <div className='bg-white shadow-inner shadow-slate-200 rounded-lg my-1'>
-                    <input type="text" className='w-full p-2 text-xs bg-transparent outline-none' placeholder='Country' name="" id="" />
-            </div>
-        </div>
-        <div className='grid grid-cols-1 lg:grid-cols-2 gap-3'>
-            <div className='bg-white shadow-inner shadow-slate-200 rounded-lg my-1'>
-                <input type="text" className='w-full p-2 text-xs bg-transparent outline-none' placeholder='State' name="" id="" />
-            </div>
-            <div className='bg-white shadow-inner shadow-slate-200 rounded-lg my-1'>
-                <input type="text" className='w-full p-2 text-xs bg-transparent outline-none' placeholder='Zip Code' name="" id="" />
-            </div>
-        </div>
-    </div> */}
     </>
   )
 }
