@@ -9,11 +9,28 @@ import ProductDetails from './pages/ProductDetails';
 import AccountSettings from './pages/AccountSettings';
 import AuthModel from './components/AuthModel';
 import { useState } from 'react';
+import WalletModel from './components/WalletModel';
+import InAppWalletModel from './components/InAppWalletModel';
+import {Toaster} from 'react-hot-toast';
 
 function App() {
   const [showModal, setShowModal] = useState(false);
+  const [walletModal, setWalletModal] = useState(false);
+  const [inWalletModal, setInWalletModal] = useState(false);
   return (
     <>
+    <Toaster 
+          position='bottom-right'
+          toastOptions={{
+            success:{
+              theme: {
+                primary:'#4aed88'
+              }
+            }
+          }}
+        >
+
+    </Toaster>
     <BrowserRouter>
       <Navbar setShowModal={setShowModal}/>
       <Routes>
@@ -23,7 +40,9 @@ function App() {
       <Route path='/product-details' element={<ProductDetails/>}/>
       <Route path='/account-settings' element={<AccountSettings/>}/>
       </Routes>
-      <AuthModel showModal={showModal} setShowModal={setShowModal}/>
+      <AuthModel showModal={showModal} setShowModal={setShowModal} setWalletModal={setWalletModal}/>
+      <WalletModel walletModal={walletModal} setWalletModal={setWalletModal} setInWalletModal={setInWalletModal}/>
+      <InAppWalletModel inWalletModal={inWalletModal} setInWalletModal={setInWalletModal} />
       <Footer/>
     </BrowserRouter>
     </>

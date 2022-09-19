@@ -1,7 +1,7 @@
 import React from 'react'
 import googleIcon from '../assets/google_icon.png';
 import walletIcon from '../assets/wallet_icon.png';
-const AuthContent = () => {
+const AuthContent = ({walletHandler}) => {
   return (
     <>
     <div>
@@ -21,7 +21,7 @@ const AuthContent = () => {
             <img src={googleIcon} className="bg-white rounded-full ml-3" alt="" srcset="" />
             <p className='w-full pt-0.5'>Continue with Google</p>
         </button>
-        <button className='flex bg-purple-500 text-white w-full p-2 rounded-xl'>
+        <button onClick={walletHandler} className='flex bg-purple-500 text-white w-full p-2 rounded-xl'>
             <img src={walletIcon} className="rounded-full ml-3" alt="" srcset="" />
             <p className='w-full pt-1'>Connect Wallet</p>
         </button>

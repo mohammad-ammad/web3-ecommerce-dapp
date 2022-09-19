@@ -4,8 +4,14 @@ import {AiOutlineSearch} from 'react-icons/ai';
 import {HiMenuAlt3, HiX} from 'react-icons/hi';
 import { Link } from 'react-router-dom';
 import { Transition } from '@windmill/react-ui';
+import { useContext } from 'react';
+import { WalletContext } from '../context/WalletContext';
 const Navbar = ({setShowModal}) => {
+  //Intialized states
   const [toggle, setToggle] = useState(false);
+  //Getting Instance Context
+  const {wallet} = useContext(WalletContext)
+
   return (
     <>
       <div className='fixed z-50 top-3 left-1/2 transform -translate-x-1/2 bg-white flex justify-between items-center w-5/6 h-12 p-5 rounded-full shadow-md'>
@@ -21,12 +27,27 @@ const Navbar = ({setShowModal}) => {
           <div className='hidden md:block mx-2'>
             <Link to="/how-it-works" className='text-sm font-bold'>How it works</Link>
           </div>
-          <div className='hidden md:block mx-2'>
-            <a href="" className='text-sm font-bold'>Join Now</a>
-          </div>
-          <div className='hidden md:block mx-1'>
-            <a href="javaScript:void(0)" onClick={()=>setShowModal(true)} className='bg-black text-white rounded-full px-5 py-1 text-sm font-normal'>Login</a>
-          </div>
+          {
+            wallet.isConnected ?
+            <>
+              <div className='hidden md:block mx-2'>
+                <a href="" className='text-sm font-bold'>Profile</a>
+              </div>
+              <div className='hidden md:block mx-1'>
+                <a href="javaScript:void(0)" className='bg-black text-white rounded-full px-5 py-1 text-sm font-normal'>Connected</a>
+              </div>
+            </>
+            :
+            <>
+              <div className='hidden md:block mx-2'>
+                <a href="" className='text-sm font-bold'>Join Now</a>
+              </div>
+              <div className='hidden md:block mx-1'>
+                <a href="javaScript:void(0)" onClick={()=>setShowModal(true)} className='bg-black text-white rounded-full px-5 py-1 text-sm font-normal'>Login</a>
+              </div>
+            </>
+          }
+         
           <div className='block md:hidden'>
             {
               toggle ? <HiX className='relative text-2xl font-bold text-slate-700 cursor-pointer' onClick={()=>setToggle(false)}/> :

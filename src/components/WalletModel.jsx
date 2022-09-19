@@ -1,20 +1,15 @@
 import { Transition } from '@windmill/react-ui';
 import React from 'react'
 import { HiX } from 'react-icons/hi';
-import AuthContent from './AuthContent';
+import WalletContent from './WalletContent';
 
 
-const AuthModel = ({ showModal ,setShowModal, setWalletModal }) => {
-
-  const walletHandler = () => 
-  {
-    setWalletModal(true)
-    setShowModal(false)
-  }
+const WalletModel = ({ walletModal ,setWalletModal, setInWalletModal }) => {
+  
   return (
     <>
       <Transition
-        show={showModal}
+        show={walletModal}
         enter="transition ease-out duration-300 transform"
         enterFrom="opacity-0 scale-95"
         enterTo="opacity-100 scale-100"
@@ -33,16 +28,16 @@ const AuthModel = ({ showModal ,setShowModal, setWalletModal }) => {
                 {/*header*/}
                 <div className="flex items-center justify-between p-5 border-b border-solid border-slate-200 rounded-t">
                   <h3 className="text-xl font-semibold">
-                    Account Information
+                    Connect Wallet
                   </h3>
-                  <button onClick={() => setShowModal(false)}>
+                  <button onClick={() => setWalletModal(false)}>
                     <HiX className='text-2xl' />
                   </button>
 
                 </div>
                 {/*body*/}
                 <div className="relative p-6 flex-auto">
-                  <AuthContent walletHandler={walletHandler}/>
+                  <WalletContent setWalletModal={setWalletModal} setInWalletModal={setInWalletModal}/>
                 </div>
                 {/*footer*/}
                 
@@ -57,4 +52,4 @@ const AuthModel = ({ showModal ,setShowModal, setWalletModal }) => {
   )
 }
 
-export default AuthModel
+export default WalletModel

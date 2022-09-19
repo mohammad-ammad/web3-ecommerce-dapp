@@ -1,3 +1,4 @@
+import { Transition } from '@windmill/react-ui';
 import React, { useState } from 'react'
 import {MdOutlineKeyboardArrowDown} from 'react-icons/md';
 
@@ -15,11 +16,22 @@ const Queries = ({question, answer, active}) => {
                         <MdOutlineKeyboardArrowDown className='fill-white text-lg cursor-pointer' onClick={toggleHandler}/>
                     </p>
                 </div>
-                <div className={`${toggle ? 'block' : 'hidden'}`}>
+                <Transition
+                  show={toggle}
+                  enter="transition ease-out duration-300 transform"
+                  enterFrom="opacity-0 scale-95"
+                  enterTo="opacity-100 scale-100"
+                  leave="transition ease-in duration-100 transform"
+                  leaveFrom="opacity-100 scale-100"
+                  leaveTo="opacity-0 scale-95"
+                >
+                    <div>
                     <p className='text-xs text-justify font-light text-slate-300 mb-3'>
                     {answer}
                     </p>
-                </div>
+                    </div>
+                </Transition>
+                
     </div>
     <hr />
     </>
