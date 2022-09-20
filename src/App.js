@@ -8,43 +8,52 @@ import Collections from './pages/Collections';
 import ProductDetails from './pages/ProductDetails';
 import AccountSettings from './pages/AccountSettings';
 import AuthModel from './components/AuthModel';
-import { useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import WalletModel from './components/WalletModel';
 import InAppWalletModel from './components/InAppWalletModel';
 import {Toaster} from 'react-hot-toast';
+import SignUpModel from './components/SignUpModel';
+import EmailSignUpModel from './components/EmailSignUpModel';
 
 function App() {
+
+  //----Intialized States Varibales
   const [showModal, setShowModal] = useState(false);
   const [walletModal, setWalletModal] = useState(false);
   const [inWalletModal, setInWalletModal] = useState(false);
+  const [isSignUp, setIsSignUp] = useState(false);
+  const [authModel, setAuthModel] = useState(false);
+ 
   return (
     <>
-    <Toaster 
-          position='bottom-right'
-          toastOptions={{
-            success:{
-              theme: {
-                primary:'#4aed88'
+      <Toaster 
+            position='bottom-right'
+            toastOptions={{
+              success:{
+                theme: {
+                  primary:'#4aed88'
+                }
               }
-            }
-          }}
-        >
+            }}
+          >
 
-    </Toaster>
-    <BrowserRouter>
-      <Navbar setShowModal={setShowModal}/>
-      <Routes>
-      <Route path='/' element={<Landing/>}/>
-      <Route path='/how-it-works' element={<HowItsWorks/>}/>
-      <Route path='/view-collections' element={<Collections/>}/>
-      <Route path='/product-details' element={<ProductDetails/>}/>
-      <Route path='/account-settings' element={<AccountSettings/>}/>
-      </Routes>
-      <AuthModel showModal={showModal} setShowModal={setShowModal} setWalletModal={setWalletModal}/>
-      <WalletModel walletModal={walletModal} setWalletModal={setWalletModal} setInWalletModal={setInWalletModal}/>
-      <InAppWalletModel inWalletModal={inWalletModal} setInWalletModal={setInWalletModal} />
-      <Footer/>
-    </BrowserRouter>
+      </Toaster>
+      <BrowserRouter>
+        <Navbar setShowModal={setShowModal} setIsSignUp={setIsSignUp}/>
+        <Routes>
+        <Route path='/' element={<Landing/>}/>
+        <Route path='/how-it-works' element={<HowItsWorks/>}/>
+        <Route path='/view-collections' element={<Collections/>}/>
+        <Route path='/product-details' element={<ProductDetails/>}/>
+        <Route path='/account-settings' element={<AccountSettings/>}/>
+        </Routes>
+        <AuthModel showModal={showModal} setShowModal={setShowModal} setWalletModal={setWalletModal}/>
+        <SignUpModel isSignUp={isSignUp} setIsSignUp={setIsSignUp} setAuthModel={setAuthModel} />
+        <EmailSignUpModel authModel={authModel} setAuthModel={setAuthModel}/>
+        <WalletModel walletModal={walletModal} setWalletModal={setWalletModal} setInWalletModal={setInWalletModal}/>
+        <InAppWalletModel inWalletModal={inWalletModal} setInWalletModal={setInWalletModal} />
+        <Footer/>
+      </BrowserRouter>
     </>
   );
 }

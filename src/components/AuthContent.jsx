@@ -1,7 +1,13 @@
 import React from 'react'
 import googleIcon from '../assets/google_icon.png';
 import walletIcon from '../assets/wallet_icon.png';
+import { useContext } from 'react';
+import { AuthContext } from '../context/AuthContext';
+
 const AuthContent = ({walletHandler}) => {
+    
+    const {login} = useContext(AuthContext)
+
   return (
     <>
     <div>
@@ -17,7 +23,7 @@ const AuthContent = ({walletHandler}) => {
         <a href="javaScript:void(0)" className='bg-black text-white rounded-full px-5 py-1 text-sm font-normal'>Sign In</a>
     </div>
     <div>
-        <button className='flex bg-blue-500 text-white w-full p-2 rounded-xl mb-3'>
+        <button onClick={() => login()} className='flex bg-blue-500 text-white w-full p-2 rounded-xl mb-3'>
             <img src={googleIcon} className="bg-white rounded-full ml-3" alt="" srcset="" />
             <p className='w-full pt-0.5'>Continue with Google</p>
         </button>

@@ -5,15 +5,21 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { WalletProvider } from './context/WalletContext';
 import { InstanceProvider } from './context/InstanceContext';
+import { AuthProvider } from './context/AuthContext';
+import { GoogleOAuthProvider } from '@react-oauth/google';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <WalletProvider>
-      <InstanceProvider>
-        <App />
-      </InstanceProvider>
-    </WalletProvider>
+    <GoogleOAuthProvider clientId={`${process.env.React_App_CLIENT_ID}`}>
+    <AuthProvider>
+      <WalletProvider>
+        <InstanceProvider>
+          <App />
+        </InstanceProvider>
+      </WalletProvider>
+    </AuthProvider>
+    </GoogleOAuthProvider>
   </React.StrictMode>
 );
 

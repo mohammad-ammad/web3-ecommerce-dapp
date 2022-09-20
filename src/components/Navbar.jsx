@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import { Transition } from '@windmill/react-ui';
 import { useContext } from 'react';
 import { WalletContext } from '../context/WalletContext';
-const Navbar = ({setShowModal}) => {
+const Navbar = ({setShowModal, setIsSignUp}) => {
   //Intialized states
   const [toggle, setToggle] = useState(false);
   //Getting Instance Context
@@ -40,7 +40,7 @@ const Navbar = ({setShowModal}) => {
             :
             <>
               <div className='hidden md:block mx-2'>
-                <a href="" className='text-sm font-bold'>Join Now</a>
+                <a href="javaScript:void(0)" onClick={()=>setIsSignUp(true)} className='text-sm font-bold'>Join Now</a>
               </div>
               <div className='hidden md:block mx-1'>
                 <a href="javaScript:void(0)" onClick={()=>setShowModal(true)} className='bg-black text-white rounded-full px-5 py-1 text-sm font-normal'>Login</a>
