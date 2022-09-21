@@ -12,13 +12,13 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <GoogleOAuthProvider clientId={`${process.env.React_App_CLIENT_ID}`}>
-    <AuthProvider>
+    <InstanceProvider>
       <WalletProvider>
-        <InstanceProvider>
+        <AuthProvider>
           <App />
-        </InstanceProvider>
+        </AuthProvider>
       </WalletProvider>
-    </AuthProvider>
+    </InstanceProvider>
     </GoogleOAuthProvider>
   </React.StrictMode>
 );

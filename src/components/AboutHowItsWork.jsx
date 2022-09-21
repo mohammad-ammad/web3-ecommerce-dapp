@@ -19,11 +19,11 @@ const Card = ({num,title,desc,image, pos}) =>
     return (
         <div className='flex justify-center md:justify-evenly items-center flex-col md:flex-row my-3'>
             <div className='block md:hidden'>
-                <img src={image} className="w-96" alt="" srcset="" />
+                <img src={image} className="w-96" alt="" />
             </div>
             {
                 pos === "left" ? <div className='hidden md:block'>
-                <img src={image} className="w-96" alt="" srcset="" />
+                <img src={image} className="w-96" alt="" />
             </div>
             : ''
             }
@@ -33,7 +33,7 @@ const Card = ({num,title,desc,image, pos}) =>
             </div>
             {
                 pos === "right" ? <div className='hidden md:block'>
-                <img src={image} className="w-96" alt="" srcset="" />
+                <img src={image} className="w-96" alt="" />
             </div>
             : ''
             }

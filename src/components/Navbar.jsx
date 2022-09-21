@@ -16,7 +16,7 @@ const Navbar = ({setShowModal, setIsSignUp}) => {
     <>
       <div className='fixed z-50 top-3 left-1/2 transform -translate-x-1/2 bg-white flex justify-between items-center w-5/6 h-12 p-5 rounded-full shadow-md'>
         <Link to='/' className='flex justify-start items-center'>
-          <img src={Logo} className="w-7 mr-2" alt="" srcset="" />
+          <img src={Logo} className="w-7 mr-2" alt="" />
           <h1 className='text-lg font-extrabold'>The Spot Room</h1>
         </Link>
         <div className='flex justify-start items-center'>
@@ -34,16 +34,16 @@ const Navbar = ({setShowModal, setIsSignUp}) => {
                 <a href="" className='text-sm font-bold'>Profile</a>
               </div>
               <div className='hidden md:block mx-1'>
-                <a href="javaScript:void(0)" className='bg-black text-white rounded-full px-5 py-1 text-sm font-normal'>Connected</a>
+                <button className='bg-black text-white rounded-full px-5 py-1 text-sm font-normal'>Connected</button>
               </div>
             </>
             :
             <>
               <div className='hidden md:block mx-2'>
-                <a href="javaScript:void(0)" onClick={()=>setIsSignUp(true)} className='text-sm font-bold'>Join Now</a>
+                <button onClick={()=>setIsSignUp(true)} className='text-sm font-bold'>Join Now</button>
               </div>
               <div className='hidden md:block mx-1'>
-                <a href="javaScript:void(0)" onClick={()=>setShowModal(true)} className='bg-black text-white rounded-full px-5 py-1 text-sm font-normal'>Login</a>
+                <button onClick={()=>setShowModal(true)} className='bg-black text-white rounded-full px-5 py-1 text-sm font-normal'>Login</button>
               </div>
             </>
           }

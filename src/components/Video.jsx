@@ -8,7 +8,7 @@ const Video = () => {
     <>
     <Strip/>
     <div>
-        <img src={Banner} className="w-full" alt="" srcset="" />
+        <img src={Banner} className="w-full" alt=""  />
     </div>
     <Strip/>
     </>

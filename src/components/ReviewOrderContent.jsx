@@ -6,7 +6,7 @@ const ReviewOrderContent = () => {
     <>
     <div className='grid grid-cols-1 lg:grid-cols-6 gap-0 overflow-y-auto'>
         <div className='col-span-2'>
-            <img src={p1} className="w-32 border-solid border-[1px] border-black rounded-lg" alt="" srcset="" />
+            <img src={p1} className="w-32 border-solid border-[1px] border-black rounded-lg" alt="" />
         </div>
         <div className='col-span-4'>
             <h1 className='text-xl font-bold text-black'>The item’s name goes here</h1>

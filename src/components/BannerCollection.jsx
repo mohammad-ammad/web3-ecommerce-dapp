@@ -4,7 +4,7 @@ import Banner1 from '../assets/banner1.png'
 const BannerCollection = () => {
   return (
     <div>
-        <img src={Banner1} className="relative w-full h-80 lg:h-auto"  alt="" srcset="" />
+        <img src={Banner1} className="relative w-full h-80 lg:h-auto"  alt="" />
         <div className='absolute top-14 lg:top-1/3 right-14 lg:right-44'>
             <div className='inline-flex justify-end items-end my-3 w-full'>
                 <HiX className='fill-white text-3xl cursor-pointer'/>

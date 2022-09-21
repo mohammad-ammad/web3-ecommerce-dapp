@@ -9,7 +9,7 @@ const WhatsInclude = () => {
         <h1 className='text-center text-4xl font-bold my-10'>What's Included</h1>
         <div className='grid grid-cols-1 md:grid-cols-2 gap-3 w-full p-2 md:w-1/2 relative left-1/2 transform -translate-x-1/2'>
             <div className='border-solid border-2 border-black rounded-lg p-3'>
-                <img src={v1} className="w-7 my-3" alt="" srcset="" />
+                <img src={v1} className="w-7 my-3" alt="" />
                 <p className='text-lg font-bold my-2 text-black'>Physical</p>
                 <p className='text-sm text-slate-700'>
                 Phygital collections will be available for redemption upon sucessful purchase. Customers without a crypto wallet can simply create an account with us and store the NFT in there. The physical product will be automatically shipped to the address provided unless storage option is selected during check-out.
@@ -35,7 +35,7 @@ const WhatsInclude = () => {
                 </p>
             </div>
             <div className='border-solid border-2 border-black rounded-lg p-3'>
-                <img src={v2} className="w-7 my-3" alt="" srcset="" />
+                <img src={v2} className="w-7 my-3" alt=""  />
                 <p className='text-lg font-bold my-2 text-black'>NFT</p>
                 <div className='flex justify-start items-center'>
                     <h4 className='text-xs font-bold text-slate-700 mr-1'>Contract Address</h4>
@@ -55,7 +55,7 @@ const WhatsInclude = () => {
                 </div>
             </div>
             <div className='border-solid border-2 border-black rounded-lg p-3'>
-                <img src={v4} className="w-7 my-3" alt="" srcset="" />
+                <img src={v4} className="w-7 my-3" alt=""  />
                 <p className='text-lg font-bold my-2 text-black'>Digital</p>
                 <p className='text-sm text-slate-700'>
                 Imagined by The Spot Room lab. Compatible with iPhone and Snapchat.

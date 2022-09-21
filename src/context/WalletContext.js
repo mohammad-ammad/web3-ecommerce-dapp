@@ -53,7 +53,7 @@ const WalletProvider = ({ children }) => {
             address:account[0],
             signer:_signer,
             network: web3ModalProvider._network,
-            isConnected:true
+            isConnected:false
         })
       }
 
@@ -68,7 +68,7 @@ const WalletProvider = ({ children }) => {
         })
     }
     return (
-        <WalletContext.Provider value={{connect, wallet, disConnect, setWallet}}>
+        <WalletContext.Provider value={{connect, wallet, disConnect, setWallet, web3Modal}}>
           {children}
         </WalletContext.Provider>
       );

@@ -6,7 +6,7 @@ const Faq = () => {
   return (
     <div className='bg-[#222222] grid grid-cols-1 md:grid-cols-3 gap-3 p-5 md:p-14'>
         <div className='inline-flex justify-center items-start'>
-            <img src={faq} className="w-60" alt="" srcset="" />
+            <img src={faq} className="w-60" alt=""  />
         </div>
         <div className='col-span-2'>
             <h1 className='text-2xl text-center md:text-left md:text-4xl text-slate-200 font-bold'>FAQ</h1>

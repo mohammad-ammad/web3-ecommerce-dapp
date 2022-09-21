@@ -48,7 +48,7 @@ const ProductDetailSection = ({setShowModal}) => {
                 <p className='text-2xl mr-2 text-slate-900 font-bold'>$ 1799</p>
                 <p className='text-md text-slate-900 font-medium mr-2'>or</p>
                 <div className='flex justify-start items-center'>
-                    <img src={matic} alt="" srcset="" />
+                    <img src={matic} alt=""  />
                     <p className='text-2xl mr-2 text-purple-600 font-bold ml-2'>2056</p>
                 </div>
             </div>

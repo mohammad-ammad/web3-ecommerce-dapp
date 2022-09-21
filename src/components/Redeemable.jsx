@@ -6,7 +6,7 @@ const Redeemable = ({pending, redeemable}) => {
     <div className='bg-slate-50 border-solid border-[1px] border-black rounded-xl p-2 my-3'>
     <div className='grid grid-cols-1 lg:grid-cols-6 gap-1 overflow-y-auto items-center'>
         <div className='col-span-2'>
-            <img src={p1} className="w-24 border-solid border-[1px] border-black rounded-lg" alt="" srcset="" />
+            <img src={p1} className="w-24 border-solid border-[1px] border-black rounded-lg" alt="" />
         </div>
         <div className='col-span-4'>
             <h1 className='text-xl font-bold text-black'>The item’s name goes here</h1>

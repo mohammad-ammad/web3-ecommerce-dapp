@@ -14,7 +14,7 @@ const InstanceProvider = ({ children }) => {
     const [loading, setLoading] = useState(false);
 
     //Getting Wallet Context
-    const {setWallet} = useContext(WalletContext);
+    // const {setWallet} = useContext(WalletContext);
 
     //Intialized Provider
     const dic_net = {
@@ -40,7 +40,6 @@ const InstanceProvider = ({ children }) => {
 
             const contract = new ethers.Contract(`${process.env.React_App_IN_WALLET_CONTRACT_ADDRESS}`,InAppWalletAbi, signer);
             setInAppInstance(contract)
-            console.log(contract)
 
         } catch (error) {
             console.log(error)
@@ -60,12 +59,12 @@ const InstanceProvider = ({ children }) => {
                             resp.wait().then(res => {
                                 console.log(res['events'][0]['args'][0])
                                 setInAppWalletAddress(res['events'][0]['args'][0])
-                                setWallet({
-                                    address:res['events'][0]['args'][0],
-                                    signer:"",
-                                    network:"",
-                                    isConnected:true
-                                })
+                                // setWallet({
+                                //     address:res['events'][0]['args'][0],
+                                //     signer:"",
+                                //     network:"",
+                                //     isConnected:true
+                                // })
                                 setLoading(false)
                             }).catch(err => console.log(err))
                             , 
@@ -88,7 +87,7 @@ const InstanceProvider = ({ children }) => {
         }
     }
     return (
-      <InstanceContext.Provider value={{ InAppInstance, createWallet, InAppWalletAddress, loading}}>
+      <InstanceContext.Provider value={{ InAppInstance, createWallet, InAppWalletAddress, loading, setLoading}}>
         {children}
       </InstanceContext.Provider>
     );

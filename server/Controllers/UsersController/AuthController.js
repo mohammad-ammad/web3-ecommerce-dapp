@@ -66,3 +66,95 @@ exports.create = async (req,res) => {
         })
     }
 }
+
+//---CHECK USER IS ALREADY EXIST OR NOT
+exports.isUser = async (req,res) => {
+    try {
+        const {email} = req.body;
+
+        if(!email)
+        {
+            throw Error("Email is required");
+        }
+
+        const isExist = await Users.findOne({email})
+
+        if(isExist)
+        {
+            res.status(200).json({message:false})
+        }
+        else 
+        {
+            res.status(200).json({message:true})
+        }
+
+    } catch (error) {
+        res.status(500).json({
+            message:error.message,
+        })
+    }
+}
+
+//---CHECK IS WALLET IS ALREADY EXIST OR NOT
+exports.isWallet = async (req,res) => {
+    try {
+        const {wallet} = req.body;
+
+        if(!wallet)
+        {
+            throw Error("Wallet is required");
+        }
+
+        const isExist = await Users.findOne({wallet})
+
+        if(isExist)
+        {
+            res.status(200).json({message:false})
+        }
+        else 
+        {
+            res.status(200).json({message:true})
+        }
+
+    } catch (error) {
+        res.status(500).json({
+            message:error.message,
+        })
+    }
+}
+
+//---LOGIN USER (CUSTOM LOGIN)
+exports.login = async (req,res) => {
+    try {
+        const {email,password,auth_type} = req.body;
+        if(!email)
+        {
+            throw Error("Email is required");
+        }
+        
+        const user = await Users.findOne({email})
+
+        if(user && user.auth_type === auth_type)
+        {
+            let resp = await bcrpyt.compare(password,user.password)
+
+            if(resp)
+            {
+                res.status(200).json(user)
+            }
+            else 
+            {
+                res.status(201).json({message:"Invalid Password"});
+            }
+        }
+        else 
+        {
+            res.status(201).json({message:"Invalid User"});
+        }
+        
+    } catch (error) {
+        res.status(500).json({
+            message:error.message,
+        })
+    }
+}

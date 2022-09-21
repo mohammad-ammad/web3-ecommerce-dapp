@@ -12,7 +12,7 @@ const Hero = () => {
     <>
     <div className={`grid grid-cols-1 ${grow ? 'md:grid-cols-5' : 'md:grid-cols-3'} gap-3`}>
         <div className={`${grow && 'col-span-3'} relative`}>
-            <img src={grow ? Banner1 : Hero1}  className="cursor-pointer w-full h-screen" onMouseEnter={() => setGrow(true)} onMouseLeave={() => setGrow(false)} alt="" srcset="" />
+            <img src={grow ? Banner1 : Hero1}  className="cursor-pointer w-full h-screen" onMouseEnter={() => setGrow(true)} onMouseLeave={() => setGrow(false)} alt="" />
             <div className={`${grow ? 'absolute top-14 md:top-1/3 right-10 md:right-10' : 'hidden'}`} onMouseEnter={() => setGrow(true)}>
             <div className='inline-flex justify-end items-end my-3 w-full'>
                 <p className='bg-white shadow-inner shadow-slate-300 rounded-lg w-24 text-center font-bold'>Live Now</p>
@@ -29,10 +29,10 @@ const Hero = () => {
         </div>
         </div>
         <div>
-        <img src={Hero2} alt="" className='w-full h-screen' srcset="" />
+        <img src={Hero2} alt="" className='w-full h-screen'  />
         </div>
         <div>
-        <img src={Hero3} alt="" className='w-full h-screen' srcset="" />
+        <img src={Hero3} alt="" className='w-full h-screen'  />
         </div>
     </div>
     </>
