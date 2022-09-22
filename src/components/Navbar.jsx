@@ -33,6 +33,9 @@ const Navbar = ({setShowModal, setIsSignUp}) => {
               <div className='hidden md:block mx-2'>
                 <a href="" className='text-sm font-bold'>Profile</a>
               </div>
+              <div className='hidden md:block mx-2'>
+                <Link to="/orders" className='text-sm font-bold'>Orders</Link>
+              </div>
               <div className='hidden md:block mx-1'>
                 <button className='bg-black text-white rounded-full px-5 py-1 text-sm font-normal'>Connected</button>
               </div>

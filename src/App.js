@@ -14,6 +14,7 @@ import InAppWalletModel from './components/InAppWalletModel';
 import {Toaster} from 'react-hot-toast';
 import SignUpModel from './components/SignUpModel';
 import EmailSignUpModel from './components/EmailSignUpModel';
+import Orders from './pages/Orders';
 
 function App() {
 
@@ -46,6 +47,7 @@ function App() {
         <Route path='/view-collections' element={<Collections/>}/>
         <Route path='/product-details' element={<ProductDetails/>}/>
         <Route path='/account-settings' element={<AccountSettings/>}/>
+        <Route path='/orders' element={<Orders/>}/>
         </Routes>
         <AuthModel showModal={showModal} setShowModal={setShowModal} setWalletModal={setWalletModal}/>
         <SignUpModel isSignUp={isSignUp} setIsSignUp={setIsSignUp} setAuthModel={setAuthModel} />

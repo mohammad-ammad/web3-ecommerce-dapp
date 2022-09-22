@@ -2,7 +2,8 @@ import CoinbaseWalletSDK from "@coinbase/wallet-sdk";
 import WalletConnect from "@walletconnect/web3-provider";
 import Web3Modal from "web3modal";
 import { ethers } from "ethers";
-import { createContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
+import { InstanceContext } from "./InstanceContext";
 
 const WalletContext = createContext();
 
@@ -15,6 +16,25 @@ const WalletProvider = ({ children }) => {
         network:"",
         isConnected:false
     })
+
+    //---GETTING THE INSTANCE CONTEXT
+    const {loadEscrowContract, dic_net} = useContext(InstanceContext)
+
+    //---USEEFFECT CALL FOR GETTING ESCROW CONTRACT
+    useEffect(() => {
+      if(wallet.isConnected && wallet.signer != "")
+      {
+        loadEscrowContract(wallet.signer)
+      }
+      else if(wallet.isConnected && wallet.signer == "")
+      {
+          const signer = new ethers.Wallet(
+            `${process.env.React_App_ACCOUNT_PRIVATE_KEY}`,
+            ethers.getDefaultProvider(dic_net)
+        );
+        loadEscrowContract(signer)
+      }
+    },[wallet])
 
     //intialized the web3 provider for wallet connection
     const providerOptions = {

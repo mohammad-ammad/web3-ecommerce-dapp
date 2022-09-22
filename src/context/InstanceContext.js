@@ -2,6 +2,7 @@ import React, { createContext, useState, useEffect, useContext } from "react";
 import {ethers} from 'ethers';
 import InAppWalletAbi from '../utils/InAppWallet.json';
 import {toast} from 'react-hot-toast';
+import Escrow from '../utils/Escrow.json';
 import { WalletContext } from "./WalletContext";
 
 const InstanceContext = createContext();
@@ -10,6 +11,7 @@ const InstanceProvider = ({ children }) => {
 
     //Intialized states
     const [InAppInstance, setInAppInstance] = useState("");
+    const [EscrowInstance, setEscrowInstance] = useState("");
     const [InAppWalletAddress,setInAppWalletAddress] = useState("");
     const [loading, setLoading] = useState(false);
 
@@ -46,7 +48,18 @@ const InstanceProvider = ({ children }) => {
         }
     }
 
-    //create wallet function
+    //---ESCROW CONTRACT FUNCTION WITH DEFAULT SIGNER OR CUSTOM SIGNER
+    const loadEscrowContract = (signer) => 
+    {
+        try {
+            const contract = new ethers.Contract(process.env.React_App_ESCROW_CONTRACT_ADDRESS, Escrow, signer);
+            setEscrowInstance(contract)
+        } catch (error) {
+            console.log(error.message)
+        }
+    }
+
+    //create wallet function (remove this function later)
     const createWallet = (username,password) => 
     {
         try {
@@ -87,7 +100,10 @@ const InstanceProvider = ({ children }) => {
         }
     }
     return (
-      <InstanceContext.Provider value={{ InAppInstance, createWallet, InAppWalletAddress, loading, setLoading}}>
+      <InstanceContext.Provider value={{ InAppInstance, createWallet,
+                InAppWalletAddress, loading, setLoading,
+                loadEscrowContract,dic_net,EscrowInstance
+        }}>
         {children}
       </InstanceContext.Provider>
     );
