@@ -9,6 +9,7 @@ const EscrowProvider = ({ children }) => {
 
     //---INTIALIZED THE STATES
     const [createCoinList, setCreateCoinList] = useState([]);
+    const [createTokenList, setCreateTokenList] = useState([]);
     const [createCoinLoading, setCreateCoinLoading] = useState(false);
 
     //---GETTING THE INSTANCE CONTEXT
@@ -17,6 +18,7 @@ const EscrowProvider = ({ children }) => {
     //---USEEFFECT FOR CALLING ESCROW EVENT CALL
     useEffect(() => {
         getEscrowTransaction()
+        getTokenEscrowTransaction()
     },[EscrowInstance,createCoinLoading])
 
     //---CREATE ESCROW ORDER FUNCTION
@@ -97,6 +99,48 @@ const EscrowProvider = ({ children }) => {
         }
     }
 
+    //---GETTING LOGGED IN USER ESCROW TRANSACTION OVER TOKEN USING EVENTS
+    const getTokenEscrowTransaction = async () => 
+    {
+        if(EscrowInstance != "")
+        {
+            const eventFilter = EscrowInstance.filters.createdTokenEscrow();
+            const allTransactions = await EscrowInstance.queryFilter(eventFilter);
+
+            await Promise.all(
+                allTransactions.map(el => {
+                    lockEscrow(parseInt(el.args['tx_id']._hex,16)).then(isLocked => {
+                        let obj = {}
+                        if(isLocked)
+                        {
+                            obj = {
+                                buyer:el.args['buyer'],
+                                seller:el.args['seller'],
+                                token:el.args['tx_id'],
+                                tokenAddress:el.args['tokenAddr'],
+                                amount:el.args['amount'],
+                                islocked:true
+                            }
+                            setCreateTokenList(prev => [...prev,obj])
+                        }
+                        else 
+                        {
+                            obj = {
+                                buyer:el.args['buyer'],
+                                seller:el.args['seller'],
+                                token:el.args['tx_id'],
+                                tokenAddress:el.args['tokenAddr'],
+                                amount:el.args['amount'],
+                                islocked:false
+                            }
+                            setCreateTokenList(prev => [...prev,obj])
+                        }
+                    })
+                })
+            )
+        }
+    }
+
     //---RELEASE PAYMENT FUNCTION FROM THE ESCROW
     const releaseEscrowPayment = async (id) => 
     {
@@ -161,7 +205,7 @@ const EscrowProvider = ({ children }) => {
     }
 
     return (
-        <EscrowContext.Provider value={{createEscrowOrder, createCoinList, releaseEscrowPayment, disputeEscrowPayment, lockEscrow}}>
+        <EscrowContext.Provider value={{createEscrowOrder, createCoinList, releaseEscrowPayment, disputeEscrowPayment, lockEscrow, createTokenList}}>
           {children}
         </EscrowContext.Provider>
     )

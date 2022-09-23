@@ -15,6 +15,7 @@ import {Toaster} from 'react-hot-toast';
 import SignUpModel from './components/SignUpModel';
 import EmailSignUpModel from './components/EmailSignUpModel';
 import Orders from './pages/Orders';
+import ViewOrder from './components/Orders/ViewOrder';
 
 function App() {
 
@@ -48,6 +49,7 @@ function App() {
         <Route path='/product-details' element={<ProductDetails/>}/>
         <Route path='/account-settings' element={<AccountSettings/>}/>
         <Route path='/orders' element={<Orders/>}/>
+        <Route path='/view-orders' element={<ViewOrder/>}/>
         </Routes>
         <AuthModel showModal={showModal} setShowModal={setShowModal} setWalletModal={setWalletModal}/>
         <SignUpModel isSignUp={isSignUp} setIsSignUp={setIsSignUp} setAuthModel={setAuthModel} />
