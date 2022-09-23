@@ -4,7 +4,7 @@ import RegisterEscrow from '../components/Orders/RegisterEscrow'
 
 const Orders = () => {
   return (
-    <div className='bg-slate-100 w-full h-screen flex justify-center items-start pt-20 md:pt-28'>
+    <div className='bg-slate-100 w-full h-full flex justify-center items-start pt-20 md:pt-28'>
         <div className='w-full md:w-1/2 px-5'>
             <div>
                 <h1 className='text-black text-md font-bold my-3'>Order Summary</h1>

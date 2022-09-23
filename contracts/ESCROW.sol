@@ -1,5 +1,5 @@
 /**
- *Submitted for verification at Etherscan.io on 2022-09-19
+ *Submitted for verification at Etherscan.io on 2022-09-23
 */
 
 // SPDX-License-Identifier: MIT
@@ -634,8 +634,9 @@ uint count;
   }
 
   // retrieve current state of transaction in escrow
-  function transaction(uint _tx_id) external view returns (uint256, uint256, address,address) {
-    return ( balances[_tx_id].amount, balances[_tx_id].tx_time, balances[_tx_id].buyer, balances[_tx_id].seller  );
+  function transaction(uint _tx_id) external view returns (Transaction memory) {
+    // return ( balances[_tx_id].amount, balances[_tx_id].tx_time, balances[_tx_id].buyer, balances[_tx_id].seller  );
+    return balances[_tx_id];
   }
 
   // admin unlocks tokens in escrow for a transaction
