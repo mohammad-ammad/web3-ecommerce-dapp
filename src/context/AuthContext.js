@@ -175,7 +175,7 @@ const AuthProvider = ({ children }) => {
                     );
 
                     setWallet({
-                        address:wallet,
+                        address:account[0],
                         signer:_signer,
                         network:web3ModalProvider._network,
                         isConnected:true
@@ -186,7 +186,7 @@ const AuthProvider = ({ children }) => {
                 else 
                 {
                     setWallet({
-                        address:wallet,
+                        address:account[0],
                         signer:_signer,
                         network:web3ModalProvider._network,
                         isConnected:true
