@@ -7,3 +7,33 @@ body
 {
     font-family: 'Poppins', sans-serif;
 }
+
+.default-nav
+{
+    display: none !important;
+}
+
+.indicators 
+{
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+}
+
+/* .overlay::after
+{
+    right: auto !important;
+    top: auto !important;
+    transform: none !important;
+} */
+
+.overlay::before, .overlay::after
+{
+    /* background:#DBFF00 !important; */
+    width: 0px !important;
+}

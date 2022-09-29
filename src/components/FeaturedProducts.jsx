@@ -6,6 +6,11 @@ import p3 from '../assets/p3.png';
 import p4 from '../assets/p4.png';
 
 const FeaturedProducts = ({Heading}) => {
+  const images = [
+    p1,
+    p2,
+    p3
+  ]
   return (
     <div className="py-10 px-2 md:px-24 bg-slate-100">
         <h1 className='text-3xl text-center font-bold my-3 md:my-2'>{Heading}</h1>
@@ -14,15 +19,15 @@ const FeaturedProducts = ({Heading}) => {
             <div className='mx-1 text-sm'>Crypto</div>
         </div>
         <div className='w-full grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-3'>
-            <Product img={p1} tag="physical" title="This is a name for the item This is a name for the item" price={1799}/>
-            <Product img={p4} tag="physical" title="This is a name for the item This is a name for the item" price={1799}/>
-            <Product img={p2} tag="physical" title="This is a name for the item This is a name for the item" price={1799}/>
-            <Product img={p3} tag="physical" title="This is a name for the item This is a name for the item" price={1799}/>
+            <Product img={images} tag="physical" title="This is a name for the item This is a name for the item" price={1799}/>
+            <Product img={images} tag="physical" title="This is a name for the item This is a name for the item" price={1799}/>
+            <Product img={images} tag="physical" title="This is a name for the item This is a name for the item" price={1799}/>
+            <Product img={images} tag="physical" title="This is a name for the item This is a name for the item" price={1799}/>
 
-            <Product img={p1} tag="physical" title="This is a name for the item This is a name for the item" price={1799}/>
-            <Product img={p4} tag="physical" title="This is a name for the item This is a name for the item" price={1799}/>
-            <Product img={p2} tag="physical" title="This is a name for the item This is a name for the item" price={1799}/>
-            <Product img={p3} tag="physical" title="This is a name for the item This is a name for the item" price={1799}/>
+            <Product img={images} tag="physical" title="This is a name for the item This is a name for the item" price={1799}/>
+            <Product img={images} tag="physical" title="This is a name for the item This is a name for the item" price={1799}/>
+            <Product img={images} tag="physical" title="This is a name for the item This is a name for the item" price={1799}/>
+            <Product img={images} tag="physical" title="This is a name for the item This is a name for the item" price={1799}/>
         </div>
     </div>
   )

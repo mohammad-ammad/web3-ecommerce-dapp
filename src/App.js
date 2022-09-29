@@ -16,6 +16,8 @@ import SignUpModel from './components/SignUpModel';
 import EmailSignUpModel from './components/EmailSignUpModel';
 import Orders from './pages/Orders';
 import ViewOrder from './components/Orders/ViewOrder';
+import Register from './pages/VendorPortal/Register';
+import Login from './pages/VendorPortal/Login';
 
 function App() {
 
@@ -50,6 +52,11 @@ function App() {
         <Route path='/account-settings' element={<AccountSettings/>}/>
         <Route path='/orders' element={<Orders/>}/>
         <Route path='/view-orders' element={<ViewOrder/>}/>
+
+        {/* vendor routes  */}
+        <Route path='/seller-register' element={<Register/>}/>
+        <Route path='/seller-login' element={<Login/>}/>
+
         </Routes>
         <AuthModel showModal={showModal} setShowModal={setShowModal} setWalletModal={setWalletModal}/>
         <SignUpModel isSignUp={isSignUp} setIsSignUp={setIsSignUp} setAuthModel={setAuthModel} />
