@@ -18,6 +18,11 @@ import Orders from './pages/Orders';
 import ViewOrder from './components/Orders/ViewOrder';
 import Register from './pages/VendorPortal/Register';
 import Login from './pages/VendorPortal/Login';
+import Dashboard from './pages/VendorPortal/Dashboard';
+import SideBar from './components/Vendor/SideBar';
+import ListedProduct from './pages/VendorPortal/ListedProduct';
+import ListProduct from './pages/VendorPortal/ListProduct';
+import VendorOrders from './pages/VendorPortal/VendorOrders';
 
 function App() {
 
@@ -44,6 +49,7 @@ function App() {
       </Toaster>
       <BrowserRouter>
         <Navbar setShowModal={setShowModal} setIsSignUp={setIsSignUp}/>
+        {/* <SideBar/> */}
         <Routes>
         <Route path='/' element={<Landing/>}/>
         <Route path='/how-it-works' element={<HowItsWorks/>}/>
@@ -56,6 +62,10 @@ function App() {
         {/* vendor routes  */}
         <Route path='/seller-register' element={<Register/>}/>
         <Route path='/seller-login' element={<Login/>}/>
+        <Route path='/seller-dashboard' element={<Dashboard/>}/>
+        <Route path='/seller-products' element={<ListedProduct/>}/>
+        <Route path='/seller-list-product' element={<ListProduct/>}/>
+        <Route path='/seller-orders' element={<VendorOrders/>}/>
 
         </Routes>
         <AuthModel showModal={showModal} setShowModal={setShowModal} setWalletModal={setWalletModal}/>
