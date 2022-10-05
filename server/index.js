@@ -9,6 +9,7 @@ const CategoryRoute = require('./Routes/CategoryRoute')
 const ColorRoute = require("./Routes/ColorRoute")
 const SizeRoute = require("./Routes/SizeRoute")
 const ProductRoute = require("./Routes/ProductRoute")
+const OrderRoute = require('./Routes/OrderRoutes')
 
 //---CONFIGURE APP INSTANCE
 dotenv.config();
@@ -28,6 +29,7 @@ app.use("/api/v1/category", CategoryRoute)
 app.use("/api/v1/color", ColorRoute)
 app.use("/api/v1/size", SizeRoute)
 app.use("/api/v1/product",ProductRoute)
+app.use("/api/v1/order",OrderRoute)
 
 
 //---APP RUNNING PORT
