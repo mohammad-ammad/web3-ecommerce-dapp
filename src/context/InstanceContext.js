@@ -1,6 +1,7 @@
 import React, { createContext, useState, useEffect, useContext } from "react";
 import {ethers} from 'ethers';
 import InAppWalletAbi from '../utils/InAppWallet.json';
+import MultiVendorAbi from '../utils/MultiVendorMarketplace.json';
 import {toast} from 'react-hot-toast';
 import Escrow from '../utils/Escrow.json';
 import { WalletContext } from "./WalletContext";
@@ -12,6 +13,7 @@ const InstanceProvider = ({ children }) => {
     //Intialized states
     const [InAppInstance, setInAppInstance] = useState("");
     const [EscrowInstance, setEscrowInstance] = useState("");
+    const [MultiVendorInstance, setMultiVendorInstance] = useState([]);
     const [InAppWalletAddress,setInAppWalletAddress] = useState("");
     const [loading, setLoading] = useState(false);
 
@@ -54,6 +56,18 @@ const InstanceProvider = ({ children }) => {
         try {
             const contract = new ethers.Contract(process.env.React_App_ESCROW_CONTRACT_ADDRESS, Escrow, signer);
             setEscrowInstance(contract)
+        } catch (error) {
+            console.log(error.message)
+        }
+    }
+
+    //---MULTI VENDOR SMART CONTRACT WITH DEFAULT SIGNER
+    const loadMultiVendorContract = (signer) => 
+    {
+        try {
+            const contract = new ethers.Contract(process.env.React_App_MultiVendorMarketplace_CONTRACT_ADDRESS, MultiVendorAbi, signer);
+            console.log(contract)
+            setMultiVendorInstance(contract)
         } catch (error) {
             console.log(error.message)
         }
@@ -102,7 +116,7 @@ const InstanceProvider = ({ children }) => {
     return (
       <InstanceContext.Provider value={{ InAppInstance, createWallet,
                 InAppWalletAddress, loading, setLoading,
-                loadEscrowContract,dic_net,EscrowInstance
+                loadEscrowContract,dic_net,EscrowInstance,loadMultiVendorContract,MultiVendorInstance
         }}>
         {children}
       </InstanceContext.Provider>

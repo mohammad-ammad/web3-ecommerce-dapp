@@ -178,6 +178,7 @@ const AuthProvider = ({ children }) => {
                         address:account[0],
                         signer:_signer,
                         network:web3ModalProvider._network,
+                        provider:"wallet",
                         isConnected:true
                     });
 
@@ -246,10 +247,21 @@ const AuthProvider = ({ children }) => {
                     address:resp['data']['wallet'],
                     signer:"",
                     network:"",
+                    provider:"custom",
                     isConnected:true
                 });
                 toast.success("User Connected Succesfully")
             }
+        } catch (error) {
+            console.log(error.message)
+        }
+    }
+
+    //---REGISTER VENDOR TO BLOCKCHAIN
+    const createVendor = async () => 
+    {
+        try {
+        
         } catch (error) {
             console.log(error.message)
         }

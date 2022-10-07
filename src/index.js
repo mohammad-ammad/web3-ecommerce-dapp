@@ -8,6 +8,7 @@ import { InstanceProvider } from './context/InstanceContext';
 import { AuthProvider } from './context/AuthContext';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { EscrowProvider } from './context/EscrowContext';
+import { MultiVendorProvider } from './context/MultiVendorContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -16,9 +17,11 @@ root.render(
     <InstanceProvider>
       <WalletProvider>
         <AuthProvider>
+          <MultiVendorProvider>
           <EscrowProvider>
             <App />
           </EscrowProvider>
+          </MultiVendorProvider>
         </AuthProvider>
       </WalletProvider>
     </InstanceProvider>

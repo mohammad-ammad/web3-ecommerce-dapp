@@ -14,17 +14,19 @@ const WalletProvider = ({ children }) => {
         address:"",
         signer:"",
         network:"",
+        provider:"",
         isConnected:false
     })
 
     //---GETTING THE INSTANCE CONTEXT
-    const {loadEscrowContract, dic_net} = useContext(InstanceContext)
+    const {loadEscrowContract, dic_net, loadMultiVendorContract} = useContext(InstanceContext)
 
-    //---USEEFFECT CALL FOR GETTING ESCROW CONTRACT
+    //---USEEFFECT CALL FOR GETTING ESCROW CONTRACT & MULTI VENDOR CONTRACT
     useEffect(() => {
       if(wallet.isConnected && wallet.signer != "")
       {
         loadEscrowContract(wallet.signer)
+        loadMultiVendorContract(wallet.signer)
       }
       else if(wallet.isConnected && wallet.signer == "")
       {

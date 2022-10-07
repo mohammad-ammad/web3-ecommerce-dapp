@@ -2,6 +2,7 @@ import React from 'react'
 import googleIcon from '../assets/google_icon.png';
 import walletIcon from '../assets/wallet_icon.png';
 import emailIcon from '../assets/email.png';
+import {FaUserAlt} from 'react-icons/fa'
 import { useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
 
@@ -28,9 +29,13 @@ const SignUpContent = ({setIsSignUp,setAuthModel}) => {
                 <img src={emailIcon} className="ml-3" alt=""  />
                 <p className='w-full pt-0.5'>Continue with Email</p>
             </button>
-            <button onClick={()=>createAndLoginWithWallet()} className='flex bg-purple-500 text-white w-full p-2 rounded-xl'>
+            <button onClick={()=>createAndLoginWithWallet()} className='flex bg-purple-500 text-white w-full p-2 rounded-xl mb-3'>
                 <img src={walletIcon} className="rounded-full ml-3" alt=""  />
                 <p className='w-full pt-1'>Connect Wallet</p>
+            </button>
+            <button className='flex items-center bg-black text-white w-full p-2 rounded-xl'>
+                <FaUserAlt className="text-2xl rounded-full ml-5"/>
+                <p className='w-full pt-1'>Continue as Vendor</p>
             </button>
         </div>
     </>

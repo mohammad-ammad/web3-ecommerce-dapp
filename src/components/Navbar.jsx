@@ -6,11 +6,15 @@ import { Link } from 'react-router-dom';
 import { Transition } from '@windmill/react-ui';
 import { useContext } from 'react';
 import { WalletContext } from '../context/WalletContext';
+import {IoIosArrowDown, IoIosArrowUp} from 'react-icons/io'
+import { MultiVendorContext } from '../context/MultiVendorContext';
 const Navbar = ({setShowModal, setIsSignUp}) => {
   //Intialized states
   const [toggle, setToggle] = useState(false);
+  const [more, setMore] = useState(false);
   //Getting Instance Context
   const {wallet} = useContext(WalletContext)
+  const {isVendor, createShop} = useContext(MultiVendorContext)
 
   return (
     <>
@@ -31,10 +35,38 @@ const Navbar = ({setShowModal, setIsSignUp}) => {
             wallet.isConnected ?
             <>
               <div className='hidden md:block mx-2'>
-                <a href="" className='text-sm font-bold'>Profile</a>
-              </div>
-              <div className='hidden md:block mx-2'>
-                <Link to="/orders" className='text-sm font-bold'>Orders</Link>
+                <button className='text-sm font-bold relative flex items-center' onClick={()=>setMore(!more)}>More {more ? <IoIosArrowUp className='ml-1 pt-0.5 text-sm font-bold'/> : <IoIosArrowDown className='ml-1 pt-0.5 text-sm font-bold'/>}</button>
+                <Transition
+                  show={more}
+                  enter="transition ease-out duration-300 transform"
+                  enterFrom="opacity-0 scale-95"
+                  enterTo="opacity-100 scale-100"
+                  leave="transition ease-in duration-100 transform"
+                  leaveFrom="opacity-100 scale-100"
+                  leaveTo="opacity-0 scale-95"
+                >
+                <div className='hidden md:block absolute top-14 right-24 w-52 bg-white rounded-lg py-2 px-3 shadow-md'>
+                    <div>
+                      <a href="" className='text-sm font-bold'>Profile</a>
+                    </div>
+                    <div>
+                      <a href="" className='text-sm font-bold'>Cart</a>
+                    </div>
+                    <div>
+                      <a href="" className='text-sm font-bold'>Orders</a>
+                    </div>
+                    {
+                      isVendor ?
+                      <div>
+                        <button onClick={()=>createShop()} className='text-sm font-bold'>Create Shop</button>
+                      </div>
+                      :
+                      <div>
+                        <a href="" className='text-sm font-bold'>Register as Vendor</a>
+                      </div>
+                    }
+                </div>
+                </Transition>
               </div>
               <div className='hidden md:block mx-1'>
                 <button className='bg-black text-white rounded-full px-5 py-1 text-sm font-normal'>Connected</button>
@@ -71,6 +103,33 @@ const Navbar = ({setShowModal, setIsSignUp}) => {
               </div>
               <div className='my-2'>
                 <a href="" className='text-sm font-bold'>Join Now</a>
+              </div>
+              <div className='my-2'>
+                <button className='text-sm font-bold flex items-center' onClick={()=>setMore(!more)}>More {more ? <IoIosArrowUp className='ml-1 pt-0.5 text-sm font-bold'/> : <IoIosArrowDown className='ml-1 pt-0.5 text-sm font-bold'/>}</button>
+                <Transition
+                  show={more}
+                  enter="transition ease-out duration-300 transform"
+                  enterFrom="opacity-0 scale-95"
+                  enterTo="opacity-100 scale-100"
+                  leave="transition ease-in duration-100 transform"
+                  leaveFrom="opacity-100 scale-100"
+                  leaveTo="opacity-0 scale-95"
+                >
+                <div className='my-2'>
+                    <div>
+                      <a href="" className='text-sm font-bold'>Profile</a>
+                    </div>
+                    <div>
+                      <a href="" className='text-sm font-bold'>Cart</a>
+                    </div>
+                    <div>
+                      <a href="" className='text-sm font-bold'>Orders</a>
+                    </div>
+                    <div>
+                      <a href="" className='text-sm font-bold'>Register as Vendor</a>
+                    </div>
+                </div>
+                </Transition>
               </div>
               <hr />
               <div className='flex items-center my-3 shadow-inner shadow-slate-200 py-1 px-2 rounded-full'>
