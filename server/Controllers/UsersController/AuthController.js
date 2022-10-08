@@ -158,3 +158,46 @@ exports.login = async (req,res) => {
         })
     }
 }
+
+//---CREATE VENDOR SHOP 
+exports.createShop = async (req,res) => {
+    try {
+        const {shop_address} = req.body;
+        const isExist = await Users.findOne({wallet:req.params.address});
+        if(isExist != null)
+        {
+            await Users.findByIdAndUpdate({_id:isExist._id},{
+                $set:{
+                    shop_address:shop_address
+                }
+            })
+
+            res.status(200).json({message:"Shop Created Successfully"})
+        }
+    } catch (error) {
+        res.status(500).json(error.message)
+    }
+}
+
+//---CHECK USER SHOPS
+exports.checkShop = async (req,res) => {
+    try {
+        const shop = await Users.findOne({wallet:req.params.address});
+        if(shop != null)
+        {
+            res.status(200).json({
+                active:true,
+                shop_address:shop.shop_address
+            });
+        }
+        else 
+        {
+            res.status(200).json({
+                active:false,
+                shop_address:""
+            });
+        }
+    } catch (error) {
+        res.status(500).json(error.message)
+    }
+}

@@ -1,20 +1,23 @@
 import React, { useState } from 'react'
 import Logo from '../assets/logo.png';
-import {AiOutlineSearch} from 'react-icons/ai';
-import {HiMenuAlt3, HiX} from 'react-icons/hi';
-import { Link } from 'react-router-dom';
+import { AiOutlineSearch } from 'react-icons/ai';
+import { HiMenuAlt3, HiX } from 'react-icons/hi';
+import { Link, useLocation } from 'react-router-dom';
 import { Transition } from '@windmill/react-ui';
 import { useContext } from 'react';
 import { WalletContext } from '../context/WalletContext';
-import {IoIosArrowDown, IoIosArrowUp} from 'react-icons/io'
+import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io'
 import { MultiVendorContext } from '../context/MultiVendorContext';
-const Navbar = ({setShowModal, setIsSignUp}) => {
+import { AuthContext } from '../context/AuthContext';
+const Navbar = ({ setShowModal, setIsSignUp }) => {
   //Intialized states
   const [toggle, setToggle] = useState(false);
   const [more, setMore] = useState(false);
+  const location = useLocation();
   //Getting Instance Context
-  const {wallet} = useContext(WalletContext)
-  const {isVendor, createShop} = useContext(MultiVendorContext)
+  const { wallet } = useContext(WalletContext)
+  const { isShop } = useContext(AuthContext)
+  const { isVendor, createShop } = useContext(MultiVendorContext)
 
   return (
     <>
@@ -25,123 +28,147 @@ const Navbar = ({setShowModal, setIsSignUp}) => {
         </Link>
         <div className='flex justify-start items-center'>
           <div className='hidden lg:flex items-center mx-1 shadow-inner shadow-slate-200 py-1 px-2 rounded-full'>
-            <AiOutlineSearch className='mr-2 text-lg text-slate-500'/>
-            <input type="text" className='outline-none' name="" id="" placeholder='Search'/>
+            <AiOutlineSearch className='mr-2 text-lg text-slate-500' />
+            <input type="text" className='outline-none' name="" id="" placeholder='Search' />
           </div>
           <div className='hidden md:block mx-2'>
             <Link to="/how-it-works" className='text-sm font-bold'>How it works</Link>
           </div>
           {
             wallet.isConnected ?
-            <>
-              <div className='hidden md:block mx-2'>
-                <button className='text-sm font-bold relative flex items-center' onClick={()=>setMore(!more)}>More {more ? <IoIosArrowUp className='ml-1 pt-0.5 text-sm font-bold'/> : <IoIosArrowDown className='ml-1 pt-0.5 text-sm font-bold'/>}</button>
-                <Transition
-                  show={more}
-                  enter="transition ease-out duration-300 transform"
-                  enterFrom="opacity-0 scale-95"
-                  enterTo="opacity-100 scale-100"
-                  leave="transition ease-in duration-100 transform"
-                  leaveFrom="opacity-100 scale-100"
-                  leaveTo="opacity-0 scale-95"
-                >
-                <div className='hidden md:block absolute top-14 right-24 w-52 bg-white rounded-lg py-2 px-3 shadow-md'>
-                    <div>
-                      <a href="" className='text-sm font-bold'>Profile</a>
+              <>
+                <div className='hidden md:block mx-2'>
+                  <button className='text-sm font-bold relative flex items-center' onClick={() => setMore(!more)}>More {more ? <IoIosArrowUp className='ml-1 pt-0.5 text-sm font-bold' /> : <IoIosArrowDown className='ml-1 pt-0.5 text-sm font-bold' />}</button>
+                  <Transition
+                    show={more}
+                    enter="transition ease-out duration-300 transform"
+                    enterFrom="opacity-0 scale-95"
+                    enterTo="opacity-100 scale-100"
+                    leave="transition ease-in duration-100 transform"
+                    leaveFrom="opacity-100 scale-100"
+                    leaveTo="opacity-0 scale-95"
+                  >
+                    <div className='hidden md:block absolute top-14 right-24 w-52 bg-white rounded-lg py-2 px-3 shadow-md'>
+                      {
+                        location.pathname === "/seller-dashboard" || location.pathname === "/seller-products" || location.pathname === "/seller-orders" || location.pathname === "/seller-list-product" ? '' :
+                          <>
+                            <div>
+                              <a href="" className='text-sm font-bold'>Profile</a>
+                            </div>
+                            <div>
+                              <a href="" className='text-sm font-bold'>Cart</a>
+                            </div>
+                            <div>
+                              <a href="" className='text-sm font-bold'>Orders</a>
+                            </div>
+                          </>
+                      }
+
+                      {
+                        isShop.active === true ?
+                          <div>
+                            {/* <button onClick={()=>createShop()} className='text-sm font-bold'>Dashboard</button> */}
+                            <Link to='/seller-dashboard' className='text-sm font-bold'>Dashboard</Link>
+                          </div>
+                          :
+                          <div>
+                            <a href="" className='text-sm font-bold'>Register as Vendor</a>
+                          </div>
+                      }
+
+                      {
+                        location.pathname === "/seller-dashboard" || location.pathname === "/seller-products" || location.pathname === "/seller-orders" || location.pathname === "/seller-list-product" ? 
+                        <>
+                        <div>
+                          <Link to="/seller-products" className='text-sm font-bold'>List Product</Link>
+                        </div>
+                        <div>
+                          <Link to="/seller-orders" className='text-sm font-bold'>Orders</Link>
+                        </div>
+                        <div>
+                          <a href="" className='text-sm font-bold'>Settings</a>
+                        </div>
+                      </> 
+                        :
+                         ''
+                      }
                     </div>
-                    <div>
-                      <a href="" className='text-sm font-bold'>Cart</a>
-                    </div>
-                    <div>
-                      <a href="" className='text-sm font-bold'>Orders</a>
-                    </div>
-                    {
-                      isVendor ?
+                  </Transition>
+                </div>
+                <div className='hidden md:block mx-1'>
+                  <button className='bg-black text-white rounded-full px-5 py-1 text-sm font-normal'>Connected</button>
+                </div>
+              </>
+              :
+              <>
+                <div className='hidden md:block mx-2'>
+                  <button onClick={() => setIsSignUp(true)} className='text-sm font-bold'>Join Now</button>
+                </div>
+                <div className='hidden md:block mx-1'>
+                  <button onClick={() => setShowModal(true)} className='bg-black text-white rounded-full px-5 py-1 text-sm font-normal'>Login</button>
+                </div>
+              </>
+          }
+
+          <div className='block md:hidden'>
+            {
+              toggle ? <HiX className='relative text-2xl font-bold text-slate-700 cursor-pointer' onClick={() => setToggle(false)} /> :
+                <HiMenuAlt3 className='relative text-2xl font-bold text-slate-700 cursor-pointer' onClick={() => setToggle(true)} />
+            }
+            <Transition
+              show={toggle}
+              enter="transition ease-out duration-300 transform"
+              enterFrom="opacity-0 scale-95"
+              enterTo="opacity-100 scale-100"
+              leave="transition ease-in duration-100 transform"
+              leaveFrom="opacity-100 scale-100"
+              leaveTo="opacity-0 scale-95"
+            >
+              <div className='absolute top-14 left-1/2 transform -translate-x-1/2 bg-white w-full rounded-xl p-5 shadow-md'>
+                <div className='my-2'>
+                  <Link to="/how-it-works" className='text-sm font-bold'>How it works</Link>
+                </div>
+                <div className='my-2'>
+                  <a href="" className='text-sm font-bold'>Join Now</a>
+                </div>
+                <div className='my-2'>
+                  <button className='text-sm font-bold flex items-center' onClick={() => setMore(!more)}>More {more ? <IoIosArrowUp className='ml-1 pt-0.5 text-sm font-bold' /> : <IoIosArrowDown className='ml-1 pt-0.5 text-sm font-bold' />}</button>
+                  <Transition
+                    show={more}
+                    enter="transition ease-out duration-300 transform"
+                    enterFrom="opacity-0 scale-95"
+                    enterTo="opacity-100 scale-100"
+                    leave="transition ease-in duration-100 transform"
+                    leaveFrom="opacity-100 scale-100"
+                    leaveTo="opacity-0 scale-95"
+                  >
+                    <div className='my-2'>
                       <div>
-                        <button onClick={()=>createShop()} className='text-sm font-bold'>Create Shop</button>
+                        <a href="" className='text-sm font-bold'>Profile</a>
                       </div>
-                      :
+                      <div>
+                        <a href="" className='text-sm font-bold'>Cart</a>
+                      </div>
+                      <div>
+                        <a href="" className='text-sm font-bold'>Orders</a>
+                      </div>
                       <div>
                         <a href="" className='text-sm font-bold'>Register as Vendor</a>
                       </div>
-                    }
+                    </div>
+                  </Transition>
                 </div>
-                </Transition>
-              </div>
-              <div className='hidden md:block mx-1'>
-                <button className='bg-black text-white rounded-full px-5 py-1 text-sm font-normal'>Connected</button>
-              </div>
-            </>
-            :
-            <>
-              <div className='hidden md:block mx-2'>
-                <button onClick={()=>setIsSignUp(true)} className='text-sm font-bold'>Join Now</button>
-              </div>
-              <div className='hidden md:block mx-1'>
-                <button onClick={()=>setShowModal(true)} className='bg-black text-white rounded-full px-5 py-1 text-sm font-normal'>Login</button>
-              </div>
-            </>
-          }
-         
-          <div className='block md:hidden'>
-            {
-              toggle ? <HiX className='relative text-2xl font-bold text-slate-700 cursor-pointer' onClick={()=>setToggle(false)}/> :
-              <HiMenuAlt3 className='relative text-2xl font-bold text-slate-700 cursor-pointer' onClick={()=>setToggle(true)}/>
-            }
-           <Transition
-                  show={toggle}
-                  enter="transition ease-out duration-300 transform"
-                  enterFrom="opacity-0 scale-95"
-                  enterTo="opacity-100 scale-100"
-                  leave="transition ease-in duration-100 transform"
-                  leaveFrom="opacity-100 scale-100"
-                  leaveTo="opacity-0 scale-95"
-                >
-              <div className='absolute top-14 left-1/2 transform -translate-x-1/2 bg-white w-full rounded-xl p-5 shadow-md'>
-              <div className='my-2'>
-                <Link to="/how-it-works" className='text-sm font-bold'>How it works</Link>
-              </div>
-              <div className='my-2'>
-                <a href="" className='text-sm font-bold'>Join Now</a>
-              </div>
-              <div className='my-2'>
-                <button className='text-sm font-bold flex items-center' onClick={()=>setMore(!more)}>More {more ? <IoIosArrowUp className='ml-1 pt-0.5 text-sm font-bold'/> : <IoIosArrowDown className='ml-1 pt-0.5 text-sm font-bold'/>}</button>
-                <Transition
-                  show={more}
-                  enter="transition ease-out duration-300 transform"
-                  enterFrom="opacity-0 scale-95"
-                  enterTo="opacity-100 scale-100"
-                  leave="transition ease-in duration-100 transform"
-                  leaveFrom="opacity-100 scale-100"
-                  leaveTo="opacity-0 scale-95"
-                >
-                <div className='my-2'>
-                    <div>
-                      <a href="" className='text-sm font-bold'>Profile</a>
-                    </div>
-                    <div>
-                      <a href="" className='text-sm font-bold'>Cart</a>
-                    </div>
-                    <div>
-                      <a href="" className='text-sm font-bold'>Orders</a>
-                    </div>
-                    <div>
-                      <a href="" className='text-sm font-bold'>Register as Vendor</a>
-                    </div>
+                <hr />
+                <div className='flex items-center my-3 shadow-inner shadow-slate-200 py-1 px-2 rounded-full'>
+                  <AiOutlineSearch className='mr-2 text-lg text-slate-500' />
+                  <input type="text" className='outline-none' name="" id="" placeholder='Search' />
                 </div>
-                </Transition>
+                <div className='my-3'>
+                  <a href="" className='bg-black text-white rounded-full px-5 py-1 text-sm font-normal'>Login</a>
+                </div>
               </div>
-              <hr />
-              <div className='flex items-center my-3 shadow-inner shadow-slate-200 py-1 px-2 rounded-full'>
-                <AiOutlineSearch className='mr-2 text-lg text-slate-500'/>
-                <input type="text" className='outline-none' name="" id="" placeholder='Search'/>
-              </div>
-              <div className='my-3'>
-                <a href="" className='bg-black text-white rounded-full px-5 py-1 text-sm font-normal'>Login</a>
-              </div>
-            </div>
             </Transition>
-            
+
           </div>
         </div>
       </div>

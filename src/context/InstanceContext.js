@@ -2,6 +2,7 @@ import React, { createContext, useState, useEffect, useContext } from "react";
 import {ethers} from 'ethers';
 import InAppWalletAbi from '../utils/InAppWallet.json';
 import MultiVendorAbi from '../utils/MultiVendorMarketplace.json';
+import NFTMarketplace from '../utils/NFTMarketplace.json'
 import {toast} from 'react-hot-toast';
 import Escrow from '../utils/Escrow.json';
 import { WalletContext } from "./WalletContext";
@@ -14,6 +15,7 @@ const InstanceProvider = ({ children }) => {
     const [InAppInstance, setInAppInstance] = useState("");
     const [EscrowInstance, setEscrowInstance] = useState("");
     const [MultiVendorInstance, setMultiVendorInstance] = useState([]);
+    const [NFTInstance, setNFTInstance] = useState([]);
     const [InAppWalletAddress,setInAppWalletAddress] = useState("");
     const [loading, setLoading] = useState(false);
 
@@ -113,10 +115,23 @@ const InstanceProvider = ({ children }) => {
             console.log(error)
         }
     }
+
+    //---LOAD NFT SMART CONTRACT 
+    const loadNftSmartContract = async (address, signer) => 
+    {
+        try {
+            const contract = new ethers.Contract(address, NFTMarketplace, signer);
+            console.log(contract)
+            setNFTInstance(contract)
+        } catch (error) {
+            console.log(error.message)
+        }
+    }
     return (
       <InstanceContext.Provider value={{ InAppInstance, createWallet,
                 InAppWalletAddress, loading, setLoading,
-                loadEscrowContract,dic_net,EscrowInstance,loadMultiVendorContract,MultiVendorInstance
+                loadEscrowContract,dic_net,EscrowInstance,loadMultiVendorContract,MultiVendorInstance,
+                loadNftSmartContract,NFTInstance
         }}>
         {children}
       </InstanceContext.Provider>

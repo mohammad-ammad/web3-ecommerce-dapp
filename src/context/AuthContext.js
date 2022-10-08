@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { useGoogleLogin } from '@react-oauth/google';
 import { InstanceContext } from "./InstanceContext";
 import {toast} from 'react-hot-toast'
@@ -18,11 +18,31 @@ const AuthProvider = ({ children }) => {
         sub:""
     })
 
+    const [isShop, setIsShop] = useState({
+        active:false,
+        shop_address:""
+    })
+
     //---GETTING THE INSTANCE CONTEXT
-    const {InAppInstance, setLoading} = useContext(InstanceContext)
+    const {InAppInstance, setLoading, loadNftSmartContract} = useContext(InstanceContext)
 
     //---GETIING WALLET INSTANCE
     const {wallet, setWallet, web3Modal} = useContext(WalletContext)
+
+    //---USEEFFECT
+    useEffect(() => {
+        if(wallet.isConnected && wallet.address != "")
+        {
+            haveShop(wallet.address)
+        }
+    },[wallet])
+
+    useEffect(() => {
+        if(isShop.active === true)
+        {
+            loadNftSmartContract(isShop.shop_address,wallet.signer)
+        }
+    },[isShop])
     
     //---Google Authentication
     const login = useGoogleLogin({
@@ -267,8 +287,25 @@ const AuthProvider = ({ children }) => {
         }
     }
 
+    //---CHECK SHOP EXIST OR NOT
+    const haveShop = async (address) => 
+    {
+        try {
+            const resp = await axios.get(`${process.env.React_App_SERVER_URL}/user/shop/${address}`);
+            if(resp['data']['active'] === true)
+            {
+                setIsShop({
+                    active:true,
+                    shop_address:resp['data']['shop_address']
+                })
+            }
+        } catch (error) {
+            console.log(error.message)
+        }
+    }
+
     return (
-        <AuthContext.Provider value={{login, user, createUser, createWithGoogle, createAndLoginWithWallet, loginWithDB}}>
+        <AuthContext.Provider value={{login, user, createUser, createWithGoogle, createAndLoginWithWallet, loginWithDB, isShop}}>
           {children}
         </AuthContext.Provider>
       );
