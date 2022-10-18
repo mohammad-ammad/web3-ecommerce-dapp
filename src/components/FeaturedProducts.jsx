@@ -4,8 +4,12 @@ import p1 from '../assets/p1.png';
 import p2 from '../assets/p2.png';
 import p3 from '../assets/p3.png';
 import p4 from '../assets/p4.png';
+import { useContext } from 'react';
+import { MultiVendorContext } from '../context/MultiVendorContext';
 
 const FeaturedProducts = ({Heading}) => {
+  //---USECONTEXT
+  const {productList} = useContext(MultiVendorContext);
   const images = [
     p1,
     p2,
@@ -19,15 +23,14 @@ const FeaturedProducts = ({Heading}) => {
             <div className='mx-1 text-sm'>Crypto</div>
         </div>
         <div className='w-full grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-3'>
-            <Product img={images} tag="physical" title="This is a name for the item This is a name for the item" price={1799}/>
-            <Product img={images} tag="physical" title="This is a name for the item This is a name for the item" price={1799}/>
-            <Product img={images} tag="physical" title="This is a name for the item This is a name for the item" price={1799}/>
-            <Product img={images} tag="physical" title="This is a name for the item This is a name for the item" price={1799}/>
-
-            <Product img={images} tag="physical" title="This is a name for the item This is a name for the item" price={1799}/>
-            <Product img={images} tag="physical" title="This is a name for the item This is a name for the item" price={1799}/>
-            <Product img={images} tag="physical" title="This is a name for the item This is a name for the item" price={1799}/>
-            <Product img={images} tag="physical" title="This is a name for the item This is a name for the item" price={1799}/>
+          {
+            productList.length > 0 ? 
+            productList.map((item,index) => (
+              <Product key={index} img={item?.attribute} id={item._id} tag="physical" title={item.title} price={item.native_price}/>
+            ))
+            : 
+            ''
+          }
         </div>
     </div>
   )

@@ -6,6 +6,10 @@ const CategorySchema = new mongoose.Schema({
         type: String,
         required:true
     },
+    collection_address:{
+        type:String,
+        required:true
+    },
     status:{
         type:Boolean,
         default:true

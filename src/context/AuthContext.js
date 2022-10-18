@@ -304,8 +304,23 @@ const AuthProvider = ({ children }) => {
         }
     }
 
+    //---CREATE MESSAGE OR NEWSLETTER
+    const createNewsLetter = async (data) => 
+    {
+        try {
+            const resp = await axios.post(`${process.env.React_App_SERVER_URL}/user/create-message`,{
+                email:data.email,
+                message:data.message
+            });
+            
+            console.log(resp)
+        } catch (error) {
+            console.log(error.message)
+        }
+    }
+
     return (
-        <AuthContext.Provider value={{login, user, createUser, createWithGoogle, createAndLoginWithWallet, loginWithDB, isShop}}>
+        <AuthContext.Provider value={{login, user, createUser, createWithGoogle, createAndLoginWithWallet, loginWithDB, isShop, createNewsLetter}}>
           {children}
         </AuthContext.Provider>
       );

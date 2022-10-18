@@ -6,8 +6,23 @@ import vector from '../assets/label.png';
 import matic from '../assets/matic.png';
 import { Slide } from 'react-slideshow-image';
 import 'react-slideshow-image/dist/styles.css';
+import { useParams } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useContext } from 'react';
+import { MultiVendorContext } from '../context/MultiVendorContext';
 
 const ProductDetailSection = ({setShowModal}) => {
+    //---USEPARAMS
+    const {id} = useParams();
+
+    //---USECONTEXT
+    const {productDetails, pDetails} = useContext(MultiVendorContext)
+
+    //---USEEFFECT 
+    useEffect(() => {
+        productDetails(id)
+    }, [id])
+    
     const images = [
         p1,
         p2,
@@ -23,10 +38,10 @@ const ProductDetailSection = ({setShowModal}) => {
     <div className='w-full grid grid-cols-1 lg:grid-cols-3 gap-3 bg-slate-100 h-full pt-32 pb-10 px-5 md:px-10 lg:px-32'>
         <div>
             <p className='text-lg text-slate-800 font-bold mb-3'>Brand’s name</p>
-            <h1 className='text-3xl text-slate-900 font-bold mb-3'>The item’s name goes here</h1>
+            <h1 className='text-3xl text-slate-900 font-bold mb-3'>{pDetails[0]?.title}</h1>
             <h3 className='text-md text-slate-800 font-bold mb-3'>About the Brand</h3>
             <p className='text-xs text-slate-900 font-medium leading-5 mb-2'>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            {pDetails[0]?.description}
             </p>
             <h3 className='text-md text-slate-800 font-bold'>Release Date</h3>
             <p className='text-sm text-slate-700 mb-3'>November 11, 2022 - 9:00 AM</p>
@@ -37,9 +52,9 @@ const ProductDetailSection = ({setShowModal}) => {
         </div>
         <div className='shadow-inner shadow-slate-300 w-80 h-96 rounded-md relative left-1/2 transform -translate-x-1/2'>
             <Slide autoplay={false} indicators={indicators}>
-                <img src={images[0]} className="w-full h-96 p-1" alt="" />
-                <img src={images[1]} className="w-full h-96 p-1" alt="" />
-                <img src={images[2]} className="w-full h-96 p-1" alt="" />
+                <img src={`https://ipfs.moralis.io:2053/ipfs/${pDetails[0]?.attribute[0]['image']}`} className="w-full h-96 p-1" alt="" />
+                <img src={`https://ipfs.moralis.io:2053/ipfs/${pDetails[0]?.attribute[1]['image']}`} className="w-full h-96 p-1" alt="" />
+                <img src={`https://ipfs.moralis.io:2053/ipfs/${pDetails[0]?.attribute[2]['image']}`} className="w-full h-96 p-1" alt="" />
             </Slide>
             <div className='absolute top-0'>
             <img src={vector} className="relative" alt="" />
@@ -62,11 +77,11 @@ const ProductDetailSection = ({setShowModal}) => {
             <h3 className='text-md text-slate-800 font-bold mt-3 my-3'>Availability</h3>
             <p className='text-sm text-slate-700 mb-3'>3 of 20 available</p>
             <div className='flex justify-start items-center my-6'>
-                <p className='text-2xl mr-2 text-slate-900 font-bold'>$ 1799</p>
+                <p className='text-2xl mr-2 text-slate-900 font-bold'>$ {pDetails[0]?.native_price}</p>
                 <p className='text-md text-slate-900 font-medium mr-2'>or</p>
                 <div className='flex justify-start items-center'>
                     <img src={matic} alt=""  />
-                    <p className='text-2xl mr-2 text-purple-600 font-bold ml-2'>2056</p>
+                    <p className='text-2xl mr-2 text-purple-600 font-bold ml-2'>{pDetails[0]?.crypto_price}</p>
                 </div>
             </div>
             <button className='bg-black text-white rounded-full px-5 py-1 text-sm font-normal' onClick={() => setShowModal(true)}>Buy Now</button>

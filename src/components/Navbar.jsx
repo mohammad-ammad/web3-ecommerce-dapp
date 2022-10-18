@@ -50,7 +50,20 @@ const Navbar = ({ setShowModal, setIsSignUp }) => {
                   >
                     <div className='hidden md:block absolute top-14 right-24 w-52 bg-white rounded-lg py-2 px-3 shadow-md'>
                       {
+                        isVendor ? 
                         location.pathname === "/seller-dashboard" || location.pathname === "/seller-products" || location.pathname === "/seller-orders" || location.pathname === "/seller-list-product" ? '' :
+                          <>
+                            <div>
+                              <a href="" className='text-sm font-bold'>Profile</a>
+                            </div>
+                            <div>
+                              <a href="" className='text-sm font-bold'>Cart</a>
+                            </div>
+                            <div>
+                              <a href="" className='text-sm font-bold'>Orders</a>
+                            </div>
+                          </>
+                          : 
                           <>
                             <div>
                               <a href="" className='text-sm font-bold'>Profile</a>
@@ -65,18 +78,16 @@ const Navbar = ({ setShowModal, setIsSignUp }) => {
                       }
 
                       {
-                        isShop.active === true ?
+                        isVendor === true ?
                           <div>
-                            {/* <button onClick={()=>createShop()} className='text-sm font-bold'>Dashboard</button> */}
                             <Link to='/seller-dashboard' className='text-sm font-bold'>Dashboard</Link>
                           </div>
                           :
-                          <div>
-                            <a href="" className='text-sm font-bold'>Register as Vendor</a>
-                          </div>
+                          ''
                       }
 
                       {
+                        isVendor ?
                         location.pathname === "/seller-dashboard" || location.pathname === "/seller-products" || location.pathname === "/seller-orders" || location.pathname === "/seller-list-product" ? 
                         <>
                         <div>
@@ -91,6 +102,8 @@ const Navbar = ({ setShowModal, setIsSignUp }) => {
                       </> 
                         :
                          ''
+                        :
+                        ''
                       }
                     </div>
                   </Transition>

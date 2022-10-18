@@ -23,6 +23,7 @@ import SideBar from './components/Vendor/SideBar';
 import ListedProduct from './pages/VendorPortal/ListedProduct';
 import ListProduct from './pages/VendorPortal/ListProduct';
 import VendorOrders from './pages/VendorPortal/VendorOrders';
+import Admin from './pages/Admin/Admin';
 
 function App() {
 
@@ -54,7 +55,7 @@ function App() {
         <Route path='/' element={<Landing/>}/>
         <Route path='/how-it-works' element={<HowItsWorks/>}/>
         <Route path='/view-collections' element={<Collections/>}/>
-        <Route path='/product-details' element={<ProductDetails/>}/>
+        <Route path='/product-details/:id' element={<ProductDetails/>}/>
         <Route path='/account-settings' element={<AccountSettings/>}/>
         <Route path='/orders' element={<Orders/>}/>
         <Route path='/view-orders' element={<ViewOrder/>}/>
@@ -66,6 +67,9 @@ function App() {
         <Route path='/seller-products' element={<ListedProduct/>}/>
         <Route path='/seller-list-product' element={<ListProduct/>}/>
         <Route path='/seller-orders' element={<VendorOrders/>}/>
+
+        {/* admin  */}
+          <Route path='/admin' element={<Admin/>}/>
 
         </Routes>
         <AuthModel showModal={showModal} setShowModal={setShowModal} setWalletModal={setWalletModal}/>

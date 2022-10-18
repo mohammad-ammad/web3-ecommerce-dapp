@@ -3,11 +3,12 @@ const Attributes = require('../../models/Attributes')
 const Products = require('../../models/Products')
 const Sizes = require('../../models/Sizes')
 const Color = require('../../models/Color')
+const Categories = require('../../models/Categories')
 
 //---CREATE PRODUCT
 exports.create = async (req, res) => {
     try {
-        const { title, catId, description, vendorAddress, attributes } = req.body;
+        const { title, catId, description,availabilty,native_price,crypto_price, vendorAddress, attributes } = req.body;
         const isExist = await Products.findOne({ title })
         if (isExist != null) {
             res.status(404).json({ message: "Product title should be unique" })
@@ -20,9 +21,6 @@ exports.create = async (req, res) => {
                         image: item.image,
                         sizeId: item.sizeId,
                         colorId: item.colorId,
-                        availabilty: item.availabilty,
-                        native_price: item.native_price,
-                        crypto_price: item.crypto_price
                     })
 
                     const _attr = await attr.save();
@@ -35,6 +33,9 @@ exports.create = async (req, res) => {
                 catId,
                 title,
                 description,
+                availabilty,
+                native_price,
+                crypto_price,
                 attribute: arr
             })
 
@@ -55,6 +56,7 @@ exports.list = async (req, res) => {
         let attr_array = [];
         await Promise.all(
             products.map(async item => {
+                const category = await Categories.findOne({collection_address:item.catId});
                 await Promise.all(
                     item.attribute.map(async el => {
                         const attr = await Attributes.findById({ _id: el })
@@ -76,6 +78,10 @@ exports.list = async (req, res) => {
                     vendorAddress: item.vendorAddress,
                     title: item.title,
                     description: item.description,
+                    native_price:item.native_price,
+                    crypto_price:item.crypto_price,
+                    category:category['title'],
+                    collection_address:item.catId,
                     attribute: attr_array
                 }
 
@@ -146,21 +152,22 @@ exports.listById = async (req, res) => {
                 let _obj = {
                     image: attr.image,
                     size: _size.title,
-                    color: _clr.color,
-                    availabilty: attr.availabilty,
-                    native_price: attr.native_price,
-                    crypto_price: attr.crypto_price
+                    color: _clr.color
                 }
                 attr_array.push(_obj)
             })
 
         )
-
+        const category = await Categories.findOne({collection_address:product.catId});
         let obj = {
             _id: product._id,
             vendorAddress: product.vendorAddress,
             title: product.title,
             description: product.description,
+            native_price:product.native_price,
+            crypto_price:product.crypto_price,
+            category:category['title'],
+            collection_address:product.catId,
             attribute: attr_array
         }
 

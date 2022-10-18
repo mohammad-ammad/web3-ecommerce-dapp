@@ -7,19 +7,7 @@ const AttributesSchema = new mongoose.Schema({
         required:true
     },
     sizeId:{type: mongoose.Schema.Types.ObjectId, ref:'Sizes'},
-    colorId:{type: mongoose.Schema.Types.ObjectId, ref:'Colors'},
-    availabilty:{
-        type:Number
-    },
-    native_price:{
-        type:Number,
-        required:true
-    },
-    crypto_price:
-    {
-        type:Number,
-        required:true
-    }  
+    colorId:{type: mongoose.Schema.Types.ObjectId, ref:'Colors'} 
 },{timestamps:true})
 
 module.exports = mongoose.model('Attributes',AttributesSchema);

@@ -12,7 +12,8 @@ exports.create = async (req,res) => {
         else 
         {
             const resp = new Categories({
-                title:req.body.category
+                title:req.body.category,
+                collection_address:req.body.collection_address
             })
 
             await resp.save();
