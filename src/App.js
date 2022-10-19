@@ -24,6 +24,7 @@ import ListedProduct from './pages/VendorPortal/ListedProduct';
 import ListProduct from './pages/VendorPortal/ListProduct';
 import VendorOrders from './pages/VendorPortal/VendorOrders';
 import Admin from './pages/Admin/Admin';
+import BuyerOrders from './pages/BuyerOrders';
 
 function App() {
 
@@ -57,7 +58,7 @@ function App() {
         <Route path='/view-collections' element={<Collections/>}/>
         <Route path='/product-details/:id' element={<ProductDetails/>}/>
         <Route path='/account-settings' element={<AccountSettings/>}/>
-        <Route path='/orders' element={<Orders/>}/>
+        <Route path='/orders' element={<BuyerOrders/>}/>
         <Route path='/view-orders' element={<ViewOrder/>}/>
 
         {/* vendor routes  */}

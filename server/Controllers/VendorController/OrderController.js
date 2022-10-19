@@ -9,14 +9,13 @@ const Sizes = require('../../models/Sizes');
 //---CREATE ORDER
 exports.create = async (req, res) => {
     try {
-        const {product_id,vendorAddress,userAddress,quantity,status,type,price} = req.body;
-        if(!product_id || !vendorAddress || !userAddress || !quantity || !status || !type || !price)
+        const {product_id,userAddress,quantity,status,type,price} = req.body;
+        if(!product_id || !userAddress || !quantity || !status || !type || !price)
         {
             throw Error("Please Fill All Fields");
         }
         const resp = new Orders({
             product_id,
-            vendorAddress,
             userAddress,
             quantity,
             status
@@ -68,7 +67,7 @@ exports.listForUser = async (req, res) => {
                 let obj = {
                     title:product.title,
                     description:product.description,
-                    attributes:attr_array,
+                    image:attr_array[0]['image'],
                     order:[
                         {
                             vendorAddress:el.vendorAddress,

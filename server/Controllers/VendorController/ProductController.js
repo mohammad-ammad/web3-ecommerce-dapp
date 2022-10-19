@@ -8,7 +8,7 @@ const Categories = require('../../models/Categories')
 //---CREATE PRODUCT
 exports.create = async (req, res) => {
     try {
-        const { title, catId, description,availabilty,native_price,crypto_price, vendorAddress, attributes } = req.body;
+        const { title, catId, description,availabilty,native_price,crypto_price, vendorAddress, attributes, tokenId } = req.body;
         const isExist = await Products.findOne({ title })
         if (isExist != null) {
             res.status(404).json({ message: "Product title should be unique" })
@@ -36,7 +36,8 @@ exports.create = async (req, res) => {
                 availabilty,
                 native_price,
                 crypto_price,
-                attribute: arr
+                attribute: arr,
+                tokenId
             })
 
             resp.save();
@@ -51,7 +52,7 @@ exports.create = async (req, res) => {
 //---PRODUCT LISTING
 exports.list = async (req, res) => {
     try {
-        const products = await Products.find();
+        const products = await Products.find({status:true});
         let arr = [];
         let attr_array = [];
         await Promise.all(
@@ -82,6 +83,7 @@ exports.list = async (req, res) => {
                     crypto_price:item.crypto_price,
                     category:category['title'],
                     collection_address:item.catId,
+                    tokenId:item.tokenId,
                     attribute: attr_array
                 }
 
@@ -140,7 +142,7 @@ exports.listByVendorAddress = async (req, res) => {
 //---PRODUCT BY ID
 exports.listById = async (req, res) => {
     try {
-        const product = await Products.findById({ _id: req.params.id })
+        const product = await Products.findById({ _id: req.params.id, status:true })
         let arr = [];
         let attr_array = [];
 
@@ -168,6 +170,7 @@ exports.listById = async (req, res) => {
             crypto_price:product.crypto_price,
             category:category['title'],
             collection_address:product.catId,
+            tokenId:product.tokenId,
             attribute: attr_array
         }
 

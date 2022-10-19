@@ -1,22 +1,31 @@
 import React from 'react'
 import p1 from '../assets/p1.png';
 import cloud from '../assets/cloud.png';
+import { useContext } from 'react';
+import { MultiVendorContext } from '../context/MultiVendorContext';
 
 const ConfirmOrderContent = () => {
+    //---USECONTEXT
+    const {pDetails, currencyToggle} = useContext(MultiVendorContext)
   return (
     <>
     <div className='grid grid-cols-1 lg:grid-cols-6 gap-0 overflow-y-auto items-center'>
         <div className='col-span-2'>
-            <img src={p1} className="w-32 border-solid border-[1px] border-black rounded-lg" alt=""  />
+            <img src={`https://ipfs.moralis.io:2053/ipfs/${pDetails[0]?.attribute[0]['image']}`} className="w-32 border-solid border-[1px] border-black rounded-lg" alt=""  />
         </div>
         <div className='col-span-4'>
-            <h1 className='text-xl font-bold text-black'>The item’s name goes here</h1>
+            <h1 className='text-xl font-bold text-black'>{pDetails[0]?.title}</h1>
             <p className='text-md text-black font-bold'>Size: M</p>
-            <p className='text-3xl text-black font-bold my-5'>$ 1799</p>
+            {
+                currencyToggle ? 
+                <p className='text-3xl text-black font-bold my-5'>{pDetails[0]?.crypto_price} Matic</p>
+                :
+                <p className='text-3xl text-black font-bold my-5'>$ {pDetails[0]?.native_price}</p>
+            }
         </div>
     </div>
     <div>
-        <h1 className='text-2xl text-black font-extrabold my-2'>Hello, John</h1>
+        {/* <h1 className='text-2xl text-black font-extrabold my-2'>Hello, John</h1> */}
         <p className='text-sm text-slate-600 my-2'>
         You have selected to store your physical item for later redemption. We will securely store your NFT in your account for you after you placing the order. If you change your mind, you can go back to change the option.
         </p>

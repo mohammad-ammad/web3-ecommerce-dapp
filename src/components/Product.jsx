@@ -4,7 +4,7 @@ import vector from '../assets/label.png';
 import { Slide } from 'react-slideshow-image';
 import 'react-slideshow-image/dist/styles.css';
 
-const Product = ({img, tag, title, price, id}) => {
+const Product = ({img, tag, title, price, id, toggle}) => {
   console.log(img[0]['image'])
   const indicators = () => {
     return (
@@ -27,7 +27,12 @@ const Product = ({img, tag, title, price, id}) => {
     <Link to={`/product-details/${id}`}>
       <div className='px-2 my-1'>
         <h1 className='text-md font-bold'>{title}</h1>
-        <p className='text-md font-extrabold my-2'>$ {price}</p>
+        {
+          toggle ? 
+          <p className='text-md font-extrabold my-2'>{price} Matic</p>
+          :
+          <p className='text-md font-extrabold my-2'>$ {price}</p>
+        }
       </div>
     </Link>
     </div>

@@ -14,6 +14,9 @@ const MultiVendorProvider = ({ children }) => {
   const [isVendor, setIsVendor] = useState(false);
   const [productList, setProductList] = useState([]);
   const [pDetails, setPDetails] = useState([]);
+  const [currencyToggle, setCurrencyToggle] = useState(false);
+  const [cart, setCart] = useState([]);
+
   //---GETTING THE INSTANCE CONTEXT
   const {MultiVendorInstance, NFTInstance} = useContext(InstanceContext)
   const {wallet} = useContext(WalletContext)
@@ -160,10 +163,9 @@ const MultiVendorProvider = ({ children }) => {
           const res = await NFTInstance.mint(data.availabilty,ethers.utils.parseUnits(data.crypto_price,"ether"),data.attributes[0]['image']);
           toast.promise(
             res.wait().then(response => {
-              console.log("minted...")
-              console.log(response)
               axios.post(`${process.env.React_App_SERVER_URL}/product/create`,{
-                ...data
+                ...data,
+                tokenId:parseInt(response.events[1].args[1]._hex,16)
               }).then(resp => {
                 console.log(resp)
               }).catch(err => console.log(err.message))
@@ -203,8 +205,57 @@ const MultiVendorProvider = ({ children }) => {
       console.log(error.message)
     }
   }
+
+  //---Create Order 
+  const createOrder = async (data) => 
+  {
+    try {
+      if(MultiVendorInstance != "")
+      {
+        const resp = await MultiVendorInstance.createOrder(data.address,data.id,data.amount,{value:ethers.utils.parseUnits(data.price.toString(),"ether")});
+        toast.promise(
+          resp.wait().then(res => {
+            console.log(res)
+            axios.post(`${process.env.React_App_SERVER_URL}/order/create`,{
+              product_id:data._id,
+              userAddress:wallet.address,
+              quantity:data.amount,
+              status:"Pending",
+              type:data.type,
+              price:data.price
+            }).then(_res => {
+              console.log(_res)
+            }).catch(err => console.log(err))
+          }).catch(err => console.log(err))
+          ,
+          {
+            loading: 'Creating Order Please Wait',
+            success: 'Order Placed Successfully',
+            error: 'Something Went Wrong',
+          }
+        )
+      }
+    } catch (error) {
+      console.log(error.message)
+    }
+  }
+
+  //---OrderCart
+  const orderCart = async () => 
+  {
+    try {
+      if(wallet.isConnected)
+      {
+        const resp = await axios.get(`${process.env.React_App_SERVER_URL}/order/list/${wallet.address}`);
+        console.log(resp['data'])
+        setCart(resp['data'])
+      }
+    } catch (error) {
+      console.log(error.message)
+    }
+  }
     return (
-        <MultiVendorContext.Provider value={{isVendor, createShop, getSizes, getColor, mintProduct, getCategories, createCollection, createTechnicalMember, productList, productDetails, pDetails}}>
+        <MultiVendorContext.Provider value={{isVendor, createShop, getSizes, getColor, mintProduct, getCategories, createCollection, createTechnicalMember, productList, productDetails, pDetails, currencyToggle, setCurrencyToggle, createOrder, orderCart, cart}}>
           {children}
         </MultiVendorContext.Provider>
     );

@@ -57,10 +57,7 @@ const Navbar = ({ setShowModal, setIsSignUp }) => {
                               <a href="" className='text-sm font-bold'>Profile</a>
                             </div>
                             <div>
-                              <a href="" className='text-sm font-bold'>Cart</a>
-                            </div>
-                            <div>
-                              <a href="" className='text-sm font-bold'>Orders</a>
+                            <Link to="/orders" className='text-sm font-bold'>Orders</Link>
                             </div>
                           </>
                           : 
@@ -69,10 +66,7 @@ const Navbar = ({ setShowModal, setIsSignUp }) => {
                               <a href="" className='text-sm font-bold'>Profile</a>
                             </div>
                             <div>
-                              <a href="" className='text-sm font-bold'>Cart</a>
-                            </div>
-                            <div>
-                              <a href="" className='text-sm font-bold'>Orders</a>
+                              <Link to="/orders" className='text-sm font-bold'>Orders</Link>
                             </div>
                           </>
                       }
