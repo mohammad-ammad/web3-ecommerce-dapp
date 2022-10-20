@@ -16,6 +16,7 @@ const MultiVendorProvider = ({ children }) => {
   const [pDetails, setPDetails] = useState([]);
   const [currencyToggle, setCurrencyToggle] = useState(false);
   const [cart, setCart] = useState([]);
+  const [vendorOrder, setVendorOrder] = useState([]);
 
   //---GETTING THE INSTANCE CONTEXT
   const {MultiVendorInstance, NFTInstance} = useContext(InstanceContext)
@@ -220,6 +221,7 @@ const MultiVendorProvider = ({ children }) => {
               product_id:data._id,
               userAddress:wallet.address,
               quantity:data.amount,
+              trxId:1,
               status:"Pending",
               type:data.type,
               price:data.price
@@ -254,8 +256,28 @@ const MultiVendorProvider = ({ children }) => {
       console.log(error.message)
     }
   }
+
+  //---Vednor Portal Order List
+  const vendorOrderList = async () => 
+  {
+    try {
+      if(wallet.isConnected)
+      {
+        const resp = await axios.get(`${process.env.React_App_SERVER_URL}/order/list`);
+        console.log(resp['data'])
+        setVendorOrder(resp['data'])
+      }
+    } catch (error) {
+      console.log(error.message)
+    }
+  }
+
+  //---dispute and cancel order (buyer)
+
+  //---withdraw option only admin
+  
     return (
-        <MultiVendorContext.Provider value={{isVendor, createShop, getSizes, getColor, mintProduct, getCategories, createCollection, createTechnicalMember, productList, productDetails, pDetails, currencyToggle, setCurrencyToggle, createOrder, orderCart, cart}}>
+        <MultiVendorContext.Provider value={{isVendor, createShop, getSizes, getColor, mintProduct, getCategories, createCollection, createTechnicalMember, productList, productDetails, pDetails, currencyToggle, setCurrencyToggle, createOrder, orderCart, cart, vendorOrder,vendorOrderList}}>
           {children}
         </MultiVendorContext.Provider>
     );

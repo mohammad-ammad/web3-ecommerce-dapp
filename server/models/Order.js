@@ -11,6 +11,7 @@ const OrdersSchema = new mongoose.Schema({
         type:Number,
         default:1
     },
+    trxId:{type:Number},
     status:{
         type:String,
         default:"Pending"

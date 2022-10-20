@@ -9,8 +9,8 @@ const Sizes = require('../../models/Sizes');
 //---CREATE ORDER
 exports.create = async (req, res) => {
     try {
-        const {product_id,userAddress,quantity,status,type,price} = req.body;
-        if(!product_id || !userAddress || !quantity || !status || !type || !price)
+        const {product_id,userAddress,quantity,status,type,price,trxId} = req.body;
+        if(!product_id || !userAddress || !quantity || !status || !type || !price || !trxId)
         {
             throw Error("Please Fill All Fields");
         }
@@ -18,6 +18,7 @@ exports.create = async (req, res) => {
             product_id,
             userAddress,
             quantity,
+            trxId,
             status
         })
 
@@ -182,6 +183,64 @@ exports.update = async (req, res) => {
         }
 
         res.status(200).json({message:"Order Updated Successfully"})
+    } catch (error) {
+        res.status(500).json(error.message)
+    }
+}
+
+exports.fetchAll = async (req,res) => 
+{
+    try {
+        let arr = [];
+        let attr_array = [];
+        const orders = await Orders.find()
+        await Promise.all(
+            orders.map(async el => {
+                const payment = await Payment.findOne({order_id:el._id})
+                const product = await Products.findById({_id:el.product_id})
+                await Promise.all(
+                    product.attribute.map(async item => {
+                        const attr = await Attributes.findById({_id:item})
+                        const _size = await Sizes.findById({ _id: attr.sizeId })
+                        const _clr = await Color.findById({ _id: attr.colorId })
+
+                        let _obj = {
+                            image: attr.image,
+                            size: _size.title,
+                            color: _clr.color,
+                            availabilty: attr.availabilty,
+                            native_price: attr.native_price,
+                            crypto_price: attr.crypto_price
+                        }
+                        attr_array.push(_obj)
+                    })
+                )
+                let obj = {
+                    title:product.title,
+                    description:product.description,
+                    image:attr_array[0]['image'],
+                    order:[
+                        {
+                            vendorAddress:el.vendorAddress,
+                            userAddress:el.userAddress,
+                            quantity:el.quantity,
+                            status:el.status
+                        }
+                    ],
+                    payment:[
+                        {
+                            type:payment.type,
+                            price:payment.price,
+                            transaction_id:payment?.transaction_id
+                        }
+                    ]
+                }
+
+                arr.push(obj)
+                attr_array = [];
+            })
+        )
+        res.status(200).json(arr)
     } catch (error) {
         res.status(500).json(error.message)
     }
