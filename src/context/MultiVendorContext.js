@@ -202,6 +202,7 @@ const MultiVendorProvider = ({ children }) => {
     try {
       const resp = await axios.get(`${process.env.React_App_SERVER_URL}/product/${id}`);
       setPDetails(resp['data'])
+      console.log(resp)
     } catch (error) {
       console.log(error.message)
     }
@@ -272,12 +273,55 @@ const MultiVendorProvider = ({ children }) => {
     }
   }
 
+  //---UPDATE ORDER STATUS
+  const updateOrderStatus = async (status,id) => 
+  {
+    try {
+      if(wallet.isConnected)
+      {
+        const resp = await axios.put(`${process.env.React_App_SERVER_URL}/order/update/${id}`,{
+          status:status
+        })
+        if(resp['data']['message'] === "Order Updated Successfully")
+        {
+          toast.success("Order Updated Successfully")
+          vendorOrderList()
+        }
+        else 
+        {
+          toast.error("Something went wrong")
+        }
+      }
+    } catch (error) {
+      console.log(error.message)
+    }
+  }
+
   //---dispute and cancel order (buyer)
 
   //---withdraw option only admin
+
+  //---PAYMENT WITH STRIPE
+  const paymentWithStripe = async (product,token) => 
+  {
+    toast.promise(
+      axios.post(`${process.env.React_App_SERVER_URL}/stripe/payment`,{
+      product,token
+      }).then(resp => {
+        console.log(resp)
+      }).catch(err => console.log(err))
+      ,
+      {
+        loading: 'Creating Order Please Wait',
+        success: 'Order Placed Successfully',
+        error: 'Something Went Wrong',
+      }
+    )
+
+  }
   
     return (
-        <MultiVendorContext.Provider value={{isVendor, createShop, getSizes, getColor, mintProduct, getCategories, createCollection, createTechnicalMember, productList, productDetails, pDetails, currencyToggle, setCurrencyToggle, createOrder, orderCart, cart, vendorOrder,vendorOrderList}}>
+        <MultiVendorContext.Provider value={{isVendor, createShop, getSizes, getColor, mintProduct, getCategories, createCollection, createTechnicalMember, productList, productDetails, pDetails, currencyToggle, setCurrencyToggle, createOrder, orderCart, cart, vendorOrder,vendorOrderList, updateOrderStatus, paymentWithStripe}}>
           {children}
         </MultiVendorContext.Provider>
     );

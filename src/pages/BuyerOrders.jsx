@@ -1,16 +1,25 @@
 import React from 'react'
 import { useEffect } from 'react'
 import { useContext } from 'react'
+import { EscrowContext } from '../context/EscrowContext'
 import { MultiVendorContext } from '../context/MultiVendorContext'
 
 const BuyerOrders = () => {
     //---USECONTEXT
     const { orderCart, cart } = useContext(MultiVendorContext)
-
+    const {cancelOrder} = useContext(EscrowContext)
+    
     //---useEffect
     useEffect(() => {
         orderCart()
     }, [])
+
+    //----CANCEL HANDLER
+    const cancelHandler = (id,trxId) => 
+    {
+        cancelOrder(trxId,id)
+    }
+
     return (
         <div className='bg-slate-100 w-full h-screen flex justify-center items-start pt-20 md:pt-28'>
             <div className='w-full md:w-5/6 px-5'>
@@ -30,6 +39,9 @@ const BuyerOrders = () => {
                             <th scope="col" class="py-3 px-6">
                                 Status
                             </th>
+                            <th scope="col" class="py-3 px-6">
+                                Action
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -48,6 +60,9 @@ const BuyerOrders = () => {
                                         </td>
                                         <td class="py-4 px-6">
                                         {item?.order[0]?.status}
+                                        </td>
+                                        <td class="py-4 px-6">
+                                            <button className='bg-black text-white rounded-full px-5 py-1 text-sm font-normal' onClick={()=>cancelHandler(item?._id,item?.trxId)}>Cancel Order</button>
                                         </td>
                                     </tr>
                                 )) : ''

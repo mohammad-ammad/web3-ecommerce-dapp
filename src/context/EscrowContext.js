@@ -3,6 +3,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { InstanceContext } from "./InstanceContext";
 import {toast} from 'react-hot-toast'
 import { WalletContext } from "./WalletContext";
+import axios from "axios";
 
 const EscrowContext = createContext();
 
@@ -16,15 +17,20 @@ const EscrowProvider = ({ children }) => {
     const [createCoinLoading, setCreateCoinLoading] = useState(false);
 
     //---GETTING THE INSTANCE CONTEXT
-    const {EscrowInstance} = useContext(InstanceContext)
+    const {EscrowInstance, loadEscrowContract} = useContext(InstanceContext)
     const {wallet} = useContext(WalletContext)
+
+    useEffect(() => {
+        if(wallet.isConnected)
+        {
+            console.log('-----Load Escrow')
+            loadEscrowContract(wallet.signer)
+        }
+    },[wallet])
 
     //---USEEFFECT FOR CALLING ESCROW EVENT CALL
     useEffect(() => {
-        getEscrowTransaction()
-        getTokenEscrowTransaction()
-        getSellerEscrowTransaction()
-        getSellerTokenEscrowTransaction()
+        
     },[EscrowInstance,createCoinLoading,wallet])
 
     //---CREATE ESCROW ORDER FUNCTION
@@ -310,10 +316,42 @@ const EscrowProvider = ({ children }) => {
         }
     }
 
+    //---new escrow functions
+
+    //---CANCEL ORDER FUNCTION
+    const cancelOrder = async (trx,id) => 
+    {
+        try {
+            if(EscrowInstance != "")
+            {
+                const resp = await EscrowInstance.cancelOrder(trx);
+                toast.promise(
+                    resp.wait().then(res => {
+                        console.log(res)
+                        axios.put(`${process.env.React_App_SERVER_URL}/order/update/${id}`,{
+                            status:"Cancel"
+                        }).then(_res => {
+                            console.log(_res)
+                        }).catch(err => console.log(err))
+                    }).catch(err => console.log(err))
+                    ,
+                    {
+                        loading: 'Order Cancel Please Wait',
+                        success: 'Order Cancel Successfully',
+                        error: 'Something Went Wrong',
+                    }
+                )
+            }
+        } catch (error) {
+            console.log(error.error.message)
+            toast.error(error.error.message)
+        }
+    }
+
     return (
         <EscrowContext.Provider value={{createEscrowOrder, createCoinList, 
         releaseEscrowPayment, disputeEscrowPayment, lockEscrow, 
-        createTokenList, createSellerCoinList, createSellerTokenList }}>
+        createTokenList, createSellerCoinList, createSellerTokenList, cancelOrder }}>
           {children}
         </EscrowContext.Provider>
     )

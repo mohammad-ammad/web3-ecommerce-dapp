@@ -1,9 +1,19 @@
 import { Transition } from '@windmill/react-ui';
 import React from 'react'
+import { useContext } from 'react';
 import { HiX } from 'react-icons/hi';
+import { MultiVendorContext } from '../../context/MultiVendorContext';
 
 
 const OrderView = ({ showModal ,setShowModal, data }) => {
+  //----USECONTEXT
+  const {updateOrderStatus} = useContext(MultiVendorContext)
+
+  //---status handler
+  const statusHandler = (value, id) => 
+  {
+    updateOrderStatus(value,id);
+  }
   return (
     <>
       <Transition
@@ -34,7 +44,9 @@ const OrderView = ({ showModal ,setShowModal, data }) => {
 
                 </div>
                 {/*body*/}
-                <div className="relative p-6 flex-auto">
+                {
+                  data.length == undefined ? 
+                  <div className="relative p-6 flex-auto">
                   <div>
                     <div className='flex justify-between items-center my-3'>
                         <h1 className='text-md text-black font-bold'>{data?.title}</h1>
@@ -50,22 +62,25 @@ const OrderView = ({ showModal ,setShowModal, data }) => {
                     </div>
                     <div className='flex justify-start items-center'>
                          <h1 className='text-md text-black font-bold mr-5'>Status</h1>
-                        <select name="" id="" className='w-full py-2 px-4 text-xs bg-white shadow-inner shadow-slate-200 rounded-lg outline-none'>
+                        <select name="" id="" onChange={(e) => statusHandler(e.target.value,data?._id)} className='w-full py-2 px-4 text-xs bg-white shadow-inner shadow-slate-200 rounded-lg outline-none'>
                             <option value="">Choose Status</option>
                             {
-                                data?.order[0].status === 'Pending' ? <option value="" selected>Pending</option>
+                                data?.order[0].status === 'Pending' ? <option value="Pending" selected>Pending</option>
                                 : 
-                                data?.order[0].status === 'Progress' ? <option value="" selected>Progress</option>
+                                data?.order[0].status === 'Progress' ? <option value="Progress" selected>Progress</option>
                                 :
-                                data?.order[0].status === 'Complete' ? <option value="" selected>Complete</option>
+                                data?.order[0].status === 'Complete' ? <option value="Complete" selected>Complete</option>
                                 : ''
                             }
-                            <option value="">{data?.order[0].status === 'Pending' ? 'Progress' : 'Pending'}</option>
-                            <option value="">Complete</option>
+                            <option value={data?.order[0].status === 'Pending' ? 'Progress' : 'Pending'}>{data?.order[0].status === 'Pending' ? 'Progress' : 'Pending'}</option>
+                            <option value="Complete">Complete</option>
                         </select>
                     </div>
                   </div>
                 </div>
+                : ''
+                }
+                
                 {/*footer*/}
                 <div className="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
                   <button  className='bg-black text-white rounded-full px-6 py-2 text-sm font-normal'>Update</button>

@@ -2,41 +2,48 @@ import { Transition } from '@windmill/react-ui';
 import React from 'react'
 import { HiX } from 'react-icons/hi';
 import ConfirmOrderContent from './ConfirmOrderContent';
-import {BsArrowLeft} from 'react-icons/bs'
+import { BsArrowLeft } from 'react-icons/bs'
 import { useContext } from 'react';
 import { WalletContext } from '../context/WalletContext';
 import { MultiVendorContext } from '../context/MultiVendorContext';
+import StripeCheckout from 'react-stripe-checkout';
 
 const ConfirmOrderModel = ({ confirmModal, setConfirmModal, setShowModal, setAccountInfo }) => {
-    //---USECONTEXT 
-    const {wallet} = useContext(WalletContext)
-    const {pDetails, currencyToggle, createOrder} = useContext(MultiVendorContext)
-    const obj = {
-      address:pDetails[0]?.collection_address,
-      id:pDetails[0]?.tokenId,
-      amount:1,
-      price:currencyToggle ? pDetails[0]?.crypto_price : pDetails[0]?.native_price,
-      _id:pDetails[0]?._id,
-      type:currencyToggle ? 'Crypto' : 'Credit'
-    }
-    const backHandler = () => 
-    {
-        setShowModal(true)
-        setConfirmModal(false)
-    }
+  //---USECONTEXT 
+  const { wallet } = useContext(WalletContext)
+  const { pDetails, currencyToggle, createOrder, paymentWithStripe } = useContext(MultiVendorContext)
+  const obj = {
+    address: pDetails[0]?.collection_address,
+    id: pDetails[0]?.tokenId,
+    amount: 1,
+    price: currencyToggle ? pDetails[0]?.crypto_price : pDetails[0]?.native_price,
+    _id: pDetails[0]?._id,
+    type: currencyToggle ? 'Crypto' : 'Credit'
+  }
+  const backHandler = () => {
+    setShowModal(true)
+    setConfirmModal(false)
+  }
 
-    const nextHandler = () => 
-    {
-      if(wallet.isConnected && wallet.address != "")
-      {
-        createOrder(obj)
-      }
-      else 
-      {
-        setAccountInfo(true)
-      }
-      setConfirmModal(false)
+  const nextHandler = () => {
+    if (wallet.isConnected && wallet.address != "") {
+      createOrder(obj)
     }
+    else {
+      setAccountInfo(true)
+    }
+    setConfirmModal(false)
+  }
+
+  //---STRIPE HANDLER
+  const stripeHandler = token => 
+  {
+    let product = {
+      name: pDetails[0]?.title,
+      price: pDetails[0]?.native_price
+    }
+    paymentWithStripe(product,token)
+  }
   return (
     <>
       <Transition
@@ -68,14 +75,26 @@ const ConfirmOrderModel = ({ confirmModal, setConfirmModal, setShowModal, setAcc
                 </div>
                 {/*body*/}
                 <div className="relative p-6 flex-auto">
-                  <ConfirmOrderContent/>
+                  <ConfirmOrderContent />
                 </div>
                 {/*footer*/}
                 <div className="flex items-center justify-between p-6 border-t border-solid border-slate-200 rounded-b">
                   <button onClick={backHandler} className='rounded-full px-6 py-2 text-sm font-bold text-black inline-flex justify-start items-center'>
-                    <BsArrowLeft className='text-xl mr-2'/>Back
-                 </button>
-                  <button className='bg-black text-white rounded-full px-6 py-2 text-sm font-normal' onClick={nextHandler}>{wallet.isConnected ? 'Place Order' : 'Next'}</button>
+                    <BsArrowLeft className='text-xl mr-2' />Back
+                  </button>
+                  {
+                    currencyToggle ?
+                      <button className='bg-black text-white rounded-full px-6 py-2 text-sm font-normal' onClick={nextHandler}>{wallet.isConnected ? 'Place Order' : 'Next'}</button>
+                      :
+                      <StripeCheckout
+                        token={stripeHandler}
+                        stripeKey="pk_test_51KBg9jG0gapMqUsS3yoMihYnaGrWojG7awmth7BpX5SUSvTICjTqtZ5mgFJCoCn71IMfo2c3Kt2f3x5prTSNgV0A00sEdlIgiv"
+                        name="The Spot Room"
+                        amount={pDetails[0]?.native_price * 100}
+                      >
+                        <button className='bg-black text-white rounded-full px-6 py-2 text-sm font-normal'>{wallet.isConnected ? 'Place Order with Stripe' : 'Next'}</button>
+                      </StripeCheckout>
+                  }
                 </div>
               </div>
             </div>

@@ -58,6 +58,7 @@ const InstanceProvider = ({ children }) => {
         try {
             const contract = new ethers.Contract(process.env.React_App_ESCROW_CONTRACT_ADDRESS, Escrow, signer);
             setEscrowInstance(contract)
+            console.log(contract)
         } catch (error) {
             console.log(error.message)
         }

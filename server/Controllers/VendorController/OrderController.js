@@ -66,9 +66,11 @@ exports.listForUser = async (req, res) => {
                     })
                 )
                 let obj = {
+                    _id:el._id,
                     title:product.title,
                     description:product.description,
                     image:attr_array[0]['image'],
+                    trxId:el.trxId,
                     order:[
                         {
                             vendorAddress:el.vendorAddress,
@@ -216,6 +218,7 @@ exports.fetchAll = async (req,res) =>
                     })
                 )
                 let obj = {
+                    _id:el._id,
                     title:product.title,
                     description:product.description,
                     image:attr_array[0]['image'],
