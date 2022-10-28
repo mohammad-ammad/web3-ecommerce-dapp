@@ -25,6 +25,8 @@ import ListProduct from './pages/VendorPortal/ListProduct';
 import VendorOrders from './pages/VendorPortal/VendorOrders';
 import Admin from './pages/Admin/Admin';
 import BuyerOrders from './pages/BuyerOrders';
+import Terms from './pages/Terms';
+import Privacy from './pages/Privacy';
 
 function App() {
 
@@ -56,6 +58,8 @@ function App() {
         <Route path='/' element={<Landing/>}/>
         <Route path='/how-it-works' element={<HowItsWorks/>}/>
         <Route path='/view-collections' element={<Collections/>}/>
+        <Route path='/terms&conditions' element={<Terms/>}/>
+        <Route path='/privacy&safety' element={<Privacy/>}/>
         <Route path='/product-details/:id' element={<ProductDetails/>}/>
         <Route path='/account-settings' element={<AccountSettings/>}/>
         <Route path='/orders' element={<BuyerOrders/>}/>
