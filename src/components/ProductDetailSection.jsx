@@ -10,24 +10,26 @@ import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useContext } from 'react';
 import { MultiVendorContext } from '../context/MultiVendorContext';
+import { useState } from 'react';
 
 const ProductDetailSection = ({setShowModal}) => {
     //---USEPARAMS
     const {id} = useParams();
 
     //---USECONTEXT
-    const {productDetails, pDetails} = useContext(MultiVendorContext)
+    const {productDetails, pDetails, setProSize, proSize} = useContext(MultiVendorContext)
 
     //---USEEFFECT 
     useEffect(() => {
         productDetails(id)
     }, [id])
+
+    //---GET SIZE
+    const getSize = (size) => 
+    {
+        setProSize(size)
+    }
     
-    const images = [
-        p1,
-        p2,
-        p3
-    ];
     const indicators = () => {
         return (
           <div className="indicator bg-slate-900 w-7 h-1.5 mx-1 rounded-xl cursor-pointer"></div>
@@ -64,13 +66,13 @@ const ProductDetailSection = ({setShowModal}) => {
         <div>
             <p className='text-md text-slate-800 font-bold my-3'>Product Detail</p>
             <p className='text-xs text-slate-600 font-semibold my-3'>Item descriptions</p>
-            <p className='text-md text-slate-800 font-bold my-3'>2” x 2”</p>
+            <p className='text-md text-slate-800 font-bold my-3'>Color: <span className='text-sm text-slate-800 font-semibold'>{pDetails[0]?.color}</span></p>
             <div className='flex justify-start items-center w-44'>
                 <p className='text-md text-slate-800 font-bold'>Size:</p>
                 <div className='flex justify-start items-center ml-5'>
-                    <div className='mx-2 border-solid border-2 border-slate-600 rounded-full px-2 py-0.5 text-sm font-bold cursor-pointer text-slate-600 hover:bg-slate-700 hover:text-white'>{pDetails[0]?.attribute[0]?.size}</div>
-                    <div className='mx-2 border-solid border-2 border-slate-600 rounded-full px-2 py-0.5 text-sm font-bold cursor-pointer text-slate-600 hover:bg-slate-700 hover:text-white'>{pDetails[0]?.attribute[1]?.size}</div>
-                    <div className='mx-2 border-solid border-2 border-slate-600 rounded-full px-2.5 py-0.5 text-sm font-bold cursor-pointer text-slate-600 hover:bg-slate-700 hover:text-white'>{pDetails[0]?.attribute[2]?.size}</div>
+                    <div className={`mx-2 border-solid border-2 border-slate-600 rounded-full px-2 py-0.5 text-sm font-bold cursor-pointer ${proSize === pDetails[0]?.attribute[0]?.size ? 'bg-slate-700 text-white' : 'text-slate-600'}`} onClick={()=>getSize(pDetails[0]?.attribute[0]?.size)}>{pDetails[0]?.attribute[0]?.size}</div>
+                    <div className={`mx-2 border-solid border-2 border-slate-600 rounded-full px-2 py-0.5 text-sm font-bold cursor-pointer ${proSize === pDetails[0]?.attribute[1]?.size ? 'bg-slate-700 text-white' : 'text-slate-600'}`} onClick={()=>getSize(pDetails[0]?.attribute[1]?.size)}>{pDetails[0]?.attribute[1]?.size}</div>
+                    <div className={`mx-2 border-solid border-2 border-slate-600 rounded-full px-2 py-0.5 text-sm font-bold cursor-pointer ${proSize === pDetails[0]?.attribute[2]?.size ? 'bg-slate-700 text-white' : 'text-slate-600'}`} onClick={()=>getSize(pDetails[0]?.attribute[2]?.size)}>{pDetails[0]?.attribute[2]?.size}</div>
                 </div>
             </div>
             <p className='text-sm text-slate-800 font-bold mt-3 my-5'>Made in Italy</p>

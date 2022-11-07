@@ -1,13 +1,26 @@
 import { Transition } from '@windmill/react-ui';
 import React from 'react'
+import { useContext } from 'react';
 import { HiX } from 'react-icons/hi';
+import { MultiVendorContext } from '../context/MultiVendorContext';
 import ReviewOrderContent from './ReviewOrderContent';
 
-const ReviewModel = ({ showModal, setShowModal, setConfirmModal }) => {
+const ReviewModel = ({ showModal, setShowModal, setConfirmModal, setAccountInfo }) => {
+
+  //---USECONTEXT
+  const {isUserDetails} = useContext(MultiVendorContext)
+
   const nextHandler = () => 
   {
     setShowModal(false)
-    setConfirmModal(true)
+    if(isUserDetails)
+    {
+      setConfirmModal(true)
+    }
+    else 
+    {
+      setAccountInfo(true)
+    }
   }
   return (
     <>

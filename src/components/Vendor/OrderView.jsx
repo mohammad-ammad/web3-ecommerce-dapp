@@ -1,5 +1,6 @@
 import { Transition } from '@windmill/react-ui';
 import React from 'react'
+import { useEffect } from 'react';
 import { useContext } from 'react';
 import { HiX } from 'react-icons/hi';
 import { MultiVendorContext } from '../../context/MultiVendorContext';
@@ -7,13 +8,20 @@ import { MultiVendorContext } from '../../context/MultiVendorContext';
 
 const OrderView = ({ showModal ,setShowModal, data }) => {
   //----USECONTEXT
-  const {updateOrderStatus} = useContext(MultiVendorContext)
+  const {updateOrderStatus, getShippingByUser, userDetail} = useContext(MultiVendorContext)
 
   //---status handler
   const statusHandler = (value, id) => 
   {
     updateOrderStatus(value,id);
   }
+
+  useEffect(() => {
+    if(data != "")
+    {
+      getShippingByUser(data?.order[0]?.userAddress)
+    }
+  }, [data])
   return (
     <>
       <Transition
@@ -59,6 +67,30 @@ const OrderView = ({ showModal ,setShowModal, data }) => {
                     </div>
                     <div>
                         <h1 className='text-md text-black font-bold'>User Details</h1>
+                        <div className='flex'>
+                          <h1 className='mr-2 text-sm font-bold text-slate-800'>Name:</h1>
+                          <p className='text-sm font-semibold text-slate-800'>{userDetail?.firstname} {userDetail?.lastname}</p>
+                        </div>
+                        <div className='flex'>
+                          <h1 className='mr-2 text-sm font-bold text-slate-800'>Shipping Address:</h1>
+                          <p className='text-sm font-semibold text-slate-800'>{userDetail?.shipping_address}</p>
+                        </div>
+                        <div className='flex'>
+                          <h1 className='mr-2 text-sm font-bold text-slate-800'>City:</h1>
+                          <p className='text-sm font-semibold text-slate-800'>{userDetail?.city}</p>
+                        </div>
+                        <div className='flex'>
+                          <h1 className='mr-2 text-sm font-bold text-slate-800'>State:</h1>
+                          <p className='text-sm font-semibold text-slate-800'>{userDetail?.state}</p>
+                        </div>
+                        <div className='flex'>
+                          <h1 className='mr-2 text-sm font-bold text-slate-800'>Zip Code:</h1>
+                          <p className='text-sm font-semibold text-slate-800'>{userDetail?.zip}</p>
+                        </div>
+                        <div className='flex'>
+                          <h1 className='mr-2 text-sm font-bold text-slate-800'>Country:</h1>
+                          <p className='text-sm font-semibold text-slate-800'>{userDetail?.country}</p>
+                        </div>
                     </div>
                     <div className='flex justify-start items-center'>
                          <h1 className='text-md text-black font-bold mr-5'>Status</h1>

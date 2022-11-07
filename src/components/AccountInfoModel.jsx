@@ -1,20 +1,39 @@
 import { Transition } from '@windmill/react-ui';
-import React from 'react'
+import React, { useState } from 'react'
 import { HiX } from 'react-icons/hi';
 import AccountInfoContent from './AccountInfoContent';
 import {BsArrowLeft} from 'react-icons/bs'
-import {useNavigate} from 'react-router-dom';
+import { useContext } from 'react';
+import { MultiVendorContext } from '../context/MultiVendorContext';
 
 const AccountInfoModel = ({ accountInfo, setAccountInfo, setConfirmModal }) => {
-  const navigate = useNavigate();
+  
+  //---USESTATES
+  const [data, setData] = useState({
+    firstname:"",
+    lastname:"",
+    email:"",
+    DOB:"",
+    phone:"",
+    shipping_address:"",
+    room:"",
+    city:"",
+    state:"",
+    zip:"",
+    country:""
+  })
+
+  const {addShippingDetails} = useContext(MultiVendorContext)
+
   const nextHandler = () => 
   {
-    navigate('/account-settings')
+    addShippingDetails(data)
+    setConfirmModal(true);
+    setAccountInfo(false);
   }
   const backHandler = () => 
   {
     setAccountInfo(false);
-    setConfirmModal(true);
   }
   return (
     <>
@@ -47,7 +66,7 @@ const AccountInfoModel = ({ accountInfo, setAccountInfo, setConfirmModal }) => {
                 </div>
                 {/*body*/}
                 <div className="relative p-6 flex-auto">
-                  <AccountInfoContent/>
+                  <AccountInfoContent data={data} setData={setData}/>
                 </div>
                 {/*footer*/}
                 <div className="flex items-center justify-between p-6 border-t border-solid border-slate-200 rounded-b">

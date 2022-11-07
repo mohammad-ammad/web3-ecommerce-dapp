@@ -1,30 +1,52 @@
 import React from 'react'
-import p1 from '../assets/p1.png';
 
-const AccountInfoContent = () => {
+const AccountInfoContent = ({data, setData}) => {
+
   return (
     <>
-    <div className='grid grid-cols-1 lg:grid-cols-6 gap-0 overflow-y-auto items-center'>
-        <div className='col-span-2'>
-            <img src={p1} className="w-32 border-solid border-[1px] border-black rounded-lg" alt=""  />
-        </div>
-        <div className='col-span-4'>
-            <h1 className='text-xl font-bold text-black'>The item’s name goes here</h1>
-            <p className='text-md text-black font-bold'>Size: M</p>
-            <p className='text-3xl text-black font-bold my-5'>$ 1799</p>
-        </div>
-    </div>
     <div>
         <div className='flex justify-between items-center my-3'>
-            <h1 className='text-md font-bold text-black'>Account Login:</h1>
+            <h1 className='text-md font-bold text-black'>Account Info:</h1>
             <h2 className='text-xs text-blue-500 cursor-pointer'>I have an account</h2>
         </div>
-        <div className='bg-white shadow-inner shadow-slate-200 rounded-lg my-1'>
-            <input type="text" className='w-full p-2 text-xs bg-transparent outline-none' placeholder='Email Address' name="" id="" />
+        <div className='grid grid-cols-1 md:grid-cols-2 gap-1'>
+            <div className='bg-white shadow-inner shadow-slate-200 rounded-lg my-1'>
+                <input type="text" value={data.firstname} onChange={(e) => setData({...data, firstname:e.target.value})} className='w-full p-3 text-xs bg-transparent outline-none' placeholder='FirstName' name="" id="" />
+            </div>
+            <div className='bg-white shadow-inner shadow-slate-200 rounded-lg my-1'>
+                <input type="text" value={data.lastname} onChange={(e) => setData({...data, lastname:e.target.value})} className='w-full p-3 text-xs bg-transparent outline-none' placeholder='LastName' name="" id="" />
+            </div>
         </div>
         <div className='bg-white shadow-inner shadow-slate-200 rounded-lg my-1'>
-            <input type="text" className='w-full p-2 text-xs bg-transparent outline-none' placeholder='Password' name="" id="" />
+            <input type="email" value={data.email} onChange={(e) => setData({...data, email:e.target.value})} className='w-full p-3 text-xs bg-transparent outline-none' placeholder='Email Address' name="" id="" />
         </div>
+        <div className='bg-white shadow-inner shadow-slate-200 rounded-lg my-1'>
+            <input type="date" value={data.DOB} onChange={(e) => setData({...data, DOB:e.target.value})} className='w-full p-3 text-xs bg-transparent outline-none' placeholder='DOB' name="" id="" />
+        </div>
+        <div className='bg-white shadow-inner shadow-slate-200 rounded-lg my-1'>
+            <input type="text" value={data.phone} onChange={(e) => setData({...data, phone:e.target.value})} className='w-full p-3 text-xs bg-transparent outline-none' placeholder='Phone No.' name="" id="" />
+        </div>
+        <div className='bg-white shadow-inner shadow-slate-200 rounded-lg my-1'>
+            <input type="text" value={data.shipping_address} onChange={(e) => setData({...data, shipping_address:e.target.value})} className='w-full p-3 text-xs bg-transparent outline-none' placeholder='Shipping name' name="" id="" />
+        </div>
+        <div className='bg-white shadow-inner shadow-slate-200 rounded-lg my-1'>
+            <input type="text" value={data.room} onChange={(e) => setData({...data, room:e.target.value})} className='w-full p-3 text-xs bg-transparent outline-none' placeholder='room/ apratment etc. (optional)' name="" id="" />
+        </div>
+        <div className='bg-white shadow-inner shadow-slate-200 rounded-lg my-1'>
+            <input type="text" value={data.city} onChange={(e) => setData({...data, city:e.target.value})} className='w-full p-3 text-xs bg-transparent outline-none' placeholder='City name' name="" id="" />
+        </div>
+        <div className='grid grid-cols-1 md:grid-cols-2 gap-1'>
+            <div className='bg-white shadow-inner shadow-slate-200 rounded-lg my-1'>
+                <input type="text" value={data.state} onChange={(e) => setData({...data, state:e.target.value})} className='w-full p-3 text-xs bg-transparent outline-none' placeholder='State' name="" id="" />
+            </div>
+            <div className='bg-white shadow-inner shadow-slate-200 rounded-lg my-1'>
+                <input type="text" value={data.zip} onChange={(e) => setData({...data, zip:e.target.value})} className='w-full p-3 text-xs bg-transparent outline-none' placeholder='Zip Code' name="" id="" />
+            </div>
+        </div>
+        <div className='bg-white shadow-inner shadow-slate-200 rounded-lg my-1'>
+            <input type="text" value={data.country} onChange={(e) => setData({...data, country:e.target.value})} className='w-full p-3 text-xs bg-transparent outline-none' placeholder='Country' name="" id="" />
+        </div>
+       
         <h2 className='text-xs text-blue-500 cursor-pointer px-2 py-1'>Forgot my password</h2>
     </div>
     </>

@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { InstanceContext } from "./InstanceContext";
-import {WalletContext} from "./WalletContext";
+import { WalletContext } from "./WalletContext";
 import { toast } from "react-hot-toast";
 import axios from "axios";
 import { ethers } from "ethers";
@@ -17,35 +17,38 @@ const MultiVendorProvider = ({ children }) => {
   const [currencyToggle, setCurrencyToggle] = useState(false);
   const [cart, setCart] = useState([]);
   const [vendorOrder, setVendorOrder] = useState([]);
+  const [proSize, setProSize] = useState("");
+  const [engraveName, setEngraveName] = useState("");
+  const [isUserDetails, setIsUserDetails] = useState(false);
+  const [userDetail, setUserDetail] = useState([]);
 
   //---GETTING THE INSTANCE CONTEXT
-  const {MultiVendorInstance, NFTInstance} = useContext(InstanceContext)
-  const {wallet} = useContext(WalletContext)
+  const { MultiVendorInstance, NFTInstance } = useContext(InstanceContext)
+  const { wallet } = useContext(WalletContext)
 
   //---USEEFFECT 
   useEffect(() => {
-    if(wallet.isConnected && wallet.address != "")
-    {
+    if (wallet.isConnected && wallet.address != "") {
       isVendorWhiteListed(wallet.address)
+      getShippingDetailsOfUser()
     }
-  },[wallet,MultiVendorInstance])
+  }, [wallet, MultiVendorInstance])
 
   useEffect(() => {
     listProduct()
-  },[])
+  }, [])
 
   //---Create Collections 
-  const createCollection = async (name) => 
-  {
+  const createCollection = async (name, engravable) => {
     try {
-      if(MultiVendorInstance != "")
-      {
+      if (MultiVendorInstance != "") {
         const resp = await MultiVendorInstance.createCollection(name);
         toast.promise(
           resp.wait().then(res => {
-            axios.post(`${process.env.React_App_SERVER_URL}/category/create`,{
-              category:name,
-              collection_address:res['events'][0]['address']
+            axios.post(`${process.env.React_App_SERVER_URL}/category/create`, {
+              category: name,
+              collection_address: res['events'][0]['address'],
+              engravable: engravable
             }).then(_res => {
               console.log(_res)
             }).catch(err => console.log(err))
@@ -63,11 +66,9 @@ const MultiVendorProvider = ({ children }) => {
   }
 
   //---Create Technical Team Member 
-  const createTechnicalMember = async (address) => 
-  {
+  const createTechnicalMember = async (address) => {
     try {
-      if(MultiVendorInstance != "")
-      {
+      if (MultiVendorInstance != "") {
         const resp = await MultiVendorInstance.AddUserToTT(address);
         toast.promise(
           resp.wait().then(res => {
@@ -87,12 +88,10 @@ const MultiVendorProvider = ({ children }) => {
   }
 
   //---CHECK IS VENDOR IS WHITELISTED OR NOT 
-  const isVendorWhiteListed = async (address) => 
-  {
+  const isVendorWhiteListed = async (address) => {
     try {
       const resp = await MultiVendorInstance.isInTT(address);
-      if(resp === true)
-      {
+      if (resp === true) {
         setIsVendor(true)
       }
     } catch (error) {
@@ -101,29 +100,27 @@ const MultiVendorProvider = ({ children }) => {
   }
 
   //---CREATE VENDOR SHOP
-  const createShop = async () => 
-  {
+  const createShop = async () => {
     try {
-        const resp = await MultiVendorInstance.createShop();
-        toast.promise(
-          resp.wait().then(res => {
-              console.log(res)
-          }).catch(err => console.log(err))
-          , 
-          {
-              loading: 'Creating Shop Please Wait',
-              success: 'Shop Created Successfully Successfully',
-              error: 'Something Went Wrong',
-          }
-          )
+      const resp = await MultiVendorInstance.createShop();
+      toast.promise(
+        resp.wait().then(res => {
+          console.log(res)
+        }).catch(err => console.log(err))
+        ,
+        {
+          loading: 'Creating Shop Please Wait',
+          success: 'Shop Created Successfully Successfully',
+          error: 'Something Went Wrong',
+        }
+      )
     } catch (error) {
       console.log(error.message)
     }
   }
 
   //---GET SIZES ATTRIBUTES 
-  const getSizes = async () => 
-  {
+  const getSizes = async () => {
     try {
       const resp = await axios.get(`${process.env.React_App_SERVER_URL}/size`);
       return resp
@@ -133,8 +130,7 @@ const MultiVendorProvider = ({ children }) => {
   }
 
   //---GET COLOR ATTRIBUTES
-  const getColor = async () => 
-  {
+  const getColor = async () => {
     try {
       const resp = await axios.get(`${process.env.React_App_SERVER_URL}/color`);
       return resp;
@@ -144,8 +140,7 @@ const MultiVendorProvider = ({ children }) => {
   }
 
   //---GET CATEGORIES
-  const getCategories = async () => 
-  {
+  const getCategories = async () => {
     try {
       const resp = await axios.get(`${process.env.React_App_SERVER_URL}/category`);
       return resp;
@@ -155,39 +150,36 @@ const MultiVendorProvider = ({ children }) => {
   }
 
   //---MINT PRODUCT
-  const mintProduct = async (data) => 
-  {
+  const mintProduct = async (data) => {
     try {
-      if(NFTInstance != "")
-      {
+      if (NFTInstance != "") {
         console.log(data)
-          const res = await NFTInstance.mint(data.availabilty,ethers.utils.parseUnits(data.crypto_price,"ether"),data.attributes[0]['image']);
-          toast.promise(
-            res.wait().then(response => {
-              axios.post(`${process.env.React_App_SERVER_URL}/product/create`,{
-                ...data,
-                tokenId:parseInt(response.events[1].args[1]._hex,16)
-              }).then(resp => {
-                console.log(resp)
-              }).catch(err => console.log(err.message))
+        const res = await NFTInstance.mint(data.availabilty, ethers.utils.parseUnits(data.crypto_price, "ether"), data.attributes[0]['image']);
+        toast.promise(
+          res.wait().then(response => {
+            axios.post(`${process.env.React_App_SERVER_URL}/product/create`, {
+              ...data,
+              tokenId: parseInt(response.events[1].args[1]._hex, 16)
+            }).then(resp => {
+              console.log(resp)
             }).catch(err => console.log(err.message))
-            , 
-            {
-                loading: 'Minting item Please Wait',
-                success: 'Item Minted Successfully',
-                error: 'Something Went Wrong',
-            }
-          )
+          }).catch(err => console.log(err.message))
+          ,
+          {
+            loading: 'Minting item Please Wait',
+            success: 'Item Minted Successfully',
+            error: 'Something Went Wrong',
+          }
+        )
       }
-      
+
     } catch (error) {
       console.log(error.message)
     }
   }
 
   //---LIST PRODUCTS
-  const listProduct = async () => 
-  {
+  const listProduct = async () => {
     try {
       const list = await axios.get(`${process.env.React_App_SERVER_URL}/product`);
       setProductList(list['data']);
@@ -197,8 +189,7 @@ const MultiVendorProvider = ({ children }) => {
   }
 
   //---Product Details
-  const productDetails = async (id) => 
-  {
+  const productDetails = async (id) => {
     try {
       const resp = await axios.get(`${process.env.React_App_SERVER_URL}/product/${id}`);
       setPDetails(resp['data'])
@@ -209,23 +200,25 @@ const MultiVendorProvider = ({ children }) => {
   }
 
   //---Create Order 
-  const createOrder = async (data) => 
-  {
+  const createOrder = async (data) => {
     try {
-      if(MultiVendorInstance != "")
-      {
-        const resp = await MultiVendorInstance.createOrder(data.address,data.id,data.amount,{value:ethers.utils.parseUnits(data.price.toString(),"ether")});
+      if (MultiVendorInstance != "") {
+        const resp = await MultiVendorInstance.createOrder(data.address, data.id, data.amount, 0, { value: ethers.utils.parseUnits(data.price.toString(), "ether") });
         toast.promise(
           resp.wait().then(res => {
             console.log(res)
-            axios.post(`${process.env.React_App_SERVER_URL}/order/create`,{
-              product_id:data._id,
-              userAddress:wallet.address,
-              quantity:data.amount,
-              trxId:1,
-              status:"Pending",
-              type:data.type,
-              price:data.price
+            let trx = ethers.BigNumber.from(res['events'][2]['topics'][2]);
+            console.log(trx)
+            axios.post(`${process.env.React_App_SERVER_URL}/order/create`, {
+              product_id: data._id,
+              userAddress: wallet.address,
+              quantity: data.amount,
+              size: data.size,
+              engraveName: data.engraveName,
+              trxId: parseInt(trx._hex, 16),
+              status: "Pending",
+              type: data.type,
+              price: data.price
             }).then(_res => {
               console.log(_res)
             }).catch(err => console.log(err))
@@ -244,11 +237,9 @@ const MultiVendorProvider = ({ children }) => {
   }
 
   //---OrderCart
-  const orderCart = async () => 
-  {
+  const orderCart = async () => {
     try {
-      if(wallet.isConnected)
-      {
+      if (wallet.isConnected) {
         const resp = await axios.get(`${process.env.React_App_SERVER_URL}/order/list/${wallet.address}`);
         console.log(resp['data'])
         setCart(resp['data'])
@@ -259,11 +250,9 @@ const MultiVendorProvider = ({ children }) => {
   }
 
   //---Vednor Portal Order List
-  const vendorOrderList = async () => 
-  {
+  const vendorOrderList = async () => {
     try {
-      if(wallet.isConnected)
-      {
+      if (wallet.isConnected) {
         const resp = await axios.get(`${process.env.React_App_SERVER_URL}/order/list`);
         console.log(resp['data'])
         setVendorOrder(resp['data'])
@@ -274,21 +263,17 @@ const MultiVendorProvider = ({ children }) => {
   }
 
   //---UPDATE ORDER STATUS
-  const updateOrderStatus = async (status,id) => 
-  {
+  const updateOrderStatus = async (status, id) => {
     try {
-      if(wallet.isConnected)
-      {
-        const resp = await axios.put(`${process.env.React_App_SERVER_URL}/order/update/${id}`,{
-          status:status
+      if (wallet.isConnected) {
+        const resp = await axios.put(`${process.env.React_App_SERVER_URL}/order/update/${id}`, {
+          status: status
         })
-        if(resp['data']['message'] === "Order Updated Successfully")
-        {
+        if (resp['data']['message'] === "Order Updated Successfully") {
           toast.success("Order Updated Successfully")
           vendorOrderList()
         }
-        else 
-        {
+        else {
           toast.error("Something went wrong")
         }
       }
@@ -302,11 +287,10 @@ const MultiVendorProvider = ({ children }) => {
   //---withdraw option only admin
 
   //---PAYMENT WITH STRIPE
-  const paymentWithStripe = async (product,token) => 
-  {
+  const paymentWithStripe = async (product, token) => {
     toast.promise(
-      axios.post(`${process.env.React_App_SERVER_URL}/stripe/payment`,{
-      product,token
+      axios.post(`${process.env.React_App_SERVER_URL}/stripe/payment`, {
+        product, token
       }).then(resp => {
         console.log(resp)
       }).catch(err => console.log(err))
@@ -319,12 +303,68 @@ const MultiVendorProvider = ({ children }) => {
     )
 
   }
-  
-    return (
-        <MultiVendorContext.Provider value={{isVendor, createShop, getSizes, getColor, mintProduct, getCategories, createCollection, createTechnicalMember, productList, productDetails, pDetails, currencyToggle, setCurrencyToggle, createOrder, orderCart, cart, vendorOrder,vendorOrderList, updateOrderStatus, paymentWithStripe}}>
-          {children}
-        </MultiVendorContext.Provider>
-    );
+
+  //---get shipping details
+  const getShippingDetailsOfUser = async () => {
+    try {
+      if (wallet.isConnected) {
+        const resp = await axios.get(`${process.env.React_App_SERVER_URL}/user/get-shipping/${wallet.address}`);
+        if(resp['data']['message'] === "User details not found")
+        {
+          setIsUserDetails(false)
+        }
+        else 
+        {
+          setIsUserDetails(true)
+        }
+      }
+    } catch (error) {
+      console.log(error.message)
+    }
+  }
+
+  //add shipping details
+  const addShippingDetails = (data) => 
+  {
+      try {
+        if (wallet.isConnected) {
+         toast.promise(
+          axios.post(`${process.env.React_App_SERVER_URL}/user/add-shipping`,{
+            wallet:wallet.address,
+            ...data
+          }).then(resp => {
+            console.log(resp)
+          }).catch(err => console.log(err))
+          ,
+          {
+            loading: 'Adding Details Please Wait',
+            success: 'Details added Successfully',
+            error: 'Something Went Wrong',
+          }
+         )
+        }
+      } catch (error) {
+        console.log(error.message)
+      }
+  }
+
+  //---get shipping address by vendors
+  const getShippingByUser = async (address) => 
+  {
+    try {
+      const resp = await axios.get(`${process.env.React_App_SERVER_URL}/user/get-shipping-address/${address}`);
+      console.log(resp)
+      setUserDetail(resp['data'])
+    } catch (error) {
+      console.log(error.message)
+    }
+  }
+
+  return (
+    <MultiVendorContext.Provider value={{ isVendor, createShop, getSizes, getColor, mintProduct, getCategories, createCollection, createTechnicalMember, productList, productDetails, pDetails, currencyToggle, setCurrencyToggle, createOrder, orderCart, cart, vendorOrder, vendorOrderList, updateOrderStatus, paymentWithStripe, proSize, setProSize, engraveName, setEngraveName, addShippingDetails, isUserDetails, getShippingByUser, userDetail }}>
+      {children}
+    </MultiVendorContext.Provider>
+  );
 }
 
-export {MultiVendorContext, MultiVendorProvider}
+export { MultiVendorContext, MultiVendorProvider }

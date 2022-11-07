@@ -61,17 +61,7 @@ const Attributes = ({ trash, attr, setAttr, attributes, setAttributes, size, col
           
         </div>
 
-        <div className='grid grid-cols-1 md:grid-cols-2 gap-2'>
-          <div className='bg-white shadow-inner shadow-slate-200 rounded-lg my-1'>
-            <select onChange={(e) => setAttributes({ ...attributes, colorId: e.target.value })} name="" id="" className='w-full p-3 text-xs bg-transparent outline-none'>
-              <option value="" disabled selected>Select Color</option>
-              {
-                color.length > 0 ? color.map((item, index) => (
-                  <option value={item._id} key={index}>{item.color}</option>
-                )) : ''
-              }
-            </select>
-          </div>
+        <div className='grid grid-cols-1 md:grid-cols-1 gap-2'>
           <div className='bg-white shadow-inner shadow-slate-200 rounded-lg my-1'>
             <select onChange={(e) => setAttributes({ ...attributes, sizeId: e.target.value })} name="" id="" className='w-full p-3 text-xs bg-transparent outline-none'>
               <option value="" selected disabled>Select Size</option>

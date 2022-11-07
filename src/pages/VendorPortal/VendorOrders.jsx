@@ -26,7 +26,7 @@ const VendorOrders = () => {
     }
     return (
         <>
-            <div className='w-full h-screen pt-28 bg-slate-100'>
+            <div className='w-full h-full pt-28 bg-slate-100'>
                 <div className='px-5 md:px-28 flex justify-between items-center'>
                     <h1 className='text-md text-black font-bold'>Your Orders</h1>
                     <Link to="/seller-list-product" className='bg-black text-white rounded-full px-5 py-1 text-sm font-normal'>Escrow</Link>
@@ -44,6 +44,12 @@ const VendorOrders = () => {
                                     </th>
                                     <th scope="col" class="py-3 px-6">
                                         Quantity
+                                    </th>
+                                    <th scope="col" class="py-3 px-6">
+                                        Size
+                                    </th>
+                                    <th scope="col" class="py-3 px-6">
+                                        Engraving
                                     </th>
                                     <th scope="col" class="py-3 px-6">
                                         Status
@@ -67,6 +73,12 @@ const VendorOrders = () => {
                                             </td>
                                             <td class="py-4 px-6">
                                                 {item?.order[0]?.quantity}
+                                            </td>
+                                            <td class="py-4 px-6">
+                                                {item?.order[0]?.size}
+                                            </td>
+                                            <td class="py-4 px-6">
+                                                {item?.order[0]?.engraveName}
                                             </td>
                                             <td class="py-4 px-6">
                                             {item?.order[0]?.status}

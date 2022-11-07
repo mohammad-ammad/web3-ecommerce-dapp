@@ -5,7 +5,7 @@ import { MultiVendorContext } from '../context/MultiVendorContext';
 
 const ReviewOrderContent = () => {
     //---USECONTEXT 
-    const {pDetails, currencyToggle, setCurrencyToggle} = useContext(MultiVendorContext)
+    const {pDetails, currencyToggle, setCurrencyToggle, proSize ,engraveName, setEngraveName} = useContext(MultiVendorContext)
   return (
     <>
     <div className='grid grid-cols-1 lg:grid-cols-6 gap-0 overflow-y-auto'>
@@ -14,7 +14,18 @@ const ReviewOrderContent = () => {
         </div>
         <div className='col-span-4'>
             <h1 className='text-xl font-bold text-black'>{pDetails[0]?.title}</h1>
-            <p className='text-md text-black font-bold'>Size: M</p>
+            <p className='text-md text-black font-bold'>Size: {proSize}</p>
+            {
+                pDetails[0]?.engravable ? 
+                <>
+                    <h1 className='text-sm text-black font-bold'>Engrave Your Name?</h1>
+                    <div className='bg-white shadow-inner shadow-slate-200 rounded-lg my-1'>
+                        <input type="text" value={engraveName} onChange={(e)=>setEngraveName(e.target.value)} name="" id="" className='w-full p-3 text-xs bg-transparent outline-none' placeholder='Engravable Name'/>
+                    </div>
+                </>
+                : 
+                ''
+            }
             <div className='flex justify-start items-center my-2 py-1 bg-white rounded-full w-full mx-auto shadow-inner shadow-slate-300 cursor-pointer'>
                 <div className={`mx-1 text-sm ${currencyToggle === false ? 'bg-black text-white  px-3 py-1 rounded-full' : ''} cursor-pointer w-1/2 text-center`} onClick={()=>setCurrencyToggle(false)}>Credit Card</div>
                 <div className={`mx-1 text-sm w-1/2 text-center ${currencyToggle === true ? 'bg-black text-white  px-3 py-1 rounded-full' : ''}`} onClick={()=>setCurrencyToggle(true)}>Crypto</div>

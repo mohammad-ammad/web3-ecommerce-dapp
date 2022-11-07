@@ -18,24 +18,22 @@ const ListProduct = () => {
   const [attr, setAttr] = useState(1);
   const [attributes1, setAttributes1] = useState({
     image:"abc",
-    sizeId:"",
-    colorId:""
+    sizeId:""
   });
   const [attributes2, setAttributes2] = useState({
     image:"",
-    sizeId:"",
-    colorId:""
+    sizeId:""
   });
   const [attributes3, setAttributes3] = useState({
     image:"",
-    sizeId:"",
-    colorId:""
+    sizeId:""
   });
   const [data, setData] = useState({
     title:"",
     description:"",
     vendorAddress:"",
     catId:"",
+    colorId:"",
     availabilty:"",
     native_price:"",
     crypto_price:"",
@@ -140,6 +138,16 @@ const ListProduct = () => {
           <div className='bg-white shadow-inner shadow-slate-200 rounded-lg my-1'>
             <input type="text" value={data.crypto_price} onChange={(e)=>setData({...data, crypto_price:e.target.value})} className='w-full p-3 text-xs bg-transparent outline-none' placeholder='Price in Matic' name="" id="" />
           </div>
+        </div>
+        <div className='bg-white shadow-inner shadow-slate-200 rounded-lg my-1'>
+            <select onChange={(e) => setData({ ...data, colorId: e.target.value })} name="" id="" className='w-full p-3 text-xs bg-transparent outline-none'>
+              <option value="" disabled selected>Select Color</option>
+              {
+                color.length > 0 ? color.map((item, index) => (
+                  <option value={item._id} key={index}>{item.color}</option>
+                )) : ''
+              }
+            </select>
         </div>
         <div className='my-3'>
           <hr />

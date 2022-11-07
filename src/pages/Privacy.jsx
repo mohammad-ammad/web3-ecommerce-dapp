@@ -132,28 +132,28 @@ const Privacy = () => {
             </p>
             <ul class="list-disc text-sm text-slate-700 leading-7 mt-2 px-4 md:px-12">
                 <li>
-                For our business activities, including to operate the Service and to provide you with the features and functionality of the Service;
+                    For our business activities, including to operate the Service and to provide you with the features and functionality of the Service;
                 </li>
                 <li>
-                To communicate with you and respond to your requests, such as to respond to your questions, contact you about changes to the Service, and communicate about account related matters;
+                    To communicate with you and respond to your requests, such as to respond to your questions, contact you about changes to the Service, and communicate about account related matters;
                 </li>
                 <li>
-                For marketing and advertising purposes, such as to market to you or offer you with information and updates on our products or services we think that you may be interested in. While we may use your Personal Information in this manner, please note that we do not use User Content to serve you ads, and we will never share User Content with any third parties for marketing or advertising purposes, unless you have explicitly submitted it to us for that purpose;
+                    For marketing and advertising purposes, such as to market to you or offer you with information and updates on our products or services we think that you may be interested in. While we may use your Personal Information in this manner, please note that we do not use User Content to serve you ads, and we will never share User Content with any third parties for marketing or advertising purposes, unless you have explicitly submitted it to us for that purpose;
                 </li>
                 <li>
-                For analytics and research purposes;
+                    For analytics and research purposes;
                 </li>
                 <li>
-                To enforce our Terms and Conditions to resolve disputes, to carry out our obligations and enforce our rights, and to protect our business interests and the interests and rights of third parties;
+                    To enforce our Terms and Conditions to resolve disputes, to carry out our obligations and enforce our rights, and to protect our business interests and the interests and rights of third parties;
                 </li>
                 <li>
-                To comply with contractual and legal obligations and requirements;
+                    To comply with contractual and legal obligations and requirements;
                 </li>
                 <li>
-                To fulfill any other purpose for which you provide Personal Information; 
+                    To fulfill any other purpose for which you provide Personal Information;
                 </li>
                 <li>
-                For any other lawful purpose, or other purpose that you consent to
+                    For any other lawful purpose, or other purpose that you consent to
                 </li>
             </ul>
 
@@ -162,10 +162,10 @@ const Privacy = () => {
                 We may also share, transmit, disclose, grant access to, make available, and provide your Personal Information with service providers and business partners to help us provide our services and fulfill our contracts with you, as described above. For example:
             </p>
             <h2 className='text-sm font-bold italic text-slate-800 mt-2'>
-                AR Providers. 
+                AR Providers.
             </h2>
             <p className='text-sm text-slate-700 leading-7 mt-2 text-justify'>
-                As part of the Service, we use augmented reality (AR) to enhance and integrate the products. As described in the Collection and Use of Personal Information section, we use business partners such as Snap and Apple. Any information shared with Snap, Apple, or any of our third-party business partners is subject to their privacy policy. 
+                As part of the Service, we use augmented reality (AR) to enhance and integrate the products. As described in the Collection and Use of Personal Information section, we use business partners such as Snap and Apple. Any information shared with Snap, Apple, or any of our third-party business partners is subject to their privacy policy.
             </p>
             <h2 className='text-sm font-bold italic text-slate-800 mt-2'>Service Providers</h2>
             <p className='text-sm text-slate-700 leading-7 mt-2 text-justify'>
@@ -173,7 +173,7 @@ const Privacy = () => {
             </p>
             <h2 className='text-sm font-bold italic text-slate-800 mt-2'>Business Partners</h2>
             <p className='text-sm text-slate-700 leading-7 mt-2 text-justify'>
-                We may disclose Personal Information to our business partners for transactional and marketing purposes, including to promote their products or services.  We may also share your Personal Information with other third parties who may have products or services we think you may enjoy. 
+                We may disclose Personal Information to our business partners for transactional and marketing purposes, including to promote their products or services.  We may also share your Personal Information with other third parties who may have products or services we think you may enjoy.
             </p>
             <h2 className='text-sm font-bold italic text-slate-800 mt-2'>Within TheSpotRoom</h2>
             <p className='text-sm text-slate-700 leading-7 mt-2 text-justify'>
@@ -181,7 +181,7 @@ const Privacy = () => {
             </p>
             <h2 className='text-sm font-bold italic text-slate-800 mt-2'>Online Advertising Partners</h2>
             <p className='text-sm text-slate-700 leading-7 mt-2 text-justify'>
-                We also share Personal Information with advertising networks or permit these partners to collect information from you directly on our websites to facilitate online advertising, such as search engines and social network advertising providers to serve targeted ads to you or to groups of other users who share similar traits, such as likely commercial interests and demographics, on third-party platforms. 
+                We also share Personal Information with advertising networks or permit these partners to collect information from you directly on our websites to facilitate online advertising, such as search engines and social network advertising providers to serve targeted ads to you or to groups of other users who share similar traits, such as likely commercial interests and demographics, on third-party platforms.
             </p>
             <h2 className='text-sm font-bold italic text-slate-800 mt-2'>NFT and Blockchain Participants</h2>
             <p className='text-sm text-slate-700 leading-7 mt-2 text-justify'>
@@ -189,13 +189,85 @@ const Privacy = () => {
             </p>
             <h2 className='text-sm font-bold italic text-slate-800 mt-2'>Legal Requirements</h2>
             <p className='text-sm text-slate-700 leading-7 mt-2 text-justify'>
-                We may share your Personal Information to comply with applicable laws and regulations, to respond to a subpoena, search warrant or other lawful request for information we receive, or to otherwise protect our rights, including enforcing our Terms and Conditions or other agreements, or protect the security or integrity of the services. 
+                We may share your Personal Information to comply with applicable laws and regulations, to respond to a subpoena, search warrant or other lawful request for information we receive, or to otherwise protect our rights, including enforcing our Terms and Conditions or other agreements, or protect the security or integrity of the services.
             </p>
             <h2 className='text-sm font-bold italic text-slate-800 mt-2'>Corporate Transaction</h2>
             <p className='text-sm text-slate-700 leading-7 mt-2 text-justify'>
                 We may transfer any information we collect in the event we sell or transfer all or a portion of our business or assets (including any shares in the company) or any portion or combination of our products, services, businesses and/or assets.  Should such a transaction occur (whether a divestiture, merger, acquisition, bankruptcy, dissolution, reorganization, liquidation, or similar transaction or proceeding), we will use reasonable efforts to ensure that any transferred information is treated in a manner consistent with this Privacy Notice.
             </p>
             <h2 className='text-sm font-bold italic text-slate-800 mt-2'>Consent</h2>
+            <p className='text-sm text-slate-700 leading-7 mt-2 text-justify'>
+                We may disclose Personal Information about you to certain other third parties with your consent.
+            </p>
+            <h2 className='text-sm font-bold italic text-slate-800 mt-2'>Aggregated and Anonymized Information</h2>
+            <p className='text-sm text-slate-700 leading-7 mt-2 text-justify'>
+                We may share your Personal Information with others in an aggregated or otherwise anonymized form that does not reasonably identify you directly as an individual.
+            </p>
+            <h1 className='text-lg font-bold text-slate-800 mt-2'>Control Over Your Information</h1>
+            <h2 className='text-sm font-bold italic text-slate-800 mt-2'>Email Communications</h2>
+            <p className='text-sm text-slate-700 leading-7 mt-2 text-justify'>
+                From time to time, we may send you emails regarding updates to our Site, products or services, notices about our organization, or information about products/services we offer (or promotional offers from third parties) that we think may be of interest to you.  If you wish to unsubscribe from such emails, simply click the “unsubscribe link” provided at the bottom of the email communication.  Note that you cannot unsubscribe from certain services-related email communications (e.g., account verification, confirmations of transactions, technical or legal notices).
+            </p>
+            <h2 className='text-sm font-bold italic text-slate-800 mt-2'>Modifying Account Information</h2>
+            <p className='text-sm text-slate-700 leading-7 mt-2 text-justify'>
+                If you have an online account with us, you have the ability to modify certain information in your account (e.g., your contact information) through options provided on the Site. If you would like to request access to, or correction or deletion of Personal Information, you may contact us. We will review your request and may require you to provide additional information to identify yourself, but we do not promise that we will be able to satisfy your request.
+            </p>
+            <h2 className='text-sm font-bold italic text-slate-800 mt-2'>SMS Text Communications</h2>
+            <p className='text-sm text-slate-700 leading-7 mt-2 text-justify'>
+                You may opt-out of receiving promotional SMS text messages at any time. Please note that unsubscribing from promotional SMS text messages will not prevent you from receiving SMS texts from TheSpotRoom directly relating to purchase or service communications such as account verification information. To unsubscribe from promotional SMS texts, email us and provide your phone number and opt-out preference or reply STOP to one of our commercial text messages.
+            </p>
+            <h2 className='text-sm font-bold italic text-slate-800 mt-2'>Children’s Personal Information</h2>
+            <p className='text-sm text-slate-700 leading-7 mt-2 text-justify'>
+                Our Service is not directed to, and we do not intend to, or knowingly, collect or solicit Personal Information from children under the age of 13. If you are under the age of 13, please do not use our Site or otherwise provide us with any Personal Information either directly or by other means. If a child under the age of 13 has provided Personal Information to us, we encourage the child’s parent or guardian to contact us to request that we remove the Personal Information from our systems. If we learn that any Personal information we collect has been provided by a child under the age of 13, we will promptly delete that Personal Information.
+            </p>
+            <h2 className='text-sm font-bold italic text-slate-800 mt-2'>Third-Party Websites</h2>
+            <p className='text-sm text-slate-700 leading-7 mt-2 text-justify'>
+                Our Site may include links to or redirect you to third-party websites, plug-ins and applications, including social media services where you may connect with us. Third-party websites may also reference or link to our websites and online service. Except where we post, link to or expressly adopt or refer to this Privacy Notice, this Privacy Notice does not apply to, and we are not responsible for, any Personal Information practices of third-party websites and online service or the practices of other third parties. To learn about the Personal information practices of third parties, please visit their respective privacy notices or policies.
+            </p>
+            <h2 className='text-sm font-bold italic text-slate-800 mt-2'>Updates to this Privacy Notice</h2>
+            <p className='text-sm text-slate-700 leading-7 mt-2 text-justify'>
+                We will update this Privacy Notice from time to time. When we make changes to this Privacy Notice, we will change the date at the beginning of this Privacy Notice. If we make material changes to this Privacy Notice, we will notify individuals by email to their registered email address, by prominent posting on our Service, or through other appropriate communication channels. All changes shall be effective from the date of publication unless otherwise provided.
+            </p>
+            <h1 className='text-lg font-bold text-slate-800 mt-2'>COOKIES AND HOW WE USE THEM</h1>
+            <h2 className='text-sm font-bold italic text-slate-800 mt-2'>What is a Cookie?</h2>
+            <p className='text-sm text-slate-700 leading-7 mt-2 text-justify'>
+                A cookie is a small file placed on your computer’s hard drive. It enables our website to identify your computer as you view different pages on our website.
+                Cookies allow websites and applications to store your preferences in order to present content, options or functions that are specific to you. They also enable us to see information like how many people use the website and what pages they tend to visit.
+            </p>
+            <h2 className='text-sm font-bold italic text-slate-800 mt-2'>How we use Cookies</h2>
+            <p className='text-sm text-slate-700 leading-7 mt-2 text-justify'>
+                We may use cookies to:
+
+                Analyze our web traffic using an analytics package. Aggregated usage data helps us improve the website structure, design, content and functions
+                Identify whether you are signed in to our website - cookies allow us to check whether you are signed in to the site.
+                Test content on our website. For example, 50% of our users might see one piece of content, the other 50% a different piece of content
+                Store information about your preferences- the website can then present you with information you will find more relevant and interesting
+                To recognize when you return to our website - we may show your relevant content, or provide functionality you used previously
+                Cookies do not provide us with access to your computer or any information about you, other than that which you choose to share with us.
+            </p>
+            <h2 className='text-sm font-bold italic text-slate-800 mt-2'>Controlling Cookies</h2>
+            <p className='text-sm text-slate-700 leading-7 mt-2 text-justify'>
+                You can use your web browser’s cookie settings to determine how our website uses cookies. If you do not want our website to store cookies on your computer or device, you should set your web browser to refuse cookies. However, please note that doing this may affect how our website functions. Some pages and services may become unavailable to you.
+            </p>
+            <h2 className='text-sm font-bold italic text-slate-800 mt-2'>Controlling Information about you</h2>
+            <p className='text-sm text-slate-700 leading-7 mt-2 text-justify'>
+                When you fill in a form or provide your details on our website, you will see one or more tick boxes allowing you to:
+
+                Opt-in to receive marketing communications from us by email, telephone, text message or post.
+                Opt-in to receive marketing communications from our third-party partners by email, telephone, text message or post.
+                If you have agreed that we can use your information for marketing purposes, you can change your mind easily, via one of these methods:
+                Sign in to our website and change your opt-in settings
+                Send an email to hello@thespotroom.com
+                We will never lease, distribute or sell your personal information to third parties unless we have your permission or the law requires us to.
+            </p>
+            <h2 className='text-lg font-bold text-slate-800 mt-2'>SECURITY</h2>
+            <p className='text-sm text-slate-700 leading-7 mt-2 text-justify'>
+                We will always hold your information securely.
+
+                To prevent unauthorized disclosure or access to your information, we have implemented strong physical and electronic security safeguards.
+
+                We also follow stringent procedures to ensure we work with all personal data in line with the Data Protection Act 1998. TheSpotRoom takes precautions — including administrative, technical, and physical measures — to safeguard your personal information against loss, theft, and misuse, as well as against unauthorized access, disclosure, alteration, and destruction. TheSpotRoom uses Secure Sockets Layer (SSL) encryption on all web pages where personal information is collected. Unfortunately, transmitting information over the Internet is not completely secure. Although we will do our best to protect your personal Information, we cannot guarantee the security of the data you transmit to the Website; any transmission is at your own risk and we cannot be held liable.
+            </p>
         </div>
     )
 }

@@ -17,7 +17,7 @@ const ProductDetails = () => {
         <WhatsInclude/>
         <Faq/>
         <ContactUs/>
-        <ReviewModel showModal={showModal} setShowModal={setShowModal} setConfirmModal={setConfirmModal}/>
+        <ReviewModel showModal={showModal} setShowModal={setShowModal} setConfirmModal={setConfirmModal} setAccountInfo={setAccountInfo} />
         <ConfirmOrderModel confirmModal={confirmModal} setConfirmModal={setConfirmModal} setShowModal={setShowModal} setAccountInfo={setAccountInfo}/>
         <AccountInfoModel accountInfo={accountInfo} setAccountInfo={setAccountInfo} setConfirmModal={setConfirmModal}/>
     </div>

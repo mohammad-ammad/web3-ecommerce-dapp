@@ -11,11 +11,13 @@ import StripeCheckout from 'react-stripe-checkout';
 const ConfirmOrderModel = ({ confirmModal, setConfirmModal, setShowModal, setAccountInfo }) => {
   //---USECONTEXT 
   const { wallet } = useContext(WalletContext)
-  const { pDetails, currencyToggle, createOrder, paymentWithStripe } = useContext(MultiVendorContext)
+  const { pDetails, currencyToggle, createOrder, paymentWithStripe, proSize, engraveName } = useContext(MultiVendorContext)
   const obj = {
     address: pDetails[0]?.collection_address,
     id: pDetails[0]?.tokenId,
     amount: 1,
+    size:proSize,
+    engraveName:engraveName,
     price: currencyToggle ? pDetails[0]?.crypto_price : pDetails[0]?.native_price,
     _id: pDetails[0]?._id,
     type: currencyToggle ? 'Crypto' : 'Credit'

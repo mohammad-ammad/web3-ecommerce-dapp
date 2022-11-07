@@ -37,6 +37,12 @@ const BuyerOrders = () => {
                                 Quantity
                             </th>
                             <th scope="col" class="py-3 px-6">
+                                Size
+                            </th>
+                            <th scope="col" class="py-3 px-6">
+                                Engraving Name
+                            </th>
+                            <th scope="col" class="py-3 px-6">
                                 Status
                             </th>
                             <th scope="col" class="py-3 px-6">
@@ -59,10 +65,16 @@ const BuyerOrders = () => {
                                             {item?.order[0]?.quantity}
                                         </td>
                                         <td class="py-4 px-6">
+                                            {item?.order[0]?.size}
+                                        </td>
+                                        <td class="py-4 px-6">
+                                            {item?.order[0]?.engraveName}
+                                        </td>
+                                        <td class="py-4 px-6">
                                         {item?.order[0]?.status}
                                         </td>
                                         <td class="py-4 px-6">
-                                            <button className='bg-black text-white rounded-full px-5 py-1 text-sm font-normal' onClick={()=>cancelHandler(item?._id,item?.trxId)}>Cancel Order</button>
+                                            <button className='bg-black text-white rounded-full px-5 py-1 w-32 text-xs font-normal' onClick={()=>cancelHandler(item?._id,item?.trxId)}>Cancel Order</button>
                                         </td>
                                     </tr>
                                 )) : ''

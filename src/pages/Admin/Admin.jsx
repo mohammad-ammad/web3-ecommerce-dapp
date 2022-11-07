@@ -8,6 +8,7 @@ const Admin = () => {
     const {createCollection, createTechnicalMember} = useContext(MultiVendorContext);
     //---USESTATE
     const [collection, setCollection] = useState("");
+    const [engrave, setEngrave] = useState(false);
     const [team, setTeam] = useState("");
     
     //----ACTION FUNCTIONS
@@ -15,7 +16,7 @@ const Admin = () => {
     {
         if(collection != "")
         {
-            createCollection(collection)
+            createCollection(collection,engrave)
         }
     }
 
@@ -33,6 +34,10 @@ const Admin = () => {
             <h1 className='text-md font-bold text-black'>Add Collection</h1>
             <div className='bg-white shadow-inner shadow-slate-200 rounded-lg my-1'>
                 <input type="text" value={collection} onChange={(e) => setCollection(e.target.value)} className='w-full p-2 text-xs bg-transparent outline-none' placeholder='Collection Name' name="" id="" />
+            </div>
+            <div className='flex justify-start items-center'>
+                <input type="checkbox" name="" id="" onChange={()=>setEngrave(!engrave)}/>
+                <p className='text-sm text-slate-700 ml-2'>Engravable?</p>
             </div>
             <div className='flex justify-center items-center my-5'>
                  <button onClick={collectionHandler} className='bg-black text-white rounded-full w-full px-5 py-1 text-sm font-normal'>Create Collection</button>
