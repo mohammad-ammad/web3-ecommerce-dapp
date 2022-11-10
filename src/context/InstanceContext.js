@@ -46,6 +46,8 @@ const InstanceProvider = ({ children }) => {
 
             const contract = new ethers.Contract(`${process.env.React_App_IN_WALLET_CONTRACT_ADDRESS}`,InAppWalletAbi, signer);
             setInAppInstance(contract)
+            console.log("-------IN APP WALLET CONTRACT")
+            console.log(contract)
 
         } catch (error) {
             console.log(error)

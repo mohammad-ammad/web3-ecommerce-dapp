@@ -10,13 +10,23 @@ const VendorOrders = () => {
     //---USESTATE
     const [showModal,setShowModal] = useState(false);
     const [data, setData] = useState([]);
+    const [limit, setLimit] = useState(3);
+    const [skip, setSkip] = useState(0);
     //----USECONTEXT
     const {vendorOrder,vendorOrderList} = useContext(MultiVendorContext)
 
     //---USEEFFECT
     useEffect(() => {
-        vendorOrderList()
-    },[])
+        vendorOrderList(limit, skip)
+    },[skip, limit])
+
+    const nextPage = () => {
+        setSkip(skip + limit)
+    }
+
+    const previousPage = () => {
+        setSkip(skip - limit)
+    }
 
     //---view Handler
     const viewHandler = (item) => 
@@ -26,7 +36,7 @@ const VendorOrders = () => {
     }
     return (
         <>
-            <div className='w-full h-full pt-28 bg-slate-100'>
+            <div className='w-full h-screen pt-28 bg-slate-100'>
                 <div className='px-5 md:px-28 flex justify-between items-center'>
                     <h1 className='text-md text-black font-bold'>Your Orders</h1>
                     <Link to="/seller-list-product" className='bg-black text-white rounded-full px-5 py-1 text-sm font-normal'>Escrow</Link>
@@ -94,7 +104,10 @@ const VendorOrders = () => {
                         </table>
                     </div>
                 </div>
-
+                <div className='flex justify-end items-center px-5 md:px-28'> 
+                    <button type='button' className='bg-black text-white rounded-full px-5 py-1 text-sm font-normal mr-2' onClick={previousPage}> Prev  </button> 
+                    <button type='button' className='bg-black text-white rounded-full px-5 py-1 text-sm font-normal'  onClick={nextPage}> Next  </button>
+                </div>
             </div>
             <OrderView showModal={showModal} setShowModal={setShowModal} data={data}/>
         </>

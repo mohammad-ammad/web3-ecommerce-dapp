@@ -250,12 +250,23 @@ const MultiVendorProvider = ({ children }) => {
   }
 
   //---Vednor Portal Order List
-  const vendorOrderList = async () => {
+  const vendorOrderList = async (limit,skip) => {
     try {
       if (wallet.isConnected) {
-        const resp = await axios.get(`${process.env.React_App_SERVER_URL}/order/list`);
-        console.log(resp['data'])
-        setVendorOrder(resp['data'])
+        toast.promise(
+          axios.get(`${process.env.React_App_SERVER_URL}/order/list?limit=${limit}&skip=${skip}`)
+          .then(resp => {
+            console.log(resp['data'])
+            setVendorOrder(resp['data'])
+          }).catch(err => console.log(err))
+          ,
+          {
+            loading: 'Please Wait',
+            success: 'Success',
+            error: 'Something Went Wrong',
+          }
+        )
+        // const resp = await 
       }
     } catch (error) {
       console.log(error.message)

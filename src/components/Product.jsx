@@ -5,7 +5,7 @@ import { Slide } from 'react-slideshow-image';
 import 'react-slideshow-image/dist/styles.css';
 
 const Product = ({img, tag, title, price, id, toggle}) => {
-  console.log(img[0]['image'])
+  console.log(img[1]['image'])
   const indicators = () => {
     return (
       <div className="indicator bg-slate-900 w-7 h-1.5 mx-1 rounded-xl cursor-pointer"></div>

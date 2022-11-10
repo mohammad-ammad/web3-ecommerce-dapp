@@ -38,11 +38,11 @@ const ContactUs = () => {
                 <RiMessage2Line className='ml-3 mt-2 fill-slate-500'/>
                 <textarea name="" onChange={(e)=>setData({...data,message:e.target.value})} id="" className='w-full p-2 text-xs bg-transparent outline-none' placeholder='Your Message (Optional)' cols="30" rows="10">{data.message}</textarea>
             </div>
-            <div className='flex justify-between items-center'>
-                <div className='flex justify-start items-center'>
+            <div className='flex justify-end items-center'>
+                {/* <div className='flex justify-start items-center'>
                     <BsFillCheckCircleFill/>
                     <span className='ml-2 text-xs font-bold text-slate-700'>Subscribe newsletter</span>
-                </div>
+                </div> */}
                 <div>
                     <button onClick={submitHandler} className='bg-black text-white rounded-full px-5 py-1 text-sm font-normal'>Send</button>
                 </div>

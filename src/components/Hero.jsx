@@ -2,6 +2,7 @@ import React from 'react'
 import Hero1 from '../assets/hero1.png';
 import Hero2 from '../assets/hero2.png';
 import Hero3 from '../assets/hero3.png';
+import Hero4 from '../assets/hero4.png';
 import Banner1 from '../assets/banner1.png';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
@@ -10,7 +11,7 @@ const Hero = () => {
   const [grow, setGrow] = useState(false);
   return (
     <>
-    <div className={`grid grid-cols-1 ${grow ? 'md:grid-cols-5' : 'md:grid-cols-3'} gap-3`}>
+    <div className={`grid grid-cols-1 ${grow ? 'md:grid-cols-6' : 'md:grid-cols-4'} gap-3`}>
         <div className={`${grow && 'col-span-3'} relative`}>
             <img src={grow ? Banner1 : Hero1}  className="cursor-pointer w-full h-screen" onMouseEnter={() => setGrow(true)} onMouseLeave={() => setGrow(false)} alt="" />
             <div className={`${grow ? 'absolute top-14 md:top-1/3 right-10 md:right-10' : 'hidden'}`} onMouseEnter={() => setGrow(true)}>
@@ -33,6 +34,9 @@ const Hero = () => {
         </div>
         <div>
         <img src={Hero3} alt="" className='w-full h-screen'  />
+        </div>
+        <div>
+        <img src={Hero4} alt="" className='w-full h-screen'  />
         </div>
     </div>
     </>

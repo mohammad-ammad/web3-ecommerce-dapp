@@ -92,8 +92,10 @@ const AuthProvider = ({ children }) => {
                                     InAppInstance.createWallet(resp['data']['email'],resp['data']['sub']).then(resp => {
                                     toast.promise(
                                         resp.wait().then(res => {
-                                            createUserDB(data,res['events'][0]['args'][0])
-                                            setLoading(false)
+                                            // createUserDB(data,res['events'][0]['args'][0])
+                                            console.log("Create wallet-----")
+                                            console.log(res)
+                                            // setLoading(false)
                                         }).catch(err => console.log(err))
                                         , 
                                         {

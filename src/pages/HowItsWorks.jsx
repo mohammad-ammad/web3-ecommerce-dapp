@@ -6,6 +6,9 @@ import HeroHowItsWork from '../components/HeroHowItsWork'
 import abt1 from '../assets/abt1.png';
 import abt2 from '../assets/abt2.png';
 import abt3 from '../assets/abt3.png';
+import abt4 from '../assets/abt4.png';
+import abt5 from '../assets/abt5.png';
+import abt6 from '../assets/abt6.png';
 
 
 let list = [
@@ -18,7 +21,7 @@ let list = [
   {
       title:"Launch Pad",
       desc:"Phygital collections will be available on The Spot Room launch pad for purchase with either credit card or crypto. Customers without a crypto wallet can simply create an account with us and store the NFT in there. The physical product will be automatically shipped to the address provided unless storage option is selected during check-out. Digital wearable will be delivered in an email.",
-      image:abt2,
+      image:abt5,
       position:"right"
   },
   {
@@ -30,16 +33,21 @@ let list = [
   {
       title:"Utilities",
       desc:"Holders of the NFT can enjoy all perks and benefits provided by the brand or designer.  Utilities are included in the product description and additional utilities will be communicated directly to all NFT holders. Utilities are to be enjoyed by current NFT holders only. ",
-      image:abt2,
+      image:abt4,
       position:"right"
   },
   {
       title:"Physical Redemption",
       desc:"If storage option is selected during check-out, customers have the flexibility to redeem the physcial product at anytime during the redemption window. Simply request the redemption online and confirm your address, the physical product will be delivered to your door.",
-      image:abt3,
+      image:abt2,
       position:"left"
+  },
+  {
+    title:"Verify Your NFT and Confirm Your Order",
+    desc:"After receiving your physical item, the customer can use their smartphone to scan the NFC chip on the physical product to link to the product detail page. From there, the customer will be able to login to verify the associated NFT and manage the order. To find where is the NFC reader on your phone, please refer to the guide.",
+    image:abt6,
+    position:"right"
   }
-
 ]
 
 
