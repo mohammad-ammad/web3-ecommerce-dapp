@@ -39,7 +39,7 @@ const MultiVendorProvider = ({ children }) => {
   }, [])
 
   //---Create Collections 
-  const createCollection = async (name, engravable) => {
+  const createCollection = async (name, engravable, attributes) => {
     try {
       if (MultiVendorInstance != "") {
         const resp = await MultiVendorInstance.createCollection(name);
@@ -48,7 +48,8 @@ const MultiVendorProvider = ({ children }) => {
             axios.post(`${process.env.React_App_SERVER_URL}/category/create`, {
               category: name,
               collection_address: res['events'][0]['address'],
-              engravable: engravable
+              engravable: engravable,
+              attributes:attributes
             }).then(_res => {
               console.log(_res)
             }).catch(err => console.log(err))
@@ -180,12 +181,12 @@ const MultiVendorProvider = ({ children }) => {
 
   //---LIST PRODUCTS
   const listProduct = async () => {
-    try {
-      const list = await axios.get(`${process.env.React_App_SERVER_URL}/product`);
-      setProductList(list['data']);
-    } catch (error) {
-      console.log(error.message)
-    }
+    // try {
+    //   const list = await axios.get(`${process.env.React_App_SERVER_URL}/product`);
+    //   setProductList(list['data']);
+    // } catch (error) {
+    //   console.log(error.message)
+    // }
   }
 
   //---Product Details
