@@ -15,9 +15,9 @@ const Product = ({img, tag, title, price, id, toggle}) => {
     <div className='flex flex-col'>
     <div className='shadow-inner shadow-slate-300 w-full h-full md:h-80 rounded-md relative'>
         <Slide autoplay={false} indicators={indicators}>
-          <img src={`https://ipfs.moralis.io:2053/ipfs/${img[0]['image']}`} className="w-full h-full md:w-80 md:h-80 p-1" alt="" />
-          <img src={`https://ipfs.moralis.io:2053/ipfs/${img[1]['image']}`} className="w-full h-full md:w-80 md:h-80 p-1" alt="" />
-          <img src={`https://ipfs.moralis.io:2053/ipfs/${img[2]['image']}`} className="w-full h-full md:w-80 md:h-80 p-1" alt="" />
+          <img src={`https://ipfs.moralis.io:2053/ipfs/${img[0]}`} className="w-full h-full md:w-80 md:h-80 p-1" alt="" />
+          <img src={`https://ipfs.moralis.io:2053/ipfs/${img[1]}`} className="w-full h-full md:w-80 md:h-80 p-1" alt="" />
+          <img src={`https://ipfs.moralis.io:2053/ipfs/${img[2]}`} className="w-full h-full md:w-80 md:h-80 p-1" alt="" />
         </Slide>
         <div className='absolute top-0'>
           <img src={vector} className="relative" alt="" />

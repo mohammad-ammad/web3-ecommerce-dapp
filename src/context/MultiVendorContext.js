@@ -21,6 +21,7 @@ const MultiVendorProvider = ({ children }) => {
   const [engraveName, setEngraveName] = useState("");
   const [isUserDetails, setIsUserDetails] = useState(false);
   const [userDetail, setUserDetail] = useState([]);
+  const [catAttrList, setCatAttrList] = useState([]);
 
   //---GETTING THE INSTANCE CONTEXT
   const { MultiVendorInstance, NFTInstance } = useContext(InstanceContext)
@@ -155,7 +156,7 @@ const MultiVendorProvider = ({ children }) => {
     try {
       if (NFTInstance != "") {
         console.log(data)
-        const res = await NFTInstance.mint(data.availabilty, ethers.utils.parseUnits(data.crypto_price, "ether"), data.attributes[0]['image']);
+        const res = await NFTInstance.mint(data.availabilty, ethers.utils.parseUnits(data.crypto_price, "ether"), data.primary_image);
         toast.promise(
           res.wait().then(response => {
             axios.post(`${process.env.React_App_SERVER_URL}/product/create`, {
@@ -181,12 +182,13 @@ const MultiVendorProvider = ({ children }) => {
 
   //---LIST PRODUCTS
   const listProduct = async () => {
-    // try {
-    //   const list = await axios.get(`${process.env.React_App_SERVER_URL}/product`);
-    //   setProductList(list['data']);
-    // } catch (error) {
-    //   console.log(error.message)
-    // }
+    try {
+      const list = await axios.get(`${process.env.React_App_SERVER_URL}/product`);
+      setProductList(list['data']);
+      console.log(list)
+    } catch (error) {
+      console.log(error.message)
+    }
   }
 
   //---Product Details
@@ -372,8 +374,20 @@ const MultiVendorProvider = ({ children }) => {
     }
   }
 
+  //---get categoryAttributes 
+  const catAttr = async (address) => 
+  {
+    try {
+      const resp = await axios.get(`${process.env.React_App_SERVER_URL}/product/attr/${address}`);
+      console.log(resp)
+      setCatAttrList(resp.data)
+    } catch (error) {
+      console.log(error.message)
+    }
+  }
+
   return (
-    <MultiVendorContext.Provider value={{ isVendor, createShop, getSizes, getColor, mintProduct, getCategories, createCollection, createTechnicalMember, productList, productDetails, pDetails, currencyToggle, setCurrencyToggle, createOrder, orderCart, cart, vendorOrder, vendorOrderList, updateOrderStatus, paymentWithStripe, proSize, setProSize, engraveName, setEngraveName, addShippingDetails, isUserDetails, getShippingByUser, userDetail }}>
+    <MultiVendorContext.Provider value={{ isVendor, createShop, getSizes, getColor, mintProduct, getCategories, createCollection, createTechnicalMember, productList, productDetails, pDetails, currencyToggle, setCurrencyToggle, createOrder, orderCart, cart, vendorOrder, vendorOrderList, updateOrderStatus, paymentWithStripe, proSize, setProSize, engraveName, setEngraveName, addShippingDetails, isUserDetails, getShippingByUser, userDetail, catAttr, catAttrList }}>
       {children}
     </MultiVendorContext.Provider>
   );

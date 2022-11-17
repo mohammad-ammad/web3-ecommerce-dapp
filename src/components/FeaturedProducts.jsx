@@ -25,7 +25,7 @@ const FeaturedProducts = ({Heading}) => {
           {
             productList.length > 0 ? 
             productList.map((item,index) => (
-              <Product key={index} img={item?.attribute} id={item._id} tag="physical" title={item.title} price={toggle ? item.crypto_price : item.native_price} toggle={toggle}/>
+              <Product key={index} img={[item.primary_image,item.secondary_image,item.tertiary_image]} id={item._id} tag="physical" title={item.title} price={toggle ? item.crypto_price : item.native_price} toggle={toggle}/>
             ))
             : 
             ''

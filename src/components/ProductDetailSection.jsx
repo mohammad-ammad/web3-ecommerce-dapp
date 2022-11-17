@@ -42,7 +42,7 @@ const ProductDetailSection = ({setShowModal}) => {
             <p className='text-lg text-slate-800 font-bold mb-3'>Brand's name</p>
             <h1 className='text-3xl text-slate-900 font-bold mb-3'>{pDetails[0]?.title}</h1>
             <h3 className='text-md text-slate-800 font-bold mb-3'>About the Brand</h3>
-            <p className='text-xs text-slate-900 font-medium leading-5 mb-2'>
+            <p className='text-xs text-slate-900 text-justify font-medium leading-5 mb-2'>
             {pDetails[0]?.description}
             </p>
             <h3 className='text-md text-slate-800 font-bold'>Collection Address:</h3>
@@ -54,9 +54,9 @@ const ProductDetailSection = ({setShowModal}) => {
         </div>
         <div className='shadow-inner shadow-slate-300 w-80 h-96 rounded-md relative left-1/2 transform -translate-x-1/2'>
             <Slide autoplay={false} indicators={indicators}>
-                <img src={`https://ipfs.moralis.io:2053/ipfs/${pDetails[0]?.attribute[0]['image']}`} className="w-full h-96 p-1" alt="" />
-                <img src={`https://ipfs.moralis.io:2053/ipfs/${pDetails[0]?.attribute[1]['image']}`} className="w-full h-96 p-1" alt="" />
-                <img src={`https://ipfs.moralis.io:2053/ipfs/${pDetails[0]?.attribute[2]['image']}`} className="w-full h-96 p-1" alt="" />
+                <img src={`https://ipfs.moralis.io:2053/ipfs/${pDetails[0]?.primary_image}`} className="w-full h-96 p-1" alt="" />
+                <img src={`https://ipfs.moralis.io:2053/ipfs/${pDetails[0]?.secondary_image}`} className="w-full h-96 p-1" alt="" />
+                <img src={`https://ipfs.moralis.io:2053/ipfs/${pDetails[0]?.tertiary_image}`} className="w-full h-96 p-1" alt="" />
             </Slide>
             <div className='absolute top-0'>
             <img src={vector} className="relative" alt="" />
@@ -66,18 +66,18 @@ const ProductDetailSection = ({setShowModal}) => {
         <div>
             <p className='text-md text-slate-800 font-bold my-3'>Product Detail</p>
             <p className='text-xs text-slate-600 font-semibold my-3'>Item descriptions</p>
-            <p className='text-md text-slate-800 font-bold my-3'>Color: <span className='text-sm text-slate-800 font-semibold'>{pDetails[0]?.color}</span></p>
-            <div className='flex justify-start items-center w-44'>
-                <p className='text-md text-slate-800 font-bold'>Size:</p>
-                <div className='flex justify-start items-center ml-5'>
-                    <div className={`mx-2 border-solid border-2 border-slate-600 rounded-full px-2 py-0.5 text-sm font-bold cursor-pointer ${proSize === pDetails[0]?.attribute[0]?.size ? 'bg-slate-700 text-white' : 'text-slate-600'}`} onClick={()=>getSize(pDetails[0]?.attribute[0]?.size)}>{pDetails[0]?.attribute[0]?.size}</div>
-                    <div className={`mx-2 border-solid border-2 border-slate-600 rounded-full px-2 py-0.5 text-sm font-bold cursor-pointer ${proSize === pDetails[0]?.attribute[1]?.size ? 'bg-slate-700 text-white' : 'text-slate-600'}`} onClick={()=>getSize(pDetails[0]?.attribute[1]?.size)}>{pDetails[0]?.attribute[1]?.size}</div>
-                    <div className={`mx-2 border-solid border-2 border-slate-600 rounded-full px-2 py-0.5 text-sm font-bold cursor-pointer ${proSize === pDetails[0]?.attribute[2]?.size ? 'bg-slate-700 text-white' : 'text-slate-600'}`} onClick={()=>getSize(pDetails[0]?.attribute[2]?.size)}>{pDetails[0]?.attribute[2]?.size}</div>
-                </div>
+            <div className='grid grid-cols-2 gap-1'>
+                {
+                    pDetails[0]?.attribute.map((el,i) => (
+                        Object.keys(el).map((key, index)=> (
+                            <p className='text-md text-slate-800 font-bold my-3'>{key}: <span className='text-sm text-slate-800 font-normal'>{el[key]}</span></p>
+                        ))
+                    ))
+                }
             </div>
             <p className='text-sm text-slate-800 font-bold mt-3 my-5'>Made in Italy</p>
             <h3 className='text-md text-slate-800 font-bold mt-3 my-3'>Availability</h3>
-            <p className='text-sm text-slate-700 mb-3'>{pDetails[0]?.remainig} of {pDetails[0]?.availabilty} available</p>
+            <p className='text-sm text-slate-700 mb-3'>{pDetails[0]?.remaining} of {pDetails[0]?.availabilty} available</p>
             <div className='flex justify-start items-center my-6'>
                 <p className='text-2xl mr-2 text-slate-900 font-bold'>$ {pDetails[0]?.native_price}</p>
                 <p className='text-md text-slate-900 font-medium mr-2'>or</p>
