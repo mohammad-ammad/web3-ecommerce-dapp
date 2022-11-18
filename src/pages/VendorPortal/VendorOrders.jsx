@@ -56,9 +56,6 @@ const VendorOrders = () => {
                                         Quantity
                                     </th>
                                     <th scope="col" class="py-3 px-6">
-                                        Size
-                                    </th>
-                                    <th scope="col" class="py-3 px-6">
                                         Engraving
                                     </th>
                                     <th scope="col" class="py-3 px-6">
@@ -83,9 +80,6 @@ const VendorOrders = () => {
                                             </td>
                                             <td class="py-4 px-6">
                                                 {item?.order[0]?.quantity}
-                                            </td>
-                                            <td class="py-4 px-6">
-                                                {item?.order[0]?.size}
                                             </td>
                                             <td class="py-4 px-6">
                                                 {item?.order[0]?.engraveName}

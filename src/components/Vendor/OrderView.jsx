@@ -115,7 +115,7 @@ const OrderView = ({ showModal ,setShowModal, data }) => {
                 
                 {/*footer*/}
                 <div className="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
-                  <button  className='bg-black text-white rounded-full px-6 py-2 text-sm font-normal'>Update</button>
+                  <button  className='bg-black text-white rounded-full px-6 py-2 text-sm font-normal' onClick={() => setShowModal(false)}>Close</button>
                 </div>
               </div>
             </div>

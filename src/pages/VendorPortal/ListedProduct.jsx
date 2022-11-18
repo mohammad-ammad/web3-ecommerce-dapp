@@ -1,7 +1,19 @@
 import React from 'react'
+import { useEffect } from 'react'
+import { useContext } from 'react'
 import { Link } from 'react-router-dom'
+import { MultiVendorContext } from '../../context/MultiVendorContext'
+import { WalletContext } from '../../context/WalletContext'
 
 const ListedProduct = () => {
+  //---USECONTEXT
+  const {vendorMintedProduct, vendorProdList} = useContext(MultiVendorContext)
+  const {wallet} = useContext(WalletContext)
+
+  //---USEEFFECT
+  useEffect(() => {
+    vendorMintedProduct()
+  }, [wallet])
   return (
     <div className='w-full h-screen pt-28 bg-slate-100'>
         <div className='px-5 md:px-28 flex justify-between items-center'>
@@ -14,13 +26,13 @@ const ListedProduct = () => {
           <thead class="text-xs text-white uppercase bg-black">
             <tr>
               <th scope="col" class="py-3 px-6">
-                Product title
+                Product
               </th>
               <th scope="col" class="py-3 px-6">
-                Price
+                Title
               </th>
               <th scope="col" class="py-3 px-6">
-                Token ID
+                SKU
               </th>
               <th scope="col" class="py-3 px-6">
                 Action
@@ -28,24 +40,27 @@ const ListedProduct = () => {
             </tr>
           </thead>
           <tbody>
-
-            <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700" >
+            {
+              vendorProdList.length > 0 ? vendorProdList.map((item, i) => (
+                <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700" key={i}>
                  
                   <td class="py-4 px-6">
-                  abc
+                    <img src={`https://ipfs.moralis.io:2053/ipfs/${item?.primary_image}`} className="w-20 border-solid border-[1px] border-black rounded-lg" alt=""  />
                   </td>
                   <td class="py-4 px-6">
-                  abc
+                  {item?.title}
                   </td>
                   <td class="py-4 px-6">
-                  abc
+                  {item?.remaining} of {item?.availabilty}
                   </td>
                   <td class="py-4 px-6">
-                  <Link to="" className='bg-black text-white rounded-full px-5 py-1 text-sm font-normal'>View</Link>
+                    <Link to={`/seller-product/${item?._id}`} className='bg-black text-white rounded-full px-5 py-1 text-sm font-normal'>Edit</Link>
                   </td>
                   
                 </tr>
-          
+              ))
+              : null
+            }
           </tbody>
         </table>
       </div>

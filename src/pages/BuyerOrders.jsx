@@ -37,9 +37,6 @@ const BuyerOrders = () => {
                                 Quantity
                             </th>
                             <th scope="col" class="py-3 px-6">
-                                Size
-                            </th>
-                            <th scope="col" class="py-3 px-6">
                                 Engraving Name
                             </th>
                             <th scope="col" class="py-3 px-6">
@@ -63,9 +60,6 @@ const BuyerOrders = () => {
                                         </td>
                                         <td class="py-4 px-6">
                                             {item?.order[0]?.quantity}
-                                        </td>
-                                        <td class="py-4 px-6">
-                                            {item?.order[0]?.size}
                                         </td>
                                         <td class="py-4 px-6">
                                             {item?.order[0]?.engraveName}

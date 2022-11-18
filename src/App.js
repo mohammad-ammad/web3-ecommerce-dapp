@@ -27,6 +27,7 @@ import Admin from './pages/Admin/Admin';
 import BuyerOrders from './pages/BuyerOrders';
 import Terms from './pages/Terms';
 import Privacy from './pages/Privacy';
+import EditProduct from './pages/VendorPortal/EditProduct';
 
 function App() {
 
@@ -72,6 +73,7 @@ function App() {
         <Route path='/seller-products' element={<ListedProduct/>}/>
         <Route path='/seller-list-product' element={<ListProduct/>}/>
         <Route path='/seller-orders' element={<VendorOrders/>}/>
+        <Route path='/seller-product/:id' element={<EditProduct/>}/>
 
         {/* admin  */}
           <Route path='/admin' element={<Admin/>}/>
