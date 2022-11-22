@@ -13,6 +13,7 @@ const ListedProduct = () => {
   //---USEEFFECT
   useEffect(() => {
     vendorMintedProduct()
+    console.log("worksss")
   }, [wallet])
   return (
     <div className='w-full h-screen pt-28 bg-slate-100'>
@@ -27,6 +28,9 @@ const ListedProduct = () => {
             <tr>
               <th scope="col" class="py-3 px-6">
                 Product
+              </th>
+              <th scope="col" class="py-3 px-6">
+                QR-Code
               </th>
               <th scope="col" class="py-3 px-6">
                 Title
@@ -46,6 +50,9 @@ const ListedProduct = () => {
                  
                   <td class="py-4 px-6">
                     <img src={`https://ipfs.moralis.io:2053/ipfs/${item?.primary_image}`} className="w-20 border-solid border-[1px] border-black rounded-lg" alt=""  />
+                  </td>
+                  <td class="py-4 px-6">
+                    <img src={item?.qrCode} className="w-20 border-solid border-[1px] border-black rounded-lg" alt=""  />
                   </td>
                   <td class="py-4 px-6">
                   {item?.title}

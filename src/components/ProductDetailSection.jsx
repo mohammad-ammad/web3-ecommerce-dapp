@@ -49,6 +49,9 @@ const ProductDetailSection = ({setShowModal}) => {
             <p className='text-sm text-slate-700 mb-3'>{pDetails[0]?.collection_address}</p>
             <h3 className='text-md text-slate-800 font-bold'>Category</h3>
             <p className='text-sm text-slate-700 mb-3'>{pDetails[0]?.category}</p>
+            <div>
+            <img src={pDetails[0]?.qrCode} className="w-20 border-solid border-[1px] border-black rounded-lg" alt=""  />
+            </div>
             {/* <h3 className='text-md text-slate-800 font-bold'>Edition Released</h3>
             <p className='text-sm text-slate-700'>30</p> */}
         </div>

@@ -1,15 +1,33 @@
 import React from 'react'
 import faq from '../assets/faq.png';
 import Queries from './Queries';
-
+import {MdOutlineKeyboardArrowDown} from 'react-icons/md';
+import { useState } from 'react';
+import { Transition } from '@windmill/react-ui';
 const Faq = () => {
+  const [open, setOpen] = useState(false);
   return (
     <div className='bg-[#222222] grid grid-cols-1 md:grid-cols-3 gap-3 p-5 md:p-14'>
         <div className='inline-flex justify-center items-start'>
             <img src={faq} className="w-60" alt=""  />
         </div>
         <div className='col-span-2'>
+          <div className='flex justify-between items-center'>
             <h1 className='text-2xl text-center md:text-left md:text-4xl text-slate-200 font-bold'>FAQ</h1>
+            <p>
+              <MdOutlineKeyboardArrowDown className='fill-white text-2xl cursor-pointer' onClick={()=>setOpen(!open)}/>
+            </p>
+          </div>
+          <Transition
+                  show={open}
+                  enter="transition ease-out duration-300 transform"
+                  enterFrom="opacity-0 scale-95"
+                  enterTo="opacity-100 scale-100"
+                  leave="transition ease-in duration-100 transform"
+                  leaveFrom="opacity-100 scale-100"
+                  leaveTo="opacity-0 scale-95"
+                >
+            <div>
             <Queries active={true} question="What is TheSpotRoom?" 
             answer="The SpotRoom is a platform that offers luxury goods secured on Blockchain, directly from the brand creators.In the marketplace, owners of phygital items or NFTs can trade freely in the secondary market. "/>
             <Queries question="What is Phygital?" 
@@ -41,6 +59,9 @@ const Faq = () => {
             answer="Once an order is placed, you will be provided with a tracking number for the physical product shipment. To complete the purchase, simply scan the security chip on the physical product with your smartphone to activate the NFT. Once the NFT is activated, it will be automatically transferred to your wallet or account. The order is not eligible for return after this point. The digital wearable component will be delivered via email. "/>
             <Queries question="How do I sell my item?" 
             answer="The marketplace for trading will be launched in Q1 2023. Join the waitlist to be the first one to know. "/>
+            </div>
+
+            </Transition>
 
         </div>
     </div>

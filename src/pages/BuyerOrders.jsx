@@ -6,7 +6,7 @@ import { MultiVendorContext } from '../context/MultiVendorContext'
 
 const BuyerOrders = () => {
     //---USECONTEXT
-    const { orderCart, cart } = useContext(MultiVendorContext)
+    const { orderCart, cart, redeemNow } = useContext(MultiVendorContext)
     const {cancelOrder} = useContext(EscrowContext)
     
     //---useEffect
@@ -18,6 +18,11 @@ const BuyerOrders = () => {
     const cancelHandler = (id,trxId) => 
     {
         cancelOrder(trxId,id)
+    }
+
+    const redeem = (id,trx) => 
+    {
+        redeemNow(id,trx)
     }
 
     return (
@@ -67,9 +72,17 @@ const BuyerOrders = () => {
                                         <td class="py-4 px-6">
                                         {item?.order[0]?.status}
                                         </td>
-                                        <td class="py-4 px-6">
-                                            <button className='bg-black text-white rounded-full px-5 py-1 w-32 text-xs font-normal' onClick={()=>cancelHandler(item?._id,item?.trxId)}>Cancel Order</button>
-                                        </td>
+                                        {
+                                            item?.order[0]?.isRedeemable === true ? 
+                                            <td class="py-4 px-6">
+                                                <button className='bg-black text-white rounded-full px-5 py-1 w-32 text-xs font-normal' onClick={()=>redeem(item?._id,item?.trxId)}>Redeem Now</button>
+                                            </td>
+                                            :
+                                            <td class="py-4 px-6">
+                                                <button className='bg-black text-white rounded-full px-5 py-1 w-32 text-xs font-normal' onClick={()=>cancelHandler(item?._id,item?.trxId)}>Cancel Order</button>
+                                            </td>
+                                        }
+                                       
                                     </tr>
                                 )) : ''
                         }

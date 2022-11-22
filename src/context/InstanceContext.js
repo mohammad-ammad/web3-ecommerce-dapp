@@ -24,8 +24,8 @@ const InstanceProvider = ({ children }) => {
 
     //Intialized Provider
     const dic_net = {
-        name: 'rinkeby',
-        chainId: 4,
+        name: 'maticmum',
+        chainId: 80001,
         _defaultProvider: (providers) => new providers.JsonRpcProvider(`${process.env.React_App_INFURIA_KEY}`)
     };
 

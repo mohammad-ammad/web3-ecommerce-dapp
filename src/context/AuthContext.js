@@ -74,7 +74,6 @@ const AuthProvider = ({ children }) => {
                         "Accept": "application/json"
                     }
                 }).then(resp => {
-
                     axios.post(`${process.env.React_App_SERVER_URL}/user/exist`,{
                         email:resp['data']['email']
                     }).then(isExist => {
@@ -92,10 +91,10 @@ const AuthProvider = ({ children }) => {
                                     InAppInstance.createWallet(resp['data']['email'],resp['data']['sub']).then(resp => {
                                     toast.promise(
                                         resp.wait().then(res => {
-                                            // createUserDB(data,res['events'][0]['args'][0])
+                                            createUserDB(data,res['events'][0]['args'][0])
                                             console.log("Create wallet-----")
                                             console.log(res)
-                                            // setLoading(false)
+                                            setLoading(false)
                                         }).catch(err => console.log(err))
                                         , 
                                         {
@@ -201,6 +200,7 @@ const AuthProvider = ({ children }) => {
                         signer:_signer,
                         network:web3ModalProvider._network,
                         provider:"wallet",
+                        type:"wallet",
                         isConnected:true
                     });
 
@@ -240,6 +240,7 @@ const AuthProvider = ({ children }) => {
                 address:wallet,
                 signer:"",
                 network:"",
+                type:"",
                 isConnected:true
             });
 
@@ -270,6 +271,7 @@ const AuthProvider = ({ children }) => {
                     signer:"",
                     network:"",
                     provider:"custom",
+                    type:"InApp",
                     isConnected:true
                 });
                 toast.success("User Connected Succesfully")

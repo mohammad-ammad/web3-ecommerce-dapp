@@ -5,15 +5,67 @@ import { MultiVendorContext } from '../../context/MultiVendorContext'
 import {GrAddCircle} from 'react-icons/gr'
 import {BsFillTrashFill} from 'react-icons/bs'
 import { useRef } from 'react';
+import { useEffect } from 'react';
+import { WalletContext } from '../../context/WalletContext';
+import { ethers } from 'ethers';
+import toast from 'react-hot-toast';
 
 const Admin = () => {
     //---USECONTEXT 
-    const {createCollection, createTechnicalMember} = useContext(MultiVendorContext);
+    const {createCollection, createTechnicalMember, checkOwner, MultiVendorInstance} = useContext(MultiVendorContext);
+    const {wallet, setWallet} = useContext(WalletContext)
     //---USESTATE
     const [collection, setCollection] = useState("");
     const [engrave, setEngrave] = useState(false);
     const [team, setTeam] = useState("");
     const [val, setVal] = useState([])
+
+    useEffect(() => {
+        const loadSession = async () => 
+      {
+        let isWallet = localStorage.getItem("wallet");
+        isWallet = JSON.parse(isWallet)
+        if(isWallet !== null)
+        {
+            if(isWallet.isConnected == true)
+            {
+            await window.ethereum.request({ method: "eth_requestAccounts" });
+            const provider = new ethers.providers.Web3Provider(window.ethereum, "any");
+            const signer = provider.getSigner();
+            const Address = await signer.getAddress();
+            if(Address == isWallet.address)
+            {
+                console.log(await checkOwner())
+                if(await checkOwner() == Address)
+                {
+                    setWallet({
+                        address:isWallet.address,
+                        signer:signer,
+                        network:"",
+                        provider:provider,
+                        isConnected:isWallet.isConnected
+                    })
+                }
+                else 
+                {
+                    toast.error("Access Denied")
+                    window.location.href = "/"
+                }
+            }
+            else 
+            {
+                window.location.href = "/"
+            }
+            }
+        }
+        else 
+        {
+            window.location.href = "/"
+        }
+      }
+
+      loadSession()
+    }, [])
 
 
     //----ACTION FUNCTIONS

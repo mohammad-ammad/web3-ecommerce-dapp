@@ -9,6 +9,7 @@ import { WalletContext } from '../context/WalletContext';
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io'
 import { MultiVendorContext } from '../context/MultiVendorContext';
 import { AuthContext } from '../context/AuthContext';
+import { useEffect } from 'react';
 const Navbar = ({ setShowModal, setIsSignUp }) => {
   //Intialized states
   const [toggle, setToggle] = useState(false);
@@ -17,7 +18,24 @@ const Navbar = ({ setShowModal, setIsSignUp }) => {
   //Getting Instance Context
   const { wallet } = useContext(WalletContext)
   const { isShop } = useContext(AuthContext)
-  const { isVendor, createShop } = useContext(MultiVendorContext)
+  const { isVendor, createShop, checkOwner } = useContext(MultiVendorContext)
+
+  const [isOwner, setIsOwner] = useState(false);
+
+  useEffect(() => {
+    const check = async () => 
+    {
+      if(wallet.isConnected)
+      {
+        if(await checkOwner() == wallet.address)
+        {
+          setIsOwner(true)
+        } 
+      }
+    }
+
+    check()
+  }, [wallet])
 
   return (
     <>
@@ -31,9 +49,16 @@ const Navbar = ({ setShowModal, setIsSignUp }) => {
             <AiOutlineSearch className='mr-2 text-lg text-slate-500' />
             <input type="text" className='outline-none' name="" id="" placeholder='Search' />
           </div>
-          <div className='hidden md:block mx-2'>
-            <Link to="/how-it-works" className='text-sm font-bold'>How it works</Link>
-          </div>
+          {
+            isOwner ? 
+            <div className='hidden md:block mx-2'>
+              <Link to="/admin" className='text-sm font-bold'>Admin Portal</Link>
+            </div>
+            :
+            <div className='hidden md:block mx-2'>
+              <Link to="/how-it-works" className='text-sm font-bold'>How it works</Link>
+            </div>
+          }
           {
             wallet.isConnected ?
               <>

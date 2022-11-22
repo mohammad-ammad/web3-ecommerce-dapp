@@ -43,7 +43,14 @@ const ConfirmOrderModel = ({ confirmModal, setConfirmModal, setShowModal, setAcc
       name: pDetails[0]?.title,
       price: pDetails[0]?.native_price
     }
-    paymentWithStripe(product,token)
+
+    if (wallet.isConnected && wallet.address != "") {
+      paymentWithStripe(product,token, obj)
+    }
+    else {
+      setAccountInfo(true)
+    }
+    setConfirmModal(false)
   }
   return (
     <>

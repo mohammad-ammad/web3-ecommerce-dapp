@@ -24,6 +24,7 @@ const MultiVendorProvider = ({ children }) => {
   const [catAttrList, setCatAttrList] = useState([]);
   const [vendorProdList, setVendorProdList] = useState([]);
   const [vendorProdListArr, setVendorProdListArr] = useState([]);
+  const [isRedeemable, setIsRedeemable] = useState(false);
 
   //---GETTING THE INSTANCE CONTEXT
   const { MultiVendorInstance, NFTInstance } = useContext(InstanceContext)
@@ -40,6 +41,13 @@ const MultiVendorProvider = ({ children }) => {
   useEffect(() => {
     listProduct()
   }, [])
+
+  //---check owner
+  const checkOwner = async () => 
+  {
+    const resp = await MultiVendorInstance.owner();
+    return resp;
+  }
 
   //---Create Collections 
   const createCollection = async (name, engravable, attributes) => {
@@ -162,6 +170,7 @@ const MultiVendorProvider = ({ children }) => {
         toast.promise(
           res.wait().then(response => {
             axios.post(`${process.env.React_App_SERVER_URL}/product/create`, {
+              vendorAddress:wallet.address,
               ...data,
               tokenId: parseInt(response.events[1].args[1]._hex, 16)
             }).then(resp => {
@@ -198,7 +207,7 @@ const MultiVendorProvider = ({ children }) => {
     try {
       const resp = await axios.get(`${process.env.React_App_SERVER_URL}/product/${id}`);
       setPDetails(resp['data'])
-      console.log(resp)
+      console.log("product details---------",resp)
     } catch (error) {
       console.log(error.message)
     }
@@ -207,33 +216,71 @@ const MultiVendorProvider = ({ children }) => {
   //---Create Order 
   const createOrder = async (data) => {
     try {
-      if (MultiVendorInstance != "") {
-        const resp = await MultiVendorInstance.createOrder(data.address, data.id, data.amount, 0, { value: ethers.utils.parseUnits(data.price.toString(), "ether") });
-        toast.promise(
-          resp.wait().then(res => {
-            console.log(res)
-            let trx = ethers.BigNumber.from(res['events'][2]['topics'][2]);
-            console.log(trx)
-            axios.post(`${process.env.React_App_SERVER_URL}/order/create`, {
-              product_id: data._id,
-              userAddress: wallet.address,
-              quantity: data.amount,
-              engraveName: data.engraveName,
-              trxId: parseInt(trx._hex, 16),
-              status: "Pending",
-              type: data.type,
-              price: data.price
-            }).then(_res => {
-              console.log(_res)
+
+      if(isRedeemable === true)
+      {
+        if(MultiVendorInstance != "")
+        {
+          const resp = await MultiVendorInstance.createRedeem(data.address,data.id,data.amount, { value: ethers.utils.parseUnits(data.price.toString(), "ether") });
+          toast.promise(
+            resp.wait().then(res => {
+              console.log(res)
+              let trx = ethers.BigNumber.from(res['events'][1]['args']['tx_id']);
+              console.log(trx)
+              axios.post(`${process.env.React_App_SERVER_URL}/order/create`, {
+                product_id: data._id,
+                userAddress: wallet.address,
+                quantity: data.amount,
+                engraveName: data.engraveName,
+                trxId: parseInt(trx._hex, 16),
+                status: "Redeem not calim",
+                type: data.type,
+                price: data.price,
+                isRedeemable:true
+              }).then(_res => {
+                console.log(_res)
+              }).catch(err => console.log(err))
             }).catch(err => console.log(err))
-          }).catch(err => console.log(err))
-          ,
-          {
-            loading: 'Creating Order Please Wait',
-            success: 'Order Placed Successfully',
-            error: 'Something Went Wrong',
-          }
-        )
+            ,
+            {
+              loading: 'Creating Redeem Please Wait',
+              success: 'Redeem Successfully',
+              error: 'Something Went Wrong',
+            }
+          )
+        }
+      }
+      else 
+      {
+        if (MultiVendorInstance != "") {
+          const resp = await MultiVendorInstance.createOrder(data.address, data.id, data.amount, 0, { value: ethers.utils.parseUnits(data.price.toString(), "ether") });
+          toast.promise(
+            resp.wait().then(res => {
+              console.log(res)
+              let trx = ethers.BigNumber.from(res['events'][2]['topics'][2]);
+              console.log(trx)
+              axios.post(`${process.env.React_App_SERVER_URL}/order/create`, {
+                product_id: data._id,
+                userAddress: wallet.address,
+                quantity: data.amount,
+                engraveName: data.engraveName,
+                trxId: parseInt(trx._hex, 16),
+                status: "Pending",
+                type: data.type,
+                price: data.price,
+                isRedeemable:false
+              }).then(_res => {
+                console.log(_res)
+              }).catch(err => console.log(err))
+            }).catch(err => console.log(err))
+            ,
+            {
+              loading: 'Creating Order Please Wait',
+              success: 'Order Placed Successfully',
+              error: 'Something Went Wrong',
+            }
+          )
+        }
       }
     } catch (error) {
       console.log(error.message)
@@ -302,21 +349,87 @@ const MultiVendorProvider = ({ children }) => {
   //---withdraw option only admin
 
   //---PAYMENT WITH STRIPE
-  const paymentWithStripe = async (product, token) => {
-    toast.promise(
-      axios.post(`${process.env.React_App_SERVER_URL}/stripe/payment`, {
-        product, token
-      }).then(resp => {
-        console.log(resp)
-      }).catch(err => console.log(err))
-      ,
-      {
-        loading: 'Creating Order Please Wait',
-        success: 'Order Placed Successfully',
-        error: 'Something Went Wrong',
-      }
-    )
-
+  const paymentWithStripe = async (product, token, data) => {
+    if(wallet.isConnected == true && wallet.address != "")
+    {
+      toast.promise(
+        axios.post(`${process.env.React_App_SERVER_URL}/stripe/payment`, {
+          product, token
+        }).then(async (resp) => {
+          if(isRedeemable === true)
+          {
+            if(MultiVendorInstance != "")
+            {
+              const resp = await MultiVendorInstance.createRedeem(data.address,data.id,data.amount, { value: ethers.utils.parseUnits(data.price.toString(), "ether") });
+              toast.promise(
+                resp.wait().then(async (res) => {
+                  console.log(res)
+                  let trx = ethers.BigNumber.from(res['events'][1]['args']['tx_id']);
+                  console.log(trx)
+                  axios.post(`${process.env.React_App_SERVER_URL}/order/create`, {
+                    product_id: data._id,
+                    userAddress: wallet.address,
+                    quantity: data.amount,
+                    engraveName: data.engraveName,
+                    trxId: parseInt(trx._hex, 16),
+                    status: "Pending",
+                    type: data.type,
+                    price: data.price,
+                    isRedeemable:true
+                  }).then(_res => {
+                    console.log(_res)
+                  }).catch(err => console.log(err))
+                }).catch(err => console.log(err))
+                ,
+                {
+                  loading: 'Creating Redeem Please Wait',
+                  success: 'Redeem Successfully',
+                  error: 'Something Went Wrong',
+                }
+              )
+            }
+          }
+          else 
+          {
+            if (MultiVendorInstance != "") {
+              const resp = await MultiVendorInstance.createOrder(data.address, data.id, data.amount, 0, { value: ethers.utils.parseUnits(data.price.toString(), "ether") });
+              toast.promise(
+                resp.wait().then(async (res) => {
+                  console.log(res)
+                  let trx = ethers.BigNumber.from(res['events'][2]['topics'][2]);
+                  console.log(trx)
+                  axios.post(`${process.env.React_App_SERVER_URL}/order/create`, {
+                    product_id: data._id,
+                    userAddress: wallet.address,
+                    quantity: data.amount,
+                    engraveName: data.engraveName,
+                    trxId: parseInt(trx._hex, 16),
+                    status: "Pending",
+                    type: data.type,
+                    price: data.price,
+                    isRedeemable:true
+                  }).then(_res => {
+                    console.log(_res)
+                  }).catch(err => console.log(err))
+                }).catch(err => console.log(err))
+                ,
+                {
+                  loading: 'Creating Order Please Wait',
+                  success: 'Order Placed Successfully',
+                  error: 'Something Went Wrong',
+                }
+              )
+            }
+          }
+        }).catch(err => console.log(err))
+        ,
+        {
+          loading: 'Creating Order Please Wait',
+          success: 'Order Placed Successfully',
+          error: 'Something Went Wrong',
+        }
+      )
+    }
   }
 
   //---get shipping details
@@ -416,8 +529,54 @@ const MultiVendorProvider = ({ children }) => {
     }
   }
 
+  //---REDEEM NOW
+  const redeemNow = async (id,trx) => 
+  {
+    try {
+      if(MultiVendorInstance != "")
+      {
+        const resp = await MultiVendorInstance.redeem(trx,"0x0000000000000000000000000000000000000000","abc");
+        toast.promise(
+          resp.wait().then(res => {
+            axios.put(`${process.env.React_App_SERVER_URL}/order/update/${id}`,{
+              status:'Pending'
+            }).then(res => {
+              console.log("Redeem Successful")
+            }).catch(err => console.log(err))
+
+          }).catch(err => console.log(err))
+          ,
+            {
+              loading: 'Creating Redeem Please Wait',
+              success: 'Redeem Successfully',
+              error: 'Something Went Wrong',
+            }
+        )
+      }
+    } catch (error) {
+      console.log(error.message)
+    }
+  }
+
+  //---update attributes 
+  const updateAttributes = async (id,attributes) => 
+  {
+    try {
+      const resp = await axios.put(`${process.env.React_App_SERVER_URL}/product/attr/${id}`, {
+        attributes:[attributes]
+      });
+      console.log(resp);
+      if(resp['data']['message'] == "Attributes updated")
+      {
+        toast.success("Attributes Updated Successfully")
+      }
+    } catch (error) {
+      console.log(error.message)
+    }
+  }
+
   return (
-    <MultiVendorContext.Provider value={{ isVendor, createShop, getSizes, getColor, mintProduct, getCategories, createCollection, createTechnicalMember, productList, productDetails, pDetails, currencyToggle, setCurrencyToggle, createOrder, orderCart, cart, vendorOrder, vendorOrderList, updateOrderStatus, paymentWithStripe, proSize, setProSize, engraveName, setEngraveName, addShippingDetails, isUserDetails, getShippingByUser, userDetail, catAttr, catAttrList, vendorMintedProduct, vendorProdList, getVendorEditAttribute, vendorProdListArr}}>
+    <MultiVendorContext.Provider value={{ isVendor, createShop, getSizes, getColor, mintProduct, getCategories, createCollection, createTechnicalMember, productList, productDetails, pDetails, currencyToggle, setCurrencyToggle, createOrder, orderCart, cart, vendorOrder, vendorOrderList, updateOrderStatus, paymentWithStripe, proSize, setProSize, engraveName, setEngraveName, addShippingDetails, isUserDetails, getShippingByUser, userDetail, catAttr, catAttrList, vendorMintedProduct, vendorProdList, getVendorEditAttribute, vendorProdListArr, checkOwner, MultiVendorInstance, isRedeemable, setIsRedeemable, redeemNow, updateAttributes}}>
       {children}
     </MultiVendorContext.Provider>
   );

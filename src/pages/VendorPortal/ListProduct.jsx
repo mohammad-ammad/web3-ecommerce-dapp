@@ -32,7 +32,6 @@ const ListProduct = () => {
   const [data, setData] = useState({
     title:"",
     description:"",
-    vendorAddress:"",
     catId:"",
     availabilty:"",
     native_price:"",
@@ -70,10 +69,12 @@ const ListProduct = () => {
   useEffect(() => {
     if(wallet.isConnected)
     {
-      setData({...data,vendorAddress:wallet.address})
-      console.log(wallet)
+      // setData({...data,vendorAddress:wallet.address})
+      // console.log(wallet)
+      // console.log("vendorooooo")
     }
   },[wallet])
+
 
   useEffect(() => {
     setData({...data, attribute:[attr]})

@@ -15,6 +15,7 @@ const WalletProvider = ({ children }) => {
         signer:"",
         network:"",
         provider:"",
+        type:"",
         isConnected:false
     })
 
@@ -37,6 +38,64 @@ const WalletProvider = ({ children }) => {
         loadEscrowContract(signer)
       }
     },[wallet])
+
+    useEffect(() => {
+      if(wallet.isConnected && wallet.address != "")
+      {
+        let obj = {
+          address:wallet.address,
+          type:wallet.type,
+          isConnected:wallet.isConnected
+        }
+        localStorage.setItem("wallet",JSON.stringify(obj))
+      }
+    }, [wallet])
+
+    useEffect(() => {
+      const loadSession = async () => 
+      {
+        let isWallet = localStorage.getItem("wallet");
+        isWallet = JSON.parse(isWallet)
+        if(isWallet.isConnected == true)
+        {
+          await window.ethereum.request({ method: "eth_requestAccounts" });
+          const provider = new ethers.providers.Web3Provider(window.ethereum, "any");
+          const signer = provider.getSigner();
+          const Address = await signer.getAddress();
+          if(Address == isWallet.address)
+          {
+            setWallet({
+              address:isWallet.address,
+              signer:signer,
+              network:"",
+              provider:provider,
+              isConnected:isWallet.isConnected
+            })
+          }
+          else 
+          {
+            localStorage.removeItem("wallet")
+          }
+        }
+      }
+
+      loadSession()
+    }, [])
+
+    if(window.ethereum)
+    {
+        window.ethereum.on('accountsChanged', function (accounts) {
+            setWallet({
+              address:"",
+              signer:"",
+              network:"",
+              provider:"",
+              isConnected:false
+            })
+            localStorage.removeItem("wallet")
+            window.location.reload()
+        })
+    }
 
     //intialized the web3 provider for wallet connection
     const providerOptions = {

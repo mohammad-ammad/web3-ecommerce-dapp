@@ -8,9 +8,8 @@ import { MultiVendorContext } from '../../context/MultiVendorContext'
 const EditProduct = () => {
 
     //---USECONTEXT
-    const {getVendorEditAttribute, vendorProdListArr} = useContext(MultiVendorContext)
-    const [attr, setAttr] = useState({});
-
+    const {getVendorEditAttribute, vendorProdListArr, updateAttributes} = useContext(MultiVendorContext)
+   
     //---get id
     const {id} = useParams();
 
@@ -20,10 +19,15 @@ const EditProduct = () => {
     }, [id])
  
     const [currentState, setCurrentState] = useState({})
-    useEffect(()=>{
-        if(vendorProdListArr?.attribute[0])
-        setCurrentState( vendorProdListArr?.attribute[0])
-    },[])
+
+    const updateAttr = (attr_id) => 
+    {
+        if(currentState != null)
+        {
+            updateAttributes(attr_id, currentState)
+        }
+    }
+
     console.log("CS:",currentState)
     
   return (
@@ -42,7 +46,7 @@ const EditProduct = () => {
                             <>
                                 <label className='text-xs px-3 text-slate-900'>{key} :</label>
                                 <div className='bg-white shadow-inner shadow-slate-200 rounded-lg my-1'>
-                                    <input type="text" value={currentState[key]} onChange={(e) => setCurrentState((currentState)=>({...currentState, color: e.target.value}))} className='w-full p-3 text-xs bg-transparent outline-none' placeholder={key} name="" id="" />
+                                    <input type="text" value={currentState[key]} onChange={(e) => setCurrentState((currentState)=>({...currentState, [key]: e.target.value}))} className='w-full p-3 text-xs bg-transparent outline-none' placeholder={item[key]} name="" id="" />
                                 </div>
                             </>
                         ))
@@ -51,6 +55,10 @@ const EditProduct = () => {
                 }
 
             </div>
+        </div>
+
+        <div className='flex justify-center items-center my-5 px-5 md:px-28'>
+          <button onClick={()=>updateAttr(vendorProdListArr?.attr_id)} className='bg-black text-white w-full rounded-full px-5 py-1 text-sm font-normal'>Update</button>
         </div>
     </div>
   )
