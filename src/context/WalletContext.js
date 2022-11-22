@@ -16,6 +16,8 @@ const WalletProvider = ({ children }) => {
         network:"",
         provider:"",
         type:"",
+        username:"",
+        password:"",
         isConnected:false
     })
 
@@ -31,11 +33,16 @@ const WalletProvider = ({ children }) => {
       }
       else if(wallet.isConnected && wallet.signer == "")
       {
-          const signer = new ethers.Wallet(
-            `${process.env.React_App_ACCOUNT_PRIVATE_KEY}`,
-            ethers.getDefaultProvider(dic_net)
-        );
+        //   const signer = new ethers.Wallet(
+        //     `${process.env.React_App_ACCOUNT_PRIVATE_KEY}`,
+        //     ethers.getDefaultProvider(dic_net)
+        // );
+
+        const provider = new ethers.providers.JsonRpcProvider("https://rpc-mumbai.maticvigil.com/");
+        const signer = new ethers.Wallet(process.env.React_App_ACCOUNT_PRIVATE_KEY,provider);
         loadEscrowContract(signer)
+        loadMultiVendorContract(signer)
+        
       }
     },[wallet])
 

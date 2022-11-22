@@ -92,6 +92,16 @@ const ConfirmOrderModel = ({ confirmModal, setConfirmModal, setShowModal, setAcc
                   </button>
                   {
                     currencyToggle ?
+                      wallet.type == "InApp" ? 
+                      <StripeCheckout
+                        token={stripeHandler}
+                        stripeKey="pk_test_51KBg9jG0gapMqUsS3yoMihYnaGrWojG7awmth7BpX5SUSvTICjTqtZ5mgFJCoCn71IMfo2c3Kt2f3x5prTSNgV0A00sEdlIgiv"
+                        name="The Spot Room"
+                        amount={pDetails[0]?.native_price * 100}
+                      >
+                        <button className='bg-black text-white rounded-full px-6 py-2 text-sm font-normal'>{wallet.isConnected ? 'Place Order with Stripe' : 'Next'}</button>
+                      </StripeCheckout>
+                      :
                       <button className='bg-black text-white rounded-full px-6 py-2 text-sm font-normal' onClick={nextHandler}>{wallet.isConnected ? 'Place Order' : 'Next'}</button>
                       :
                       <StripeCheckout

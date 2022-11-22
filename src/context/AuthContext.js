@@ -272,6 +272,8 @@ const AuthProvider = ({ children }) => {
                     network:"",
                     provider:"custom",
                     type:"InApp",
+                    username:resp['data']['wallet'],
+                    password:resp['data']['password'],
                     isConnected:true
                 });
                 toast.success("User Connected Succesfully")
