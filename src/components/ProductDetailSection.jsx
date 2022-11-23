@@ -19,6 +19,10 @@ const ProductDetailSection = ({setShowModal}) => {
     //---USECONTEXT
     const {productDetails, pDetails, setProSize, proSize} = useContext(MultiVendorContext)
 
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [])
+
     //---USEEFFECT 
     useEffect(() => {
         productDetails(id)
