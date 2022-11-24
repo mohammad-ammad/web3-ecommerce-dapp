@@ -3,6 +3,7 @@ import Banner1 from '../assets/img-phygitalization.png';
 import Banner2 from '../assets/img-authenticity.png';
 import Banner3 from '../assets/img-liquidity.png';
 import Banner4 from '../assets/img-flexibility.png';
+import { Link } from 'react-router-dom';
 const WhatToDo = () => {
   return (
     <div className='p-10'>
@@ -30,7 +31,7 @@ const WhatToDo = () => {
             </div>
         </div>
         <div className='inline-flex justify-center items-center w-full my-5'>
-        <a href="" className='bg-black text-white rounded-full px-5 py-1 text-sm font-normal'>How It's Works</a>
+        <Link to="/how-it-works" className='bg-black text-white rounded-full px-5 py-1 text-sm font-normal'>How It Works</Link>
         </div>
     </div>
   )

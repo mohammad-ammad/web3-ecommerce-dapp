@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import AboutHowItsWork from '../components/AboutHowItsWork'
 import ContactUs from '../components/ContactUs'
 import Faq from '../components/Faq'
@@ -43,7 +43,7 @@ let list = [
       position:"left"
   },
   {
-    title:"Verify Your NFT and Confirm Your Order",
+    title:"NFT Activation",
     desc:"After receiving your physical item, the customer can use their smartphone to scan the NFC chip on the physical product to link to the product detail page. From there, the customer will be able to login to verify the associated NFT and manage the order. To find where is the NFC reader on your phone, please refer to the guide.",
     image:abt6,
     position:"right"
@@ -53,10 +53,15 @@ let list = [
 
 
 const HowItsWorks = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [])
+  const myRef = useRef(null)
+  const executeScroll = () => myRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' }) 
   return (
     <>
-    <HeroHowItsWork/>
-    <AboutHowItsWork list={list}/>
+    <HeroHowItsWork executeScroll={executeScroll}/>
+    <AboutHowItsWork list={list} myRef={myRef}/>
     <Faq/>
     <ContactUs/>
     </>

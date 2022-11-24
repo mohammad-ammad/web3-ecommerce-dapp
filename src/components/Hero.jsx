@@ -19,7 +19,7 @@ const Hero = () => {
             <div className={`hidden md:grid gap-3 ${grow > 0 ? 'grid-cols-6' : 'grid-cols-4'}`}>
                 <div className={`${grow === 1 && 'col-span-3'} relative`}>
                     <img src={grow === 1 ? Banner1 : Hero1} className="cursor-pointer w-full h-screen" alt="" onMouseEnter={() => setGrow(1)} onMouseLeave={() => setGrow(0)} />
-                    <div className={`${grow === 1 ? 'absolute top-14 md:top-1/3 right-10 md:right-10' : 'hidden'}`} onMouseEnter={() => setGrow(true)}>
+                    <div className={`${grow === 1 ? 'absolute top-14 md:top-1/3 right-10 md:right-10' : 'hidden'}`} onMouseEnter={() => setGrow(1)}>
                         <div className='inline-flex justify-end items-center my-3 w-full'>
                             <img src={freeman} className="w-24 bg-white rounded-md mr-3 py-1" alt="" srcset="" />
                             <p className='bg-[#7956DC] shadow-inner shadow-[#c2b2ee] rounded-lg w-28 py-2 text-white text-center font-bold'>Live Now</p>
@@ -37,13 +37,13 @@ const Hero = () => {
                 </div>
                 <div className={`${grow === 2 && 'col-span-3'} relative`}>
                     <img src={grow === 2 ? Banner3 : Hero2} className="cursor-pointer w-full h-screen" alt="" onMouseEnter={() => setGrow(2)} onMouseLeave={() => setGrow(0)} />
-                    <div className={`${grow === 2 ? 'absolute top-14 md:top-1/3 right-10 md:right-10' : 'hidden'}`} onMouseEnter={() => setGrow(true)}>
+                    <div className={`${grow === 2 ? 'absolute top-14 md:top-1/3 right-10 md:right-10' : 'hidden'}`} onMouseEnter={() => setGrow(2)}>
                     <div className='inline-flex justify-end items-center my-3 w-full'>
                             <img src={freeman} className="w-24 bg-white rounded-md mr-3 py-1" alt="" srcset="" />
                             <p className='bg-[#7956DC] shadow-inner shadow-[#c2b2ee] rounded-lg w-28 py-2 text-white text-center font-bold'>Live Now</p>
                         </div>
                         <div className='my-1'>
-                            <h1 className='text-white text-3xl font-extrabold'>LOCKET GOLDEN SNITCH NECKLACE</h1>
+                            <h1 className='text-white text-3xl font-extrabold'>TIME TURNER DIAMOND NECKLACE</h1>
                         </div>
                         <div className='my-3'>
                             <p className='text-white text-right text-md'>Harry Potter™</p>
@@ -55,13 +55,13 @@ const Hero = () => {
                 </div>
                 <div className={`${grow === 3 && 'col-span-3'} relative`}>
                     <img src={grow === 3 ? Banner4 : Hero3} className="cursor-pointer w-full h-screen" alt="" onMouseEnter={() => setGrow(3)} onMouseLeave={() => setGrow(0)} />
-                    <div className={`${grow === 3 ? 'absolute top-14 md:top-1/3 right-10 md:right-10' : 'hidden'}`} onMouseEnter={() => setGrow(true)}>
+                    <div className={`${grow === 3 ? 'absolute top-14 md:top-1/3 right-10 md:right-10' : 'hidden'}`} onMouseEnter={() => setGrow(3)}>
                     <div className='inline-flex justify-end items-center my-3 w-full'>
                             <img src={freeman} className="w-24 bg-white rounded-md mr-3 py-1" alt="" srcset="" />
                             <p className='bg-[#7956DC] shadow-inner shadow-[#c2b2ee] rounded-lg w-28 py-2 text-white text-center font-bold'>Live Now</p>
                         </div>
                         <div className='my-1'>
-                            <h1 className='text-white text-3xl font-extrabold'>LOCKET GOLDEN SNITCH NECKLACE</h1>
+                            <h1 className='text-white text-2xl font-extrabold'>HOGWARTS ACCEPTANCE LETTER NECKLACE</h1>
                         </div>
                         <div className='my-3'>
                             <p className='text-white text-right text-md'>Harry Potter™</p>
@@ -73,13 +73,13 @@ const Hero = () => {
                 </div>
                 <div className={`${grow === 4 && 'col-span-3'} relative`}>
                     <img src={grow === 4 ? Banner5 : Hero4} className="cursor-pointer w-full h-screen" alt="" onMouseEnter={() => setGrow(4)} onMouseLeave={() => setGrow(0)} />
-                    <div className={`${grow === 4 ? 'absolute top-14 md:top-1/3 right-10 md:right-10' : 'hidden'}`} onMouseEnter={() => setGrow(true)}>
+                    <div className={`${grow === 4 ? 'absolute top-14 md:top-1/3 right-10 md:right-10' : 'hidden'}`} onMouseEnter={() => setGrow(4)}>
                     <div className='inline-flex justify-end items-center my-3 w-full'>
                             <img src={freeman} className="w-24 bg-white rounded-md mr-3 py-1" alt="" srcset="" />
                             <p className='bg-[#7956DC] shadow-inner shadow-[#c2b2ee] rounded-lg w-28 py-2 text-white text-center font-bold'>Live Now</p>
                         </div>
                         <div className='my-1'>
-                            <h1 className='text-white text-3xl font-extrabold'>LOCKET GOLDEN SNITCH NECKLACE</h1>
+                            <h1 className='text-white text-3xl font-extrabold'>MIRROR OF ERISED NECKLACE</h1>
                         </div>
                         <div className='my-3'>
                             <p className='text-white text-right text-md'>Harry Potter™</p>

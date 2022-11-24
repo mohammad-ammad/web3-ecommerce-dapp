@@ -5,7 +5,6 @@ import {MdOutlineKeyboardArrowDown} from 'react-icons/md';
 import { useState } from 'react';
 import { Transition } from '@windmill/react-ui';
 const Faq = () => {
-  const [open, setOpen] = useState(false);
   return (
     <div className='bg-[#222222] grid grid-cols-1 md:grid-cols-3 gap-3 p-5 md:p-14'>
         <div className='inline-flex justify-center items-start'>
@@ -14,21 +13,9 @@ const Faq = () => {
         <div className='col-span-2'>
           <div className='flex justify-between items-center'>
             <h1 className='text-2xl text-center md:text-left md:text-4xl text-slate-200 font-bold'>FAQ</h1>
-            <p>
-              <MdOutlineKeyboardArrowDown className='fill-white text-2xl cursor-pointer' onClick={()=>setOpen(!open)}/>
-            </p>
           </div>
-          <Transition
-                  show={open}
-                  enter="transition ease-out duration-300 transform"
-                  enterFrom="opacity-0 scale-95"
-                  enterTo="opacity-100 scale-100"
-                  leave="transition ease-in duration-100 transform"
-                  leaveFrom="opacity-100 scale-100"
-                  leaveTo="opacity-0 scale-95"
-                >
-            <div>
-            <Queries active={true} question="What is TheSpotRoom?" 
+          <div>
+            <Queries question="What is TheSpotRoom?" 
             answer="The SpotRoom is a platform that offers luxury goods secured on Blockchain, directly from the brand creators.In the marketplace, owners of phygital items or NFTs can trade freely in the secondary market. "/>
             <Queries question="What is Phygital?" 
             answer="Each physical item is accompanied by an embedded security chip, linked to an NFT. The NFT is a collectible artwork representing the physical, as well as a product ID housing information on provenance, authenticity and ownership. Digital twin wearable comes in form of an AR filter or a digital skin for your avatar. "/>
@@ -60,8 +47,6 @@ const Faq = () => {
             <Queries question="How do I sell my item?" 
             answer="The marketplace for trading will be launched in Q1 2023. Join the waitlist to be the first one to know. "/>
             </div>
-
-            </Transition>
 
         </div>
     </div>
