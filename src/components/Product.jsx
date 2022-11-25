@@ -8,7 +8,7 @@ const Product = ({img, tag, title, price, id, toggle}) => {
   console.log(img[1]['image'])
   const indicators = () => {
     return (
-      <div className="indicator bg-slate-900 w-7 h-1.5 mx-1 rounded-xl cursor-pointer"></div>
+      <div className="indicator border-black border-[2px] w-10 h-1.5 mx-1 rounded-xl cursor-pointer"></div>
     )
   };
   return (

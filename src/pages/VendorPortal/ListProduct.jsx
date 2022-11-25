@@ -13,7 +13,7 @@ import { toast } from 'react-hot-toast'
 
 const ListProduct = () => {
   //---USECONTEXT
-  const {getSizes, getColor, mintProduct, getCategories, catAttr, catAttrList} = useContext(MultiVendorContext)
+  const {getSizes, getColor, mintProduct, getCategories, catAttr, catAttrList, getnfc, mintAmount} = useContext(MultiVendorContext)
   const {loadNftSmartContract} = useContext(InstanceContext);
   const {wallet} = useContext(WalletContext);
   //---USESTATES
@@ -111,6 +111,8 @@ const ListProduct = () => {
     setData({...data,catId:e.target.value})
     loadNftSmartContract(e.target.value,wallet.signer);
     catAttr(e.target.value)
+    getnfc(e.target.value)
+
   }
 
   const attrChangeHandler = (e) => 
@@ -187,7 +189,7 @@ const ListProduct = () => {
             </select>
           </div>
           <div className='bg-white shadow-inner shadow-slate-200 rounded-lg my-1'>
-            <input type="text" value={data.availabilty} onChange={(e)=>setData({...data, availabilty:e.target.value})}  className='w-full p-3 text-xs bg-transparent outline-none' placeholder='SKU' name="" id="" />
+            <input type="number" value={data.availabilty} min="1" max={mintAmount} onChange={(e)=>setData({...data, availabilty:e.target.value})}  className='w-full p-3 text-xs bg-transparent outline-none' placeholder='SKU' name="" id="" />
           </div>
         </div>
         <div className='grid grid-cols-1 md:grid-cols-2 gap-2'>

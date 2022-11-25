@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import AuthModel from '../components/AuthModel'
 import ContactUs from '../components/ContactUs'
 import Faq from '../components/Faq'
@@ -8,6 +8,9 @@ import Video from '../components/Video'
 import WhatToDo from '../components/WhatToDo'
 
 const Landing = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [])
   return (
     <>
         <Hero/>

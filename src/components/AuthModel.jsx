@@ -42,7 +42,7 @@ const AuthModel = ({ showModal ,setShowModal, setWalletModal }) => {
                 </div>
                 {/*body*/}
                 <div className="relative p-6 flex-auto">
-                  <AuthContent walletHandler={walletHandler}/>
+                  <AuthContent walletHandler={walletHandler} setShowModal={setShowModal}/>
                 </div>
                 {/*footer*/}
                 

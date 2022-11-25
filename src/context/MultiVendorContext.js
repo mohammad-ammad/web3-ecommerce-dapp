@@ -25,6 +25,9 @@ const MultiVendorProvider = ({ children }) => {
   const [vendorProdList, setVendorProdList] = useState([]);
   const [vendorProdListArr, setVendorProdListArr] = useState([]);
   const [isRedeemable, setIsRedeemable] = useState(false);
+  const [mintAmount, setMintAmount] = useState(0);
+  const [mintReAmount, setMintReAmount] = useState(0);
+ 
 
   //---GETTING THE INSTANCE CONTEXT
   const { MultiVendorInstance, NFTInstance } = useContext(InstanceContext)
@@ -50,7 +53,7 @@ const MultiVendorProvider = ({ children }) => {
   }
 
   //---Create Collections 
-  const createCollection = async (name, engravable, attributes) => {
+  const createCollection = async (name, engravable, attributes, serial, amount) => {
     try {
       if (MultiVendorInstance != "") {
         const resp = await MultiVendorInstance.createCollection(name);
@@ -60,7 +63,9 @@ const MultiVendorProvider = ({ children }) => {
               category: name,
               collection_address: res['events'][0]['address'],
               engravable: engravable,
-              attributes:attributes
+              attributes:attributes,
+              serial_no:serial,
+              amount:amount
             }).then(_res => {
               console.log(_res)
             }).catch(err => console.log(err))
@@ -172,7 +177,8 @@ const MultiVendorProvider = ({ children }) => {
             axios.post(`${process.env.React_App_SERVER_URL}/product/create`, {
               vendorAddress:wallet.address,
               ...data,
-              tokenId: parseInt(response.events[1].args[1]._hex, 16)
+              tokenId: parseInt(response.events[1].args[1]._hex, 16),
+              remain:mintReAmount
             }).then(resp => {
               console.log(resp)
             }).catch(err => console.log(err.message))
@@ -581,8 +587,19 @@ const MultiVendorProvider = ({ children }) => {
     }
   }
 
+  const getnfc = async (collection) => 
+  {
+    try {
+      const resp = await axios.get(`${process.env.React_App_SERVER_URL}/category/nfc/${collection}`)  
+      setMintAmount(resp['data']['remaining_amount'])
+      setMintReAmount(resp['data']['amount'])
+    } catch (error) {
+      console.log(error.message)
+    }
+  }
+
   return (
-    <MultiVendorContext.Provider value={{ isVendor, createShop, getSizes, getColor, mintProduct, getCategories, createCollection, createTechnicalMember, productList, productDetails, pDetails, currencyToggle, setCurrencyToggle, createOrder, orderCart, cart, vendorOrder, vendorOrderList, updateOrderStatus, paymentWithStripe, proSize, setProSize, engraveName, setEngraveName, addShippingDetails, isUserDetails, getShippingByUser, userDetail, catAttr, catAttrList, vendorMintedProduct, vendorProdList, getVendorEditAttribute, vendorProdListArr, checkOwner, MultiVendorInstance, isRedeemable, setIsRedeemable, redeemNow, updateAttributes}}>
+    <MultiVendorContext.Provider value={{ isVendor, createShop, getSizes, getColor, mintProduct, getCategories, createCollection, createTechnicalMember, productList, productDetails, pDetails, currencyToggle, setCurrencyToggle, createOrder, orderCart, cart, vendorOrder, vendorOrderList, updateOrderStatus, paymentWithStripe, proSize, setProSize, engraveName, setEngraveName, addShippingDetails, isUserDetails, getShippingByUser, userDetail, catAttr, catAttrList, vendorMintedProduct, vendorProdList, getVendorEditAttribute, vendorProdListArr, checkOwner, MultiVendorInstance, isRedeemable, setIsRedeemable, redeemNow, updateAttributes, getnfc, mintAmount}}>
       {children}
     </MultiVendorContext.Provider>
   );

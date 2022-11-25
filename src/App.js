@@ -28,6 +28,7 @@ import BuyerOrders from './pages/BuyerOrders';
 import Terms from './pages/Terms';
 import Privacy from './pages/Privacy';
 import EditProduct from './pages/VendorPortal/EditProduct';
+import CommingSoon from './components/CommingSoon';
 
 function App() {
 
@@ -62,6 +63,7 @@ function App() {
         <Route path='/terms&conditions' element={<Terms/>}/>
         <Route path='/privacy&safety' element={<Privacy/>}/>
         <Route path='/product-details/:id' element={<ProductDetails/>}/>
+        <Route path='/category/:cat' element={<CommingSoon/>}/>
         <Route path='/account-settings' element={<AccountSettings/>}/>
         <Route path='/orders' element={<BuyerOrders/>}/>
         <Route path='/view-orders' element={<ViewOrder/>}/>

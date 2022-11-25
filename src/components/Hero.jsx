@@ -33,7 +33,7 @@ const Hero = () => {
                         <div className='inline-flex justify-end items-end my-3 w-full'>
                             <Link to="/view-collections" className='bg-[#DBFF00] text-black rounded-full px-5 py-2 text-sm font-bold'>View Collections</Link>
                         </div>
-                    </div>
+                </div>
                 </div>
                 <div className={`${grow === 2 && 'col-span-3'} relative`}>
                     <img src={grow === 2 ? Banner3 : Hero2} className="cursor-pointer w-full h-screen" alt="" onMouseEnter={() => setGrow(2)} onMouseLeave={() => setGrow(0)} />

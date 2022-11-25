@@ -16,6 +16,8 @@ const Admin = () => {
     const {wallet, setWallet} = useContext(WalletContext)
     //---USESTATE
     const [collection, setCollection] = useState("");
+    const [serial, setSerial] = useState("");
+    const [amount, setAmount] = useState(0);
     const [engrave, setEngrave] = useState(false);
     const [team, setTeam] = useState("");
     const [val, setVal] = useState([])
@@ -73,7 +75,7 @@ const Admin = () => {
     {
         if(collection != "")
         {
-            createCollection(collection,engrave, val)
+            createCollection(collection,engrave, val, serial, amount)
         }
     }
 
@@ -116,6 +118,15 @@ const Admin = () => {
             <div className='flex justify-start items-center'>
                 <input type="checkbox" name="" id="" onChange={()=>setEngrave(!engrave)}/>
                 <p className='text-sm text-slate-700 ml-2'>Engravable?</p>
+            </div>
+            <div className='my-2'>
+                <h1 className='text-sm font-semibold text-black'>Add NFC INFO</h1>
+                <div className='bg-white shadow-inner shadow-slate-200 rounded-lg my-1'>
+                    <input type="text" value={serial} onChange={(e) => setSerial(e.target.value)} className='w-full p-2 text-xs bg-transparent outline-none' placeholder='Serial No.' name="" id="" />
+                </div>
+                <div className='bg-white shadow-inner shadow-slate-200 rounded-lg my-1'>
+                    <input type="number" value={amount} onChange={(e)=>setAmount(e.target.value)} className='w-full p-2 text-xs bg-transparent outline-none' placeholder='Amount' name="" id="" />
+                </div>
             </div>
             <div className='my-2'>
                 <div className='flex justify-between items-center'>

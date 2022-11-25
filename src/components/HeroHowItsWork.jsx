@@ -16,7 +16,7 @@ const HeroHowItsWork = ({executeScroll}) => {
             </div>
           </div>
           <div>
-            <video src={howVideo}  width="500" autoPlay loop></video>
+            <video src={howVideo} width="500" autoPlay loop ></video>
           </div>
         </div>
         <div className='h-32 inline-flex justify-center items-end'>
