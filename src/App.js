@@ -29,6 +29,7 @@ import Terms from './pages/Terms';
 import Privacy from './pages/Privacy';
 import EditProduct from './pages/VendorPortal/EditProduct';
 import CommingSoon from './components/CommingSoon';
+import ScrollTop from './components/ScrollTop';
 
 function App() {
 
@@ -53,6 +54,7 @@ function App() {
           >
 
       </Toaster>
+      <ScrollTop/>
       <BrowserRouter>
         <Navbar setShowModal={setShowModal} setIsSignUp={setIsSignUp}/>
         {/* <SideBar/> */}

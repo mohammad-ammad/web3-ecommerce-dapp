@@ -10,7 +10,6 @@ import abt4 from '../assets/abt4.png';
 import abt5 from '../assets/abt5.png';
 import abt6 from '../assets/abt6.png';
 
-
 let list = [
   {
       title:"Phygitalization",
@@ -44,7 +43,7 @@ let list = [
   },
   {
     title:"NFT Activation",
-    desc:"After receiving your physical item, the customer can use their smartphone to scan the NFC chip on the physical product to link to the product detail page. From there, the customer will be able to login to verify the associated NFT and manage the order. To find where is the NFC reader on your phone, please refer to the guide.",
+    desc:"After receiving the order, customer can scan the microchip embedded in the physical product using a smartphone. The smartphone must touch the microchip until a notification appears on the screen. The link will open the product page where the customer can log in to verify the companion NFT and manage the order. Reference the guide to locate the NFC antenna on your smartphone.",
     image:abt6,
     position:"right"
   }

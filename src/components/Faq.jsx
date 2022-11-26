@@ -2,17 +2,39 @@ import React from 'react'
 import faq from '../assets/faq.png';
 import Queries from './Queries';
 import {MdOutlineKeyboardArrowDown} from 'react-icons/md';
+import {AiOutlineMinus} from 'react-icons/ai'
+import {GrAdd} from 'react-icons/gr'
 import { useState } from 'react';
 import { Transition } from '@windmill/react-ui';
 const Faq = () => {
+  const [open, setOpen] = useState(false);
   return (
     <div className='bg-[#222222] grid grid-cols-1 md:grid-cols-3 gap-3 p-5 md:p-14'>
+      {
+        open === false ? 
+        <div className='flex justify-between items-center col-span-3'>
+          <div className='inline-flex justify-center items-start'>
+                <img src={faq} className="w-28" alt=""  />
+          </div>
+          <div>
+              <div className='flex justify-between items-center'>
+                <h1 className='text-2xl text-center md:text-left md:text-4xl text-slate-200 font-bold'>FAQ</h1>
+              </div>
+          </div>
+          <div>
+          <p className='text-white font-bold text-2xl cursor-pointer' onClick={()=>setOpen(true)}>+</p>
+          </div>
+        </div>
+        : 
+
+        <>
         <div className='inline-flex justify-center items-start'>
             <img src={faq} className="w-60" alt=""  />
         </div>
         <div className='col-span-2'>
           <div className='flex justify-between items-center'>
             <h1 className='text-2xl text-center md:text-left md:text-4xl text-slate-200 font-bold'>FAQ</h1>
+            <AiOutlineMinus className='text-white font-bold cursor-pointer' onClick={()=>setOpen(false)} />
           </div>
           <div>
             <Queries question="What is TheSpotRoom?" 
@@ -46,9 +68,14 @@ const Faq = () => {
             answer="Once an order is placed, you will be provided with a tracking number for the physical product shipment. To complete the purchase, simply scan the security chip on the physical product with your smartphone to activate the NFT. Once the NFT is activated, it will be automatically transferred to your wallet or account. The order is not eligible for return after this point. The digital wearable component will be delivered via email. "/>
             <Queries question="How do I sell my item?" 
             answer="The marketplace for trading will be launched in Q1 2023. Join the waitlist to be the first one to know. "/>
+            <Queries question="How to scan the microchip?" 
+            answer="Depending on the model of your smartphone, locate the NFC antenna on the smartphone and point it at the microchip. The smartphone should touch the microchip until a notification pops up. For iPhone, the antenna is located on the top edge at the back of the phone. It is recommended to remove any phone case as it may interfere with the signal"/>
             </div>
 
         </div>
+        </>
+
+      }
     </div>
   )
 }

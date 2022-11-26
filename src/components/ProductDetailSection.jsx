@@ -18,6 +18,7 @@ const ProductDetailSection = ({setShowModal}) => {
 
     //---USECONTEXT
     const {productDetails, pDetails, setProSize, proSize} = useContext(MultiVendorContext)
+    const [activeIndex, setActiveIndex] = useState(0);
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -60,14 +61,14 @@ const ProductDetailSection = ({setShowModal}) => {
             <p className='text-sm text-slate-700'>30</p> */}
         </div>
         <div className='shadow-inner shadow-slate-300 w-80 h-96 rounded-md relative left-1/2 transform -translate-x-1/2'>
-            <Slide autoplay={false} indicators={indicators}>
+            <Slide autoplay={false} indicators={indicators} canSwipe={true} onChange={(e, index )=>setActiveIndex(index)}>
                 <img src={`https://ipfs.moralis.io:2053/ipfs/${pDetails[0]?.primary_image}`} className="w-full h-96 p-1" alt="" />
                 <img src={`https://ipfs.moralis.io:2053/ipfs/${pDetails[0]?.secondary_image}`} className="w-full h-96 p-1" alt="" />
                 <img src={`https://ipfs.moralis.io:2053/ipfs/${pDetails[0]?.tertiary_image}`} className="w-full h-96 p-1" alt="" />
             </Slide>
             <div className='absolute top-0'>
             <img src={vector} className="relative" alt="" />
-            <p className='absolute top-6 -rotate-45 text-white text-sm'>physical </p>
+            <p className={`absolute ${activeIndex === 0 ? 'top-6 text-sm' : 'top-6 left-[20px] text-sm'} -rotate-45 text-white`}>{activeIndex === 0 ? 'Physical' : activeIndex === 1 ? 'NFT' : activeIndex === 2 ? "AR" : null}</p>
             </div>
         </div>
         <div>

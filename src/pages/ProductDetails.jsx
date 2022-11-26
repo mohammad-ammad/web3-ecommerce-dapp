@@ -8,6 +8,7 @@ import { useState } from 'react'
 import ConfirmOrderModel from '../components/ConfirmOrderModel'
 import AccountInfoModel from '../components/AccountInfoModel'
 import Slider from '../components/Slider'
+import MoreDetails from '../components/MoreDetails'
 const ProductDetails = () => {
   const [showModal, setShowModal] = useState(false);
   const [confirmModal, setConfirmModal] = useState(false);
@@ -16,6 +17,7 @@ const ProductDetails = () => {
     <div>
         <ProductDetailSection setShowModal={setShowModal}/>
         <Slider/>
+        <MoreDetails/>
         <WhatsInclude/>
         <Faq/>
         <ContactUs/>

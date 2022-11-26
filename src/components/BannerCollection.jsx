@@ -6,7 +6,7 @@ const BannerCollection = () => {
   return (
     <div>
         <img src={Banner2} className="relative w-full h-80 lg:h-auto"  alt="" />
-        <div className='absolute top-10 lg:top-1/4 flex justify-center items-center w-full flex-col'>
+        <div className='absolute top-5 md:top-10 lg:top-24 xl:top-28 flex justify-center items-center w-full flex-col'>
            <div>
             <img src={freemanLogo} className="w-80" alt="" />
            </div>

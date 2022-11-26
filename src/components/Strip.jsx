@@ -1,9 +1,9 @@
 import React from 'react'
 import Logo from '../assets/logo.png';
 import Marquee from "react-fast-marquee";
-const Strip = () => {
+const Strip = ({direction}) => {
   return (
-    <Marquee className='bg-[#DBFF00] w-full' speed={35}>
+    <Marquee className='bg-[#DBFF00] w-full' speed={35} direction={direction}>
         <div className='flex justify-center items-center bg-[#DBFF00] py-2'>
         <div className='flex justify-start items-center'>
             <img src={Logo} className="w-7 mr-2" alt="" />

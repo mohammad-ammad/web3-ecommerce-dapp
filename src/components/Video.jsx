@@ -5,11 +5,11 @@ import Strip from './Strip'
 const Video = () => {
   return (
     <>
-    <Strip/>
+    <Strip direction="left"/>
     <div>
         <img src={banner2} className="w-full" alt=""  />
     </div>
-    <Strip/>
+    <Strip direction="right"/>
     </>
   )
 }
