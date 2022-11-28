@@ -273,7 +273,7 @@ const AuthProvider = ({ children }) => {
                     provider:"custom",
                     type:"InApp",
                     username:resp['data']['wallet'],
-                    password:resp['data']['password'],
+                    password:password,
                     isConnected:true
                 });
                 toast.success("User Connected Succesfully")

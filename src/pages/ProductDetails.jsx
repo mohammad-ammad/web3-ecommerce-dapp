@@ -9,13 +9,18 @@ import ConfirmOrderModel from '../components/ConfirmOrderModel'
 import AccountInfoModel from '../components/AccountInfoModel'
 import Slider from '../components/Slider'
 import MoreDetails from '../components/MoreDetails'
-const ProductDetails = () => {
+import { useContext } from 'react'
+import { WalletContext } from '../context/WalletContext'
+const ProductDetails = ({showModal : authmodel,setShowModal : setAuthModel}) => {
+
   const [showModal, setShowModal] = useState(false);
   const [confirmModal, setConfirmModal] = useState(false);
   const [accountInfo, setAccountInfo] = useState(false);
+  const {wallet} = useContext(WalletContext)
+
   return (
     <div>
-        <ProductDetailSection setShowModal={setShowModal}/>
+        <ProductDetailSection setShowModal={setShowModal} isshowModal={authmodel} setIsShowModal={setAuthModel}/>
         <Slider/>
         <MoreDetails/>
         <WhatsInclude/>

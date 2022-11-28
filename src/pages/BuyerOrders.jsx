@@ -3,11 +3,13 @@ import { useEffect } from 'react'
 import { useContext } from 'react'
 import { EscrowContext } from '../context/EscrowContext'
 import { MultiVendorContext } from '../context/MultiVendorContext'
+import { WalletContext } from '../context/WalletContext'
 
 const BuyerOrders = () => {
     //---USECONTEXT
     const { orderCart, cart, redeemNow } = useContext(MultiVendorContext)
     const {cancelOrder} = useContext(EscrowContext)
+    const {wallet} = useContext(WalletContext)
     
     //---useEffect
     useEffect(() => {
@@ -17,7 +19,14 @@ const BuyerOrders = () => {
     //----CANCEL HANDLER
     const cancelHandler = (id,trxId) => 
     {
-        cancelOrder(trxId,id)
+        if(wallet.username != "" && wallet.password != "")
+        {
+            cancelOrder(trxId,id,wallet.password)
+        }
+        else 
+        {
+            cancelOrder(trxId,id,"abc")
+        }
     }
 
     const redeem = (id,trx) => 

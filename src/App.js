@@ -43,7 +43,7 @@ function App() {
   return (
     <>
       <Toaster 
-            position='bottom-right'
+            position='top-right'
             toastOptions={{
               success:{
                 theme: {
@@ -64,7 +64,7 @@ function App() {
         <Route path='/view-collections' element={<Collections/>}/>
         <Route path='/terms&conditions' element={<Terms/>}/>
         <Route path='/privacy&safety' element={<Privacy/>}/>
-        <Route path='/product-details/:id' element={<ProductDetails/>}/>
+        <Route path='/product-details/:id' element={<ProductDetails showModal={showModal} setShowModal={setShowModal} />}/>
         <Route path='/category/:cat' element={<CommingSoon/>}/>
         <Route path='/account-settings' element={<AccountSettings/>}/>
         <Route path='/orders' element={<BuyerOrders/>}/>

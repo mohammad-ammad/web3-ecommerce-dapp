@@ -319,12 +319,12 @@ const EscrowProvider = ({ children }) => {
     //---new escrow functions
 
     //---CANCEL ORDER FUNCTION
-    const cancelOrder = async (trx,id) => 
+    const cancelOrder = async (trx,id, pass) => 
     {
         try {
             if(EscrowInstance != "")
             {
-                const resp = await EscrowInstance.cancelOrder(trx);
+                const resp = await EscrowInstance.cancelOrder(trx,pass);
                 toast.promise(
                     resp.wait().then(res => {
                         console.log(res)
@@ -343,7 +343,7 @@ const EscrowProvider = ({ children }) => {
                 )
             }
         } catch (error) {
-            console.log(error.error.message)
+            console.log(error.message)
             toast.error(error.error.message)
         }
     }

@@ -11,14 +11,16 @@ import { useEffect } from 'react';
 import { useContext } from 'react';
 import { MultiVendorContext } from '../context/MultiVendorContext';
 import { useState } from 'react';
+import { WalletContext } from '../context/WalletContext';
 
-const ProductDetailSection = ({setShowModal}) => {
+const ProductDetailSection = ({setShowModal,isshowModal,setIsShowModal}) => {
     //---USEPARAMS
     const {id} = useParams();
 
     //---USECONTEXT
     const {productDetails, pDetails, setProSize, proSize} = useContext(MultiVendorContext)
     const [activeIndex, setActiveIndex] = useState(0);
+    const {wallet} = useContext(WalletContext);
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -33,6 +35,18 @@ const ProductDetailSection = ({setShowModal}) => {
     const getSize = (size) => 
     {
         setProSize(size)
+    }
+
+    const buyHandler = () => 
+    {
+        if(wallet.isConnected && wallet.address != "")
+        {
+            setShowModal(true)
+        }
+        else 
+        {
+            setIsShowModal(true)
+        }
     }
     
     const indicators = () => {
@@ -94,7 +108,11 @@ const ProductDetailSection = ({setShowModal}) => {
                     <p className='text-2xl mr-2 text-purple-600 font-bold ml-2'>{pDetails[0]?.crypto_price}</p>
                 </div>
             </div>
-            <button className='bg-black text-white rounded-full px-5 py-1 text-sm font-normal' onClick={() => setShowModal(true)}>Buy Now</button>
+            {pDetails[0]?.remaining === 0 ? 
+            <button className='bg-black text-white rounded-full px-5 py-1 text-sm font-normal'>Out of Stock</button>
+            :
+            <button className='bg-black text-white rounded-full px-5 py-1 text-sm font-normal' onClick={() => buyHandler()}>Buy Now</button>
+            }
         </div>
     </div>
 </>

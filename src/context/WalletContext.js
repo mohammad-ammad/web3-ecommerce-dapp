@@ -55,6 +55,8 @@ const WalletProvider = ({ children }) => {
           isConnected:wallet.isConnected
         }
         localStorage.setItem("wallet",JSON.stringify(obj))
+        console.log("walllllet")
+        console.log(wallet)
       }
     }, [wallet])
 

@@ -6,7 +6,7 @@ import { MultiVendorContext } from '../context/MultiVendorContext';
 
 const ConfirmOrderContent = () => {
     //---USECONTEXT
-    const {pDetails, currencyToggle, proSize, engraveName} = useContext(MultiVendorContext)
+    const {pDetails, currencyToggle, proSize, engraveName, zipCode, setZipCode} = useContext(MultiVendorContext)
   return (
     <>
     <div className='grid grid-cols-1 lg:grid-cols-6 gap-0 overflow-y-auto items-center'>
@@ -30,6 +30,11 @@ const ConfirmOrderContent = () => {
                 :
                 <p className='text-3xl text-black font-bold my-5'>$ {pDetails[0]?.native_price}</p>
             }
+            <div>
+                <div className='bg-white shadow-inner shadow-slate-200 rounded-lg my-1'>
+                    <input type="text" value={zipCode} onChange={(e)=>setZipCode(e.target.value)} className='w-full p-3 text-xs bg-transparent outline-none' placeholder='Zip Code' name="" id="" />
+                </div>
+            </div>
         </div>
     </div>
     <div>

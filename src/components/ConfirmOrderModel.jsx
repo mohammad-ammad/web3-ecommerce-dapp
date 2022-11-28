@@ -7,11 +7,12 @@ import { useContext } from 'react';
 import { WalletContext } from '../context/WalletContext';
 import { MultiVendorContext } from '../context/MultiVendorContext';
 import StripeCheckout from 'react-stripe-checkout';
+import toast from 'react-hot-toast';
 
 const ConfirmOrderModel = ({ confirmModal, setConfirmModal, setShowModal, setAccountInfo }) => {
   //---USECONTEXT 
   const { wallet } = useContext(WalletContext)
-  const { pDetails, currencyToggle, createOrder, paymentWithStripe, engraveName } = useContext(MultiVendorContext)
+  const { pDetails, currencyToggle, createOrder, paymentWithStripe, engraveName, zipCode } = useContext(MultiVendorContext)
   const obj = {
     address: pDetails[0]?.collection_address,
     id: pDetails[0]?.tokenId,
@@ -39,18 +40,27 @@ const ConfirmOrderModel = ({ confirmModal, setConfirmModal, setShowModal, setAcc
   //---STRIPE HANDLER
   const stripeHandler = token => 
   {
-    let product = {
-      name: pDetails[0]?.title,
-      price: pDetails[0]?.native_price
+    let tax = 0;
+    if(zipCode != "")
+    {
+      let product = {
+        name: pDetails[0]?.title,
+        price: Number(pDetails[0]?.native_price) + Number(5)
+      }
+  
+      if (wallet.isConnected && wallet.address != "") {
+        paymentWithStripe(product,token, obj, pDetails[0]?.crypto_price)
+      }
+      else {
+        setAccountInfo(true)
+      }
+      setConfirmModal(false)
     }
-
-    if (wallet.isConnected && wallet.address != "") {
-      paymentWithStripe(product,token, obj)
+    else 
+    {
+      toast.error("Please Fill zip code")
     }
-    else {
-      setAccountInfo(true)
-    }
-    setConfirmModal(false)
+   
   }
   return (
     <>

@@ -27,6 +27,7 @@ const MultiVendorProvider = ({ children }) => {
   const [isRedeemable, setIsRedeemable] = useState(false);
   const [mintAmount, setMintAmount] = useState(0);
   const [mintReAmount, setMintReAmount] = useState(0);
+  const [zipCode, setZipCode] = useState("")
  
 
   //---GETTING THE INSTANCE CONTEXT
@@ -354,7 +355,8 @@ const MultiVendorProvider = ({ children }) => {
   //---withdraw option only admin
 
   //---PAYMENT WITH STRIPE
-  const paymentWithStripe = async (product, token, data) => {
+  const paymentWithStripe = async (product, token, data, price) => {
+    console.log(price)
     if(wallet.isConnected == true && wallet.address != "")
     {
       if(wallet.type == "InApp")
@@ -367,7 +369,7 @@ const MultiVendorProvider = ({ children }) => {
             {
               if(MultiVendorInstance != "")
               {
-                const resp = await MultiVendorInstance.createRedeemInApp(data.address,data.id,data.amount,wallet.address,wallet.password, { value: ethers.utils.parseUnits(data.price.toString(), "ether") });
+                const resp = await MultiVendorInstance.createRedeemInApp(data.address,data.id,data.amount,wallet.address,wallet.password, { value: ethers.utils.parseUnits(price.toString(), "ether") });
                 toast.promise(
                   resp.wait().then(async (res) => {
                     console.log(res)
@@ -399,7 +401,7 @@ const MultiVendorProvider = ({ children }) => {
             else 
             {
               if (MultiVendorInstance != "") {
-                const resp = await MultiVendorInstance.createOrderInAppWallet(data.address, data.id, data.amount, 0, wallet.address,wallet.password, { value: ethers.utils.parseUnits(data.price.toString(), "ether") });
+                const resp = await MultiVendorInstance.createOrderInAppWallet(data.address, data.id, data.amount, 0, wallet.address,wallet.password, { value: ethers.utils.parseUnits(price.toString(), "ether") });
                 toast.promise(
                   resp.wait().then(async (res) => {
                     console.log(res)
@@ -414,7 +416,7 @@ const MultiVendorProvider = ({ children }) => {
                       status: "Pending",
                       type: data.type,
                       price: data.price,
-                      isRedeemable:true
+                      isRedeemable:false
                     }).then(_res => {
                       console.log(_res)
                     }).catch(err => console.log(err))
@@ -547,7 +549,14 @@ const MultiVendorProvider = ({ children }) => {
     try {
       if(MultiVendorInstance != "")
       {
-        const resp = await MultiVendorInstance.redeem(trx,"0x0000000000000000000000000000000000000000","abc");
+        let _user = "0x0000000000000000000000000000000000000000";
+        let pass = "abc";
+        if(wallet.username != "" && wallet.password !="")
+        {
+          _user = wallet.username;
+          pass = wallet.password
+        }
+        const resp = await MultiVendorInstance.redeem(trx,_user,pass);
         toast.promise(
           resp.wait().then(res => {
             axios.put(`${process.env.React_App_SERVER_URL}/order/update/${id}`,{
@@ -599,7 +608,7 @@ const MultiVendorProvider = ({ children }) => {
   }
 
   return (
-    <MultiVendorContext.Provider value={{ isVendor, createShop, getSizes, getColor, mintProduct, getCategories, createCollection, createTechnicalMember, productList, productDetails, pDetails, currencyToggle, setCurrencyToggle, createOrder, orderCart, cart, vendorOrder, vendorOrderList, updateOrderStatus, paymentWithStripe, proSize, setProSize, engraveName, setEngraveName, addShippingDetails, isUserDetails, getShippingByUser, userDetail, catAttr, catAttrList, vendorMintedProduct, vendorProdList, getVendorEditAttribute, vendorProdListArr, checkOwner, MultiVendorInstance, isRedeemable, setIsRedeemable, redeemNow, updateAttributes, getnfc, mintAmount}}>
+    <MultiVendorContext.Provider value={{ isVendor, createShop, getSizes, getColor, mintProduct, getCategories, createCollection, createTechnicalMember, productList, productDetails, pDetails, currencyToggle, setCurrencyToggle, createOrder, orderCart, cart, vendorOrder, vendorOrderList, updateOrderStatus, paymentWithStripe, proSize, setProSize, engraveName, setEngraveName, addShippingDetails, isUserDetails, getShippingByUser, userDetail, catAttr, catAttrList, vendorMintedProduct, vendorProdList, getVendorEditAttribute, vendorProdListArr, checkOwner, MultiVendorInstance, isRedeemable, setIsRedeemable, redeemNow, updateAttributes, getnfc, mintAmount, zipCode, setZipCode}}>
       {children}
     </MultiVendorContext.Provider>
   );

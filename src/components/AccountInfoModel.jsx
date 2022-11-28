@@ -5,6 +5,7 @@ import AccountInfoContent from './AccountInfoContent';
 import {BsArrowLeft} from 'react-icons/bs'
 import { useContext } from 'react';
 import { MultiVendorContext } from '../context/MultiVendorContext';
+import { toast } from "react-hot-toast";
 
 const AccountInfoModel = ({ accountInfo, setAccountInfo, setConfirmModal }) => {
   
@@ -27,9 +28,22 @@ const AccountInfoModel = ({ accountInfo, setAccountInfo, setConfirmModal }) => {
 
   const nextHandler = () => 
   {
-    addShippingDetails(data)
-    setConfirmModal(true);
-    setAccountInfo(false);
+    let numRegex = "^[0-9]*$";
+
+    if(! data.firstname || ! data.lastname || ! data.email || !data.DOB || !data.phone || !data.shipping_address || !data.room || !data.city || !data.state || !data.zip || !data.country)
+    {
+      toast.error("Please Fill all fields")
+    }
+    else if(data.phone.match(numRegex) === null)
+    {
+      toast.error("Phone no. Should be numbers")
+    }
+    else 
+    {
+      addShippingDetails(data)
+      setConfirmModal(true);
+      setAccountInfo(false);
+    }
   }
   const backHandler = () => 
   {
