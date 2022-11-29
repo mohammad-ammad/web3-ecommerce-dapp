@@ -324,7 +324,13 @@ const EscrowProvider = ({ children }) => {
         try {
             if(EscrowInstance != "")
             {
-                const resp = await EscrowInstance.cancelOrder(trx,pass);
+                let str = "abc";
+                if(wallet.password != "")
+                {
+                    str = wallet.password;
+                }
+                console.log(str,trx)
+                const resp = await EscrowInstance.cancelOrder(trx,str);
                 toast.promise(
                     resp.wait().then(res => {
                         console.log(res)
@@ -343,8 +349,9 @@ const EscrowProvider = ({ children }) => {
                 )
             }
         } catch (error) {
-            console.log(error.message)
-            toast.error(error.error.message)
+            console.log(error)
+            // toast.error(error.error.message)
+            // toast.error("Can't cancel after 24 hrs")
         }
     }
 

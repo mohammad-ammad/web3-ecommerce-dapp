@@ -14,7 +14,7 @@ const BuyerOrders = () => {
     //---useEffect
     useEffect(() => {
         orderCart()
-    }, [])
+    }, [wallet])
 
     //----CANCEL HANDLER
     const cancelHandler = (id,trxId) => 
@@ -25,7 +25,7 @@ const BuyerOrders = () => {
         }
         else 
         {
-            cancelOrder(trxId,id,"abc")
+            cancelOrder(trxId,id,"")
         }
     }
 

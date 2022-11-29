@@ -10,9 +10,15 @@ body
 
 .default-nav
 {
-    display: none !important;
+    /* display: none !important; */
+    margin: 0 30px !important;
+    background-color: #F4F4F4 !important;
 }
 
+.default-nav > svg 
+{
+    width: 15px !important;
+}
 .indicators 
 {
     position: absolute;

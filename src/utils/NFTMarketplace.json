@@ -13,6 +13,11 @@
 			},
 			{
 				"internalType": "address",
+				"name": "_inApp",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
 				"name": "_owner",
 				"type": "address"
 			}
@@ -226,6 +231,19 @@
 	{
 		"inputs": [],
 		"name": "escrow",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "inApp",
 		"outputs": [
 			{
 				"internalType": "address",
@@ -600,3 +618,5 @@
 		"type": "function"
 	}
 ]
+
+

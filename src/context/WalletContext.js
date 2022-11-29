@@ -78,6 +78,8 @@ const WalletProvider = ({ children }) => {
               signer:signer,
               network:"",
               provider:provider,
+              username:"",
+              password:"",
               isConnected:isWallet.isConnected
             })
           }

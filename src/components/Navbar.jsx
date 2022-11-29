@@ -21,7 +21,7 @@ const Navbar = ({ setShowModal, setIsSignUp }) => {
   const { isVendor, createShop, checkOwner } = useContext(MultiVendorContext)
 
   const [isOwner, setIsOwner] = useState(false);
-
+  
   useEffect(() => {
     const check = async () => 
     {
@@ -36,6 +36,10 @@ const Navbar = ({ setShowModal, setIsSignUp }) => {
 
     check()
   }, [wallet])
+
+  useEffect(() => {
+    setMore(false)
+  },[location])
 
   return (
     <>
@@ -56,7 +60,7 @@ const Navbar = ({ setShowModal, setIsSignUp }) => {
             </div>
             :
             <div className='hidden md:block mx-2'>
-              <Link to="/how-it-works" className='text-sm font-bold'>How it works</Link>
+              <Link to="/how-it-works" className='text-sm font-bold'>How It Works</Link>
             </div>
           }
           {
@@ -79,7 +83,7 @@ const Navbar = ({ setShowModal, setIsSignUp }) => {
                         location.pathname === "/seller-dashboard" || location.pathname === "/seller-products" || location.pathname === "/seller-orders" || location.pathname === "/seller-list-product" ? '' :
                           <>
                             <div>
-                              <a href="" className='text-sm font-bold'>Profile</a>
+                              <Link to="/account-settings" className='text-sm font-bold'>Profile</Link>
                             </div>
                             <div>
                             <Link to="/orders" className='text-sm font-bold'>Orders</Link>
@@ -88,7 +92,7 @@ const Navbar = ({ setShowModal, setIsSignUp }) => {
                           : 
                           <>
                             <div>
-                              <a href="" className='text-sm font-bold'>Profile</a>
+                            <Link to="/account-settings" className='text-sm font-bold'>Profile</Link>
                             </div>
                             <div>
                               <Link to="/orders" className='text-sm font-bold'>Orders</Link>
@@ -114,9 +118,6 @@ const Navbar = ({ setShowModal, setIsSignUp }) => {
                         </div>
                         <div>
                           <Link to="/seller-orders" className='text-sm font-bold'>Orders</Link>
-                        </div>
-                        <div>
-                          <a href="" className='text-sm font-bold'>Settings</a>
                         </div>
                       </> 
                         :

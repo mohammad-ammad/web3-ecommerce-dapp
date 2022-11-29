@@ -28,6 +28,7 @@ const MultiVendorProvider = ({ children }) => {
   const [mintAmount, setMintAmount] = useState(0);
   const [mintReAmount, setMintReAmount] = useState(0);
   const [zipCode, setZipCode] = useState("")
+  const [getShippingUserDetails, setGetShippingUserDetails] = useState([]);
  
 
   //---GETTING THE INSTANCE CONTEXT
@@ -263,7 +264,7 @@ const MultiVendorProvider = ({ children }) => {
           toast.promise(
             resp.wait().then(res => {
               console.log(res)
-              let trx = ethers.BigNumber.from(res['events'][2]['topics'][2]);
+              let trx = ethers.BigNumber.from(res['events'][3]['args']['tx_id']);
               console.log(trx)
               axios.post(`${process.env.React_App_SERVER_URL}/order/create`, {
                 product_id: data._id,
@@ -373,7 +374,9 @@ const MultiVendorProvider = ({ children }) => {
                 toast.promise(
                   resp.wait().then(async (res) => {
                     console.log(res)
-                    let trx = ethers.BigNumber.from(res['events'][1]['args']['tx_id']);
+                    const _resp = await MultiVendorInstance.returnUserRedeems(wallet.address);
+                    console.log(_resp[_resp.length-1].rid)
+                    let trx = ethers.BigNumber.from(_resp[_resp.length-1].rid);
                     console.log(trx)
                     axios.post(`${process.env.React_App_SERVER_URL}/order/create`, {
                       product_id: data._id,
@@ -405,7 +408,7 @@ const MultiVendorProvider = ({ children }) => {
                 toast.promise(
                   resp.wait().then(async (res) => {
                     console.log(res)
-                    let trx = ethers.BigNumber.from(res['events'][2]['topics'][2]);
+                    let trx = ethers.BigNumber.from(res['events'][3]['args']['tx_id']);
                     console.log(trx)
                     axios.post(`${process.env.React_App_SERVER_URL}/order/create`, {
                       product_id: data._id,
@@ -458,6 +461,7 @@ const MultiVendorProvider = ({ children }) => {
         else 
         {
           setIsUserDetails(true)
+          setGetShippingUserDetails(resp['data'])
         }
       }
     } catch (error) {
@@ -547,20 +551,23 @@ const MultiVendorProvider = ({ children }) => {
   const redeemNow = async (id,trx) => 
   {
     try {
+      console.log(trx)
       if(MultiVendorInstance != "")
       {
-        let _user = "0x0000000000000000000000000000000000000000";
-        let pass = "abc";
+        let resp;
         if(wallet.username != "" && wallet.password !="")
         {
-          _user = wallet.username;
-          pass = wallet.password
+          resp = await MultiVendorInstance.redeem(trx,wallet.username,wallet.password);
         }
-        const resp = await MultiVendorInstance.redeem(trx,_user,pass);
+        else 
+        {
+          resp = await MultiVendorInstance.redeem(trx,"0x0000000000000000000000000000000000000000","abc");
+        }
+        console.log(wallet)
         toast.promise(
           resp.wait().then(res => {
             axios.put(`${process.env.React_App_SERVER_URL}/order/update/${id}`,{
-              status:'Pending'
+              status:'Redeemed'
             }).then(res => {
               console.log("Redeem Successful")
             }).catch(err => console.log(err))
@@ -607,8 +614,23 @@ const MultiVendorProvider = ({ children }) => {
     }
   }
 
+  const updateShipping = async (data) => 
+  {
+    try {
+      const resp = await axios.put(`${process.env.React_App_SERVER_URL}/user/update-shipping/${wallet.address}`,{
+        ...data
+      })
+      if(resp['data']['message'] === "Update successfully")
+      {
+        toast.success("Data Updated Successfully")
+      }
+    } catch (error) {
+      console.log(error.message)
+    }
+  }
+
   return (
-    <MultiVendorContext.Provider value={{ isVendor, createShop, getSizes, getColor, mintProduct, getCategories, createCollection, createTechnicalMember, productList, productDetails, pDetails, currencyToggle, setCurrencyToggle, createOrder, orderCart, cart, vendorOrder, vendorOrderList, updateOrderStatus, paymentWithStripe, proSize, setProSize, engraveName, setEngraveName, addShippingDetails, isUserDetails, getShippingByUser, userDetail, catAttr, catAttrList, vendorMintedProduct, vendorProdList, getVendorEditAttribute, vendorProdListArr, checkOwner, MultiVendorInstance, isRedeemable, setIsRedeemable, redeemNow, updateAttributes, getnfc, mintAmount, zipCode, setZipCode}}>
+    <MultiVendorContext.Provider value={{ isVendor, createShop, getSizes, getColor, mintProduct, getCategories, createCollection, createTechnicalMember, productList, productDetails, pDetails, currencyToggle, setCurrencyToggle, createOrder, orderCart, cart, vendorOrder, vendorOrderList, updateOrderStatus, paymentWithStripe, proSize, setProSize, engraveName, setEngraveName, addShippingDetails, isUserDetails, getShippingByUser, userDetail, catAttr, catAttrList, vendorMintedProduct, vendorProdList, getVendorEditAttribute, vendorProdListArr, checkOwner, MultiVendorInstance, isRedeemable, setIsRedeemable, redeemNow, updateAttributes, getnfc, mintAmount, zipCode, setZipCode, getShippingUserDetails, getShippingDetailsOfUser, updateShipping}}>
       {children}
     </MultiVendorContext.Provider>
   );

@@ -1,6 +1,9 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 const Privacy = () => {
+    useEffect(() => {
+        window.scrollTo(0, 0);
+      }, [])
     return (
         <div className='bg-slate-100 w-full h-full flex justify-start items-start flex-col pt-20 px-2 md:pt-28 md:px-20'>
             <h1 className='text-2xl font-bold text-slate-800'>PRIVACY & SAFETY</h1>

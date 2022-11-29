@@ -9,7 +9,7 @@ import { Transition } from '@windmill/react-ui';
 const Faq = () => {
   const [open, setOpen] = useState(false);
   return (
-    <div className='bg-[#222222] grid grid-cols-1 md:grid-cols-3 gap-3 p-5 md:p-14'>
+    <div className={`bg-[#222222] grid grid-cols-1 md:grid-cols-3 gap-3 ${open === false ? 'px-14 py-3' : 'p-5 md:p-14'}`}>
       {
         open === false ? 
         <div className='flex justify-between items-center col-span-3'>
