@@ -5,9 +5,9 @@ const AccountInfoContent = ({data, setData}) => {
   return (
     <>
     <div>
-        <div className='flex justify-between items-center my-3'>
+        <div className='flex justify-start items-center my-3'>
             <h1 className='text-md font-bold text-black'>Account Info:</h1>
-            <h2 className='text-xs text-blue-500 cursor-pointer'>I have an account</h2>
+            {/* <h2 className='text-xs text-blue-500 cursor-pointer'>I have an account</h2> */}
         </div>
         <div className='grid grid-cols-1 md:grid-cols-2 gap-1'>
             <div className='bg-white shadow-inner shadow-slate-200 rounded-lg my-1'>
@@ -47,7 +47,7 @@ const AccountInfoContent = ({data, setData}) => {
             <input type="text" value={data.country} onChange={(e) => setData({...data, country:e.target.value})} className='w-full p-3 text-xs bg-transparent outline-none' placeholder='Country' name="" id="" />
         </div>
        
-        <h2 className='text-xs text-blue-500 cursor-pointer px-2 py-1'>Forgot my password</h2>
+        {/* <h2 className='text-xs text-blue-500 cursor-pointer px-2 py-1'>Forgot my password</h2> */}
     </div>
     </>
   )

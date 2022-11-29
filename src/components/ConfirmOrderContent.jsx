@@ -43,7 +43,7 @@ const ConfirmOrderContent = () => {
         You have selected to store your physical item for later redemption. We will securely store your NFT in your account for you after you placing the order. If you change your mind, you can go back to change the option.
         </p>
     </div>
-    <div className='flex flex-col md:flex-row justify-center md:justify-between items-center bg-white border-solid border-[1px] border-black px-3 py-2 rounded-lg'>
+    {/* <div className='flex flex-col md:flex-row justify-center md:justify-between items-center bg-white border-solid border-[1px] border-black px-3 py-2 rounded-lg'>
         <div className='flex justify-center md:justify-start items-center'>
             <img src={cloud} alt="" />
             <p className='ml-5 md:ml-2 text-md text-black font-semibold'>Store the physical item for redemption at a later date.</p>
@@ -51,7 +51,7 @@ const ConfirmOrderContent = () => {
         <div>
             <button className='text-blue-600'>Change Option</button>
         </div>
-    </div>
+    </div> */}
     </>
   )
 }
