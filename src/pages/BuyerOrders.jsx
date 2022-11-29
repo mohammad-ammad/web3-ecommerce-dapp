@@ -35,7 +35,7 @@ const BuyerOrders = () => {
     }
 
     return (
-        <div className='bg-slate-100 w-full h-screen flex justify-center items-start pt-20 md:pt-28'>
+        <div className='bg-slate-100 w-full min-h-screen max-h-full flex justify-center items-start pt-20 md:pt-28'>
             <div className='w-full md:w-5/6 px-5'>
                 <h1 className='text-black text-md font-bold my-3'>Order Summary</h1>
                 <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
