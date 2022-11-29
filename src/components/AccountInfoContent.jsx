@@ -30,7 +30,7 @@ const AccountInfoContent = ({data, setData}) => {
             <input type="text" value={data.shipping_address} onChange={(e) => setData({...data, shipping_address:e.target.value})} className='w-full p-3 text-xs bg-transparent outline-none' placeholder='Address' name="" id="" />
         </div>
         <div className='bg-white shadow-inner shadow-slate-200 rounded-lg my-1'>
-            <input type="text" value={data.room} onChange={(e) => setData({...data, room:e.target.value})} className='w-full p-3 text-xs bg-transparent outline-none' placeholder='room/ apratment etc. (optional)' name="" id="" />
+            <input type="text" value={data.room} onChange={(e) => setData({...data, room:e.target.value})} className='w-full p-3 text-xs bg-transparent outline-none' placeholder='room/ apratment etc.' name="" id="" />
         </div>
         <div className='bg-white shadow-inner shadow-slate-200 rounded-lg my-1'>
             <input type="text" value={data.city} onChange={(e) => setData({...data, city:e.target.value})} className='w-full p-3 text-xs bg-transparent outline-none' placeholder='City name' name="" id="" />
