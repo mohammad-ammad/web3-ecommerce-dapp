@@ -99,13 +99,13 @@ const OrderView = ({ showModal ,setShowModal, data }) => {
                             {
                                 data?.order[0].status === 'Pending' ? <option value="Pending" selected>Pending</option>
                                 : 
-                                data?.order[0].status === 'Progress' ? <option value="Progress" selected>Progress</option>
+                                data?.order[0].status === 'Progress' ? <option value="Progress" selected>In-Progress</option>
                                 :
-                                data?.order[0].status === 'Complete' ? <option value="Complete" selected>Complete</option>
+                                data?.order[0].status === 'Complete' ? <option value="Complete" selected>Completed</option>
                                 : ''
                             }
-                            <option value={data?.order[0].status === 'Pending' ? 'Progress' : 'Pending'}>{data?.order[0].status === 'Pending' ? 'Progress' : 'Pending'}</option>
-                            <option value="Complete">Complete</option>
+                            <option value={data?.order[0].status === 'Pending' ? 'In-Progress' : 'Pending'}>{data?.order[0].status === 'Pending' ? 'In-Progress' : 'Pending'}</option>
+                            <option value="Complete">Completed</option>
                         </select>
                     </div>
                   </div>

@@ -47,6 +47,10 @@ const AccountSettings = () => {
         })
     },[getShippingUserDetails])
 
+    useEffect(() => {
+        window.scrollTo(0, 0);
+      }, [])
+
     const updateHandler = () => 
     {
         updateShipping(data)

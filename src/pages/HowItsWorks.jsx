@@ -25,7 +25,7 @@ let list = [
   },
   {
       title:"Purchase Confirmation",
-      desc:"Customers have 7 days to inspect and confirm the purchase after the physical product is delivered. To complete the transaction, simply scan the chip embedded in the physical product to activate the NFT. Once activated, NFT will be transferred automatically to the purchaser’s wallet or account and no return will be honored after this point. ",
+      desc:"Customers have 7 days to inspect and confirm the purchase after the physical product is delivered. To complete the transaction, simply scan the microchip embedded in the physical product to activate the NFT. Once activated, NFT will be transferred automatically to the purchaser’s wallet or account and no return will be honored after this point. ",
       image:abt3,
       position:"left"
   },

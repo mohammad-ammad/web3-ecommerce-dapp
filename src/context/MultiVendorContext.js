@@ -630,7 +630,7 @@ const MultiVendorProvider = ({ children }) => {
   }
 
   return (
-    <MultiVendorContext.Provider value={{ isVendor, createShop, getSizes, getColor, mintProduct, getCategories, createCollection, createTechnicalMember, productList, productDetails, pDetails, currencyToggle, setCurrencyToggle, createOrder, orderCart, cart, vendorOrder, vendorOrderList, updateOrderStatus, paymentWithStripe, proSize, setProSize, engraveName, setEngraveName, addShippingDetails, isUserDetails, getShippingByUser, userDetail, catAttr, catAttrList, vendorMintedProduct, vendorProdList, getVendorEditAttribute, vendorProdListArr, checkOwner, MultiVendorInstance, isRedeemable, setIsRedeemable, redeemNow, updateAttributes, getnfc, mintAmount, zipCode, setZipCode, getShippingUserDetails, getShippingDetailsOfUser, updateShipping}}>
+    <MultiVendorContext.Provider value={{ isVendor, createShop, getSizes, getColor, mintProduct, getCategories, createCollection, createTechnicalMember, productList, productDetails, pDetails, currencyToggle, setCurrencyToggle, createOrder, orderCart, cart, vendorOrder, vendorOrderList, updateOrderStatus, paymentWithStripe, proSize, setProSize, engraveName, setEngraveName, addShippingDetails, isUserDetails, getShippingByUser, userDetail, catAttr, catAttrList, vendorMintedProduct, vendorProdList, getVendorEditAttribute, vendorProdListArr, checkOwner, MultiVendorInstance, isRedeemable, setIsRedeemable, redeemNow, updateAttributes, getnfc, mintAmount, zipCode, setZipCode, getShippingUserDetails, getShippingDetailsOfUser, updateShipping, listProduct}}>
       {children}
     </MultiVendorContext.Provider>
   );
