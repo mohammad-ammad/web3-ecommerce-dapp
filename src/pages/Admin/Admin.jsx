@@ -9,6 +9,7 @@ import { useEffect } from 'react';
 import { WalletContext } from '../../context/WalletContext';
 import { ethers } from 'ethers';
 import toast from 'react-hot-toast';
+import {CopyToClipboard} from 'react-copy-to-clipboard';
 
 const Admin = () => {
     //---USECONTEXT 
@@ -126,6 +127,16 @@ const Admin = () => {
                 </div>
                 <div className='bg-white shadow-inner shadow-slate-200 rounded-lg my-1'>
                     <input type="number" value={amount} onChange={(e)=>setAmount(e.target.value)} className='w-full p-2 text-xs bg-transparent outline-none' placeholder='Amount' name="" id="" />
+                </div>
+                <div>
+                    <span className='text-sm font-semibold text-black'>LINK:</span>
+                    {
+                        collection != "" &&
+                        <CopyToClipboard text={`${process.env.REACT_APP_DOMAIN}/category/${collection}`}
+                                onCopy={() => toast.success("copied to clipboard")}>
+                        <span className='text-sm mx-2 text-blue-700'>{process.env.DOMAIN}/category/{collection}</span>
+                        </CopyToClipboard>
+                    }
                 </div>
             </div>
             <div className='my-2'>

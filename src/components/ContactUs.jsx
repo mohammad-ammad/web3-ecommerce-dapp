@@ -18,10 +18,13 @@ const ContactUs = () => {
     //---SUBMIT HANDLER
     const submitHandler = () => 
     {
-        console.log(data)
         if(data.email != "" && data.message != "")
         {
             createNewsLetter(data)
+            setData({
+                email:"",
+                message:""
+            })
         }
     }
   return (

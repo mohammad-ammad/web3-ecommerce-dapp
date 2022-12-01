@@ -153,11 +153,19 @@ const WalletProvider = ({ children }) => {
     const disConnect = () => 
     {
         setWallet({
-            address:"",
-            signer:"",
-            network:"",
-            isConnected:false
+          address:"",
+          signer:"",
+          network:"",
+          provider:"",
+          type:"",
+          username:"",
+          password:"",
+          isConnected:false
         })
+
+        localStorage.removeItem("wallet")
+
+        window.reload();
     }
     return (
         <WalletContext.Provider value={{connect, wallet, disConnect, setWallet, web3Modal}}>

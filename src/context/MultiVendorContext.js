@@ -29,6 +29,7 @@ const MultiVendorProvider = ({ children }) => {
   const [mintReAmount, setMintReAmount] = useState(0);
   const [zipCode, setZipCode] = useState("")
   const [getShippingUserDetails, setGetShippingUserDetails] = useState([]);
+  const [OrderCompleted, setOrderCompleted] = useState([]);
  
 
   //---GETTING THE INSTANCE CONTEXT
@@ -629,8 +630,23 @@ const MultiVendorProvider = ({ children }) => {
     }
   }
 
+  const getCompletedOrder = async () => 
+  {
+    try {
+      if(wallet.isConnected)
+      {
+        const resp = await axios.get(`${process.env.React_App_SERVER_URL}/order/confirm/${wallet.address}`);
+        console.log(resp['data'])
+        setOrderCompleted(resp['data'])
+      }
+    } catch (error) {
+      console.log(error.message)
+    }
+  }
+
+  
   return (
-    <MultiVendorContext.Provider value={{ isVendor, createShop, getSizes, getColor, mintProduct, getCategories, createCollection, createTechnicalMember, productList, productDetails, pDetails, currencyToggle, setCurrencyToggle, createOrder, orderCart, cart, vendorOrder, vendorOrderList, updateOrderStatus, paymentWithStripe, proSize, setProSize, engraveName, setEngraveName, addShippingDetails, isUserDetails, getShippingByUser, userDetail, catAttr, catAttrList, vendorMintedProduct, vendorProdList, getVendorEditAttribute, vendorProdListArr, checkOwner, MultiVendorInstance, isRedeemable, setIsRedeemable, redeemNow, updateAttributes, getnfc, mintAmount, zipCode, setZipCode, getShippingUserDetails, getShippingDetailsOfUser, updateShipping, listProduct}}>
+    <MultiVendorContext.Provider value={{ isVendor, createShop, getSizes, getColor, mintProduct, getCategories, createCollection, createTechnicalMember, productList, productDetails, pDetails, currencyToggle, setCurrencyToggle, createOrder, orderCart, cart, vendorOrder, vendorOrderList, updateOrderStatus, paymentWithStripe, proSize, setProSize, engraveName, setEngraveName, addShippingDetails, isUserDetails, getShippingByUser, userDetail, catAttr, catAttrList, vendorMintedProduct, vendorProdList, getVendorEditAttribute, vendorProdListArr, checkOwner, MultiVendorInstance, isRedeemable, setIsRedeemable, redeemNow, updateAttributes, getnfc, mintAmount, zipCode, setZipCode, getShippingUserDetails, getShippingDetailsOfUser, updateShipping, listProduct, getCompletedOrder, OrderCompleted}}>
       {children}
     </MultiVendorContext.Provider>
   );

@@ -101,8 +101,14 @@ const ListProduct = () => {
   //---submitHandler 
   const submitHandler = () => 
   {
-    console.log(data)
-    mintProduct(data)
+    if(!data.title || !data.description || !data.catId || !data.availabilty || !data.native_price || !data.crypto_price)
+    {
+      toast.error("All Fields are required")
+    }
+    else 
+    {
+      mintProduct(data)
+    }
   }
 
   //---loadCollectionContract 
@@ -162,7 +168,17 @@ const ListProduct = () => {
     console.log("working")
   }
 
-  console.log(data)
+  useEffect(() => {
+    const fiat = async () => 
+    {
+      const resp = await axios.get('https://min-api.cryptocompare.com/data/price?fsym=MATIC&tsyms=MATIC,USD,EUR');
+      let rate = resp.data['USD'];
+      setData({...data,crypto_price:data.native_price/rate})
+    }
+
+    data.native_price != "" && fiat() 
+  },[data.native_price])
+
   return (
     <div className='w-full h-full pt-28 bg-slate-100'>
       <div className='px-5 md:px-28 flex justify-between items-center'>

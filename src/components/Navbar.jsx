@@ -16,7 +16,7 @@ const Navbar = ({ setShowModal, setIsSignUp }) => {
   const [more, setMore] = useState(false);
   const location = useLocation();
   //Getting Instance Context
-  const { wallet } = useContext(WalletContext)
+  const { wallet, disConnect } = useContext(WalletContext)
   const { isShop } = useContext(AuthContext)
   const { isVendor, createShop, checkOwner } = useContext(MultiVendorContext)
 
@@ -129,7 +129,7 @@ const Navbar = ({ setShowModal, setIsSignUp }) => {
                   </Transition>
                 </div>
                 <div className='hidden md:block mx-1'>
-                  <button className='bg-black text-white rounded-full px-5 py-1 text-sm font-normal'>Connected</button>
+                  <button className='bg-black text-white rounded-full px-5 py-1 text-sm font-normal' onClick={()=>disConnect()}>Connected</button>
                 </div>
               </>
               :

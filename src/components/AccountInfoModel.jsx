@@ -30,7 +30,7 @@ const AccountInfoModel = ({ accountInfo, setAccountInfo, setConfirmModal }) => {
   {
     let numRegex = "^[0-9]*$";
 
-    if(! data.firstname || ! data.lastname || ! data.email || !data.DOB || !data.phone || !data.shipping_address || !data.room || !data.city || !data.state || !data.zip || !data.country)
+    if(! data.firstname || ! data.lastname || ! data.email || !data.phone || !data.shipping_address || !data.city || !data.state || !data.zip || !data.country)
     {
       toast.error("Please Fill all fields")
     }

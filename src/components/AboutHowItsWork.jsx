@@ -17,7 +17,7 @@ export default AboutHowItsWork
 const Card = ({num,title,desc,image, pos}) => 
 {
     return (
-        <div className='flex justify-center md:justify-between items-center flex-col md:flex-row my-3 md:my-40'>
+        <div className='flex justify-center md:justify-between items-center flex-col md:flex-row my-3 md:my-24'>
             <div className='block md:hidden'>
                 <img src={image} className="w-96" alt="" />
             </div>

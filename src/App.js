@@ -30,6 +30,7 @@ import Privacy from './pages/Privacy';
 import EditProduct from './pages/VendorPortal/EditProduct';
 import CommingSoon from './components/CommingSoon';
 import ScrollTop from './components/ScrollTop';
+import Forgot from './pages/Forgot';
 
 function App() {
 
@@ -69,6 +70,7 @@ function App() {
         <Route path='/account-settings' element={<AccountSettings/>}/>
         <Route path='/orders' element={<BuyerOrders/>}/>
         <Route path='/view-orders' element={<ViewOrder/>}/>
+        <Route path='/forgot' element={<Forgot/>}/>
 
         {/* vendor routes  */}
         <Route path='/seller-register' element={<Register/>}/>

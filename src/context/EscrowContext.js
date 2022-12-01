@@ -355,10 +355,58 @@ const EscrowProvider = ({ children }) => {
         }
     }
 
+    const returnOrder = async (id,trx,confirmation) => 
+    {
+        try {
+        if(wallet.isConnected)
+        {
+            if(EscrowInstance != "")
+            {
+                if(confirmation === "return")
+                {
+                    const res = await EscrowInstance.dispute(trx,wallet.password != "" ? wallet.password : "abc");
+                    toast.promise(res.wait().then(response => {
+                        axios.put(`${process.env.React_App_SERVER_URL}/order/confirm/${id}`,{
+                            confirmation:confirmation
+                        }).then(resp => {
+
+                        }).catch(err => console.log(err))
+                    }).catch(err => console.log(err)),{
+                        loading: 'Please Wait',
+                        success: 'Order Return Successfully',
+                        error: 'Something Went Wrong',
+                    })
+                }
+                else 
+                {
+                    const resp = await axios.put(`${process.env.React_App_SERVER_URL}/order/confirm/${id}`,{
+                        confirmation:confirmation
+                        });
+                    if(resp['data']['message'] === "Order already confirmed")
+                    {
+                        toast.error("Order already confirmed");
+                    }
+                    if(resp['data']['message'] === "Can't return order after 7 days")
+                    {
+                        toast.error("Can't return order after 7 days");
+                    }
+                    if(resp['data']['message'] === "Order updated")
+                    {
+                        toast.success("Order updated");
+                    }
+                }
+            }
+            
+        }
+        } catch (error) {
+        console.log(error.message)
+        }
+    }
+
     return (
         <EscrowContext.Provider value={{createEscrowOrder, createCoinList, 
         releaseEscrowPayment, disputeEscrowPayment, lockEscrow, 
-        createTokenList, createSellerCoinList, createSellerTokenList, cancelOrder }}>
+        createTokenList, createSellerCoinList, createSellerTokenList, cancelOrder, returnOrder }}>
           {children}
         </EscrowContext.Provider>
     )

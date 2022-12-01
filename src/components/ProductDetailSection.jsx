@@ -58,9 +58,9 @@ const ProductDetailSection = ({setShowModal,isshowModal,setIsShowModal}) => {
     <>
     <div className='w-full grid grid-cols-1 lg:grid-cols-3 gap-3 bg-slate-100 h-full pt-32 pb-10 px-5 md:px-10 lg:px-32'>
         <div>
-            <p className='text-lg text-slate-800 font-bold mb-3'>Brand's name</p>
+            {/* <p className='text-lg text-slate-800 font-bold mb-3'>Brand's name</p> */}
             <h1 className='text-3xl text-slate-900 font-bold mb-3'>{pDetails[0]?.title}</h1>
-            <h3 className='text-md text-slate-800 font-bold mb-3'>About the Brand</h3>
+            <h3 className='text-md text-slate-800 font-bold mb-3'>Product Description</h3>
             <p className='text-xs text-slate-900 text-justify font-medium leading-5 mb-2'>
             {pDetails[0]?.description}
             </p>
@@ -86,8 +86,8 @@ const ProductDetailSection = ({setShowModal,isshowModal,setIsShowModal}) => {
             </div>
         </div>
         <div>
-            <p className='text-md text-slate-800 font-bold my-3'>Product Detail</p>
-            <p className='text-xs text-slate-600 font-semibold my-3'>Item descriptions</p>
+            {/* <p className='text-md text-slate-800 font-bold my-3'>Product Detail</p> */}
+            {/* <p className='text-xs text-slate-600 font-semibold my-3'>Item descriptions</p> */}
             <div className='grid grid-cols-2 gap-1'>
                 {
                     pDetails[0]?.attribute.map((el,i) => (
@@ -97,7 +97,7 @@ const ProductDetailSection = ({setShowModal,isshowModal,setIsShowModal}) => {
                     ))
                 }
             </div>
-            <p className='text-sm text-slate-800 font-bold mt-3 my-5'>Made in Italy</p>
+            {/* <p className='text-sm text-slate-800 font-bold mt-3 my-5'>Made in Italy</p> */}
             <h3 className='text-md text-slate-800 font-bold mt-3 my-3'>Availability</h3>
             <p className='text-sm text-slate-700 mb-3'>{pDetails[0]?.remaining} of {pDetails[0]?.availabilty} available</p>
             <div className='flex justify-start items-center my-6'>
@@ -113,6 +113,7 @@ const ProductDetailSection = ({setShowModal,isshowModal,setIsShowModal}) => {
             :
             <button className='bg-black text-white rounded-full px-5 py-1 text-sm font-normal' onClick={() => buyHandler()}>Buy Now</button>
             }
+            <button className='bg-transparent border-[1px] border-[solid] border-black text-black rounded-full px-5 py-1 text-sm font-normal mx-3' onClick={()=>setIsShowModal(true)}>Login to Verify My NFT</button>
         </div>
     </div>
 </>

@@ -319,7 +319,7 @@ const AuthProvider = ({ children }) => {
                 message:data.message
             });
             
-            console.log(resp)
+            toast.success("Message Sent Successfully")
         } catch (error) {
             console.log(error.message)
         }

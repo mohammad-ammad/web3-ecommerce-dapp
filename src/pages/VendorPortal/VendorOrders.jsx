@@ -59,6 +59,9 @@ const VendorOrders = () => {
                                         Engraving
                                     </th>
                                     <th scope="col" class="py-3 px-6">
+                                        Confirmation
+                                    </th>
+                                    <th scope="col" class="py-3 px-6">
                                         Status
                                     </th>
                                     <th scope="col" class="py-3 px-6">
@@ -83,6 +86,9 @@ const VendorOrders = () => {
                                             </td>
                                             <td class="py-4 px-6">
                                                 {item?.order[0]?.engraveName}
+                                            </td>
+                                            <td class="py-4 px-6">
+                                            {item?.order[0]?.confirmation}
                                             </td>
                                             <td class="py-4 px-6">
                                             {item?.order[0]?.status}

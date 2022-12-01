@@ -4,6 +4,7 @@ import walletIcon from '../assets/wallet_icon.png';
 import { useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const AuthContent = ({walletHandler, setShowModal}) => {
 
@@ -15,6 +16,8 @@ const AuthContent = ({walletHandler, setShowModal}) => {
     
     //---GETTING THE AUTH CONTEXT
     const {login,loginWithDB, createAndLoginWithWallet} = useContext(AuthContext)
+
+    const navigate = useNavigate();
 
     //---LOGIN SUBMIT HANDLER
     const submitHandler = (type) => 
@@ -39,7 +42,11 @@ const AuthContent = ({walletHandler, setShowModal}) => {
         setShowModal(false)
     }
 
-
+    const go = () => 
+    {
+        navigate('/forgot');
+        setShowModal(false)
+    }
   return (
     <>
     <div>
@@ -51,7 +58,7 @@ const AuthContent = ({walletHandler, setShowModal}) => {
         </div>
     </div>
     <div className='flex justify-between items-center my-3'>
-        <a href="" className='text-xs text-blue-500 cursor-pointer px-2 py-1'>Forgot my password</a>
+        <a href="javaScript:void(0)" onClick={go} className='text-xs text-blue-500 cursor-pointer px-2 py-1'>Forgot my password</a>
         <button onClick={()=>submitHandler("custom")} className='bg-black text-white rounded-full px-5 py-1 text-sm font-normal'>Sign In</button>
     </div>
     <div>
