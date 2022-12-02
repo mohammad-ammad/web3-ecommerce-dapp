@@ -8,11 +8,14 @@ import { WalletContext } from '../context/WalletContext';
 import { MultiVendorContext } from '../context/MultiVendorContext';
 import StripeCheckout from 'react-stripe-checkout';
 import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 
 const ConfirmOrderModel = ({ confirmModal, setConfirmModal, setShowModal, setAccountInfo }) => {
+  const navigate = useNavigate();
   //---USECONTEXT 
   const { wallet } = useContext(WalletContext)
-  const { pDetails, currencyToggle, createOrder, paymentWithStripe, engraveName, zipCode } = useContext(MultiVendorContext)
+  const { pDetails, currencyToggle, createOrder, paymentWithStripe, engraveName, zipCode, gotoorder } = useContext(MultiVendorContext)
   const obj = {
     address: pDetails[0]?.collection_address,
     id: pDetails[0]?.tokenId,
@@ -62,6 +65,10 @@ const ConfirmOrderModel = ({ confirmModal, setConfirmModal, setShowModal, setAcc
     }
    
   }
+
+  useEffect(() => {
+    gotoorder === true && navigate('/orders')
+  }, [gotoorder])
   return (
     <>
       <Transition

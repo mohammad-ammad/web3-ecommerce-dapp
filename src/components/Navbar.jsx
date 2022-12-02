@@ -162,7 +162,7 @@ const Navbar = ({ setShowModal, setIsSignUp }) => {
                   <Link to="/how-it-works" className='text-sm font-bold'>How it works</Link>
                 </div>
                 <div className='my-2'>
-                  <a href="" className='text-sm font-bold'>Join Now</a>
+                <button onClick={() => setIsSignUp(true)} className='text-sm font-bold'>Join Now</button>
                 </div>
                 <div className='my-2'>
                   <button className='text-sm font-bold flex items-center' onClick={() => setMore(!more)}>More {more ? <IoIosArrowUp className='ml-1 pt-0.5 text-sm font-bold' /> : <IoIosArrowDown className='ml-1 pt-0.5 text-sm font-bold' />}</button>
@@ -177,16 +177,10 @@ const Navbar = ({ setShowModal, setIsSignUp }) => {
                   >
                     <div className='my-2'>
                       <div>
-                        <a href="" className='text-sm font-bold'>Profile</a>
+                        <Link to="/account-settings" className='text-sm font-bold'>Profile</Link>
                       </div>
                       <div>
-                        <a href="" className='text-sm font-bold'>Cart</a>
-                      </div>
-                      <div>
-                        <a href="" className='text-sm font-bold'>Orders</a>
-                      </div>
-                      <div>
-                        <a href="" className='text-sm font-bold'>Register as Vendor</a>
+                        <Link to="/orders" className='text-sm font-bold'>Orders</Link>
                       </div>
                     </div>
                   </Transition>
@@ -197,7 +191,7 @@ const Navbar = ({ setShowModal, setIsSignUp }) => {
                   <input type="text" className='outline-none' name="" id="" placeholder='Search' />
                 </div>
                 <div className='my-3'>
-                  <a href="" className='bg-black text-white rounded-full px-5 py-1 text-sm font-normal'>Login</a>
+                  <button onClick={() => setShowModal(true)} className='bg-black text-white rounded-full px-5 py-1 text-sm font-normal'>{wallet.isConnected ? 'Connected' : 'Login'}</button>
                 </div>
               </div>
             </Transition>

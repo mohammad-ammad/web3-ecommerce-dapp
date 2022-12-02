@@ -30,6 +30,7 @@ const MultiVendorProvider = ({ children }) => {
   const [zipCode, setZipCode] = useState("")
   const [getShippingUserDetails, setGetShippingUserDetails] = useState([]);
   const [OrderCompleted, setOrderCompleted] = useState([]);
+  const [gotoorder, setGoToOrder] = useState(false);
  
 
   //---GETTING THE INSTANCE CONTEXT
@@ -174,7 +175,7 @@ const MultiVendorProvider = ({ children }) => {
     try {
       if (NFTInstance != "") {
         console.log(data)
-        const res = await NFTInstance.mint(data.availabilty, ethers.utils.parseUnits(data.crypto_price, "ether"), data.primary_image);
+        const res = await NFTInstance.mint(data.availabilty, ethers.utils.parseUnits((data.crypto_price).toString(), "ether"), data.primary_image);
         toast.promise(
           res.wait().then(response => {
             axios.post(`${process.env.React_App_SERVER_URL}/product/create`, {
@@ -247,6 +248,7 @@ const MultiVendorProvider = ({ children }) => {
                 isRedeemable:true
               }).then(_res => {
                 console.log(_res)
+                setGoToOrder(true)
               }).catch(err => console.log(err))
             }).catch(err => console.log(err))
             ,
@@ -279,6 +281,7 @@ const MultiVendorProvider = ({ children }) => {
                 isRedeemable:false
               }).then(_res => {
                 console.log(_res)
+                setGoToOrder(true)
               }).catch(err => console.log(err))
             }).catch(err => console.log(err))
             ,
@@ -292,6 +295,7 @@ const MultiVendorProvider = ({ children }) => {
       }
     } catch (error) {
       console.log(error.message)
+      toast.error("Insufficient funds")
     }
   }
 
@@ -391,6 +395,7 @@ const MultiVendorProvider = ({ children }) => {
                       isRedeemable:true
                     }).then(_res => {
                       console.log(_res)
+                      setGoToOrder(true)
                     }).catch(err => console.log(err))
                   }).catch(err => console.log(err))
                   ,
@@ -423,6 +428,7 @@ const MultiVendorProvider = ({ children }) => {
                       isRedeemable:false
                     }).then(_res => {
                       console.log(_res)
+                      setGoToOrder(true)
                     }).catch(err => console.log(err))
                   }).catch(err => console.log(err))
                   ,
@@ -646,7 +652,7 @@ const MultiVendorProvider = ({ children }) => {
 
   
   return (
-    <MultiVendorContext.Provider value={{ isVendor, createShop, getSizes, getColor, mintProduct, getCategories, createCollection, createTechnicalMember, productList, productDetails, pDetails, currencyToggle, setCurrencyToggle, createOrder, orderCart, cart, vendorOrder, vendorOrderList, updateOrderStatus, paymentWithStripe, proSize, setProSize, engraveName, setEngraveName, addShippingDetails, isUserDetails, getShippingByUser, userDetail, catAttr, catAttrList, vendorMintedProduct, vendorProdList, getVendorEditAttribute, vendorProdListArr, checkOwner, MultiVendorInstance, isRedeemable, setIsRedeemable, redeemNow, updateAttributes, getnfc, mintAmount, zipCode, setZipCode, getShippingUserDetails, getShippingDetailsOfUser, updateShipping, listProduct, getCompletedOrder, OrderCompleted}}>
+    <MultiVendorContext.Provider value={{ isVendor, createShop, getSizes, getColor, mintProduct, getCategories, createCollection, createTechnicalMember, productList, productDetails, pDetails, currencyToggle, setCurrencyToggle, createOrder, orderCart, cart, vendorOrder, vendorOrderList, updateOrderStatus, paymentWithStripe, proSize, setProSize, engraveName, setEngraveName, addShippingDetails, isUserDetails, getShippingByUser, userDetail, catAttr, catAttrList, vendorMintedProduct, vendorProdList, getVendorEditAttribute, vendorProdListArr, checkOwner, MultiVendorInstance, isRedeemable, setIsRedeemable, redeemNow, updateAttributes, getnfc, mintAmount, zipCode, setZipCode, getShippingUserDetails, getShippingDetailsOfUser, updateShipping, listProduct, getCompletedOrder, OrderCompleted, gotoorder, setGoToOrder}}>
       {children}
     </MultiVendorContext.Provider>
   );

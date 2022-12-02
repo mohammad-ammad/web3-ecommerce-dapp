@@ -91,12 +91,42 @@ const Hero = () => {
                 </div>
             </div>
 
-            <div className='grid grid-cols-2 gap-2 md:hidden'>
-                <div>
-                    <img src={Hero1} className="w-full" alt="" />
+            <div className={`grid ${grow > 0 ? 'grid-cols-3' : 'grid-cols-2'} gap-2 md:hidden`}>
+                <div className={`${grow === 1 && 'col-span-2'} relative`}>
+                    <img src={grow === 1 ? Banner1 : Hero1} className="cursor-pointer w-full h-screen" alt="" onMouseEnter={() => setGrow(1)} onMouseLeave={() => setGrow(0)} />
+                    <div className={`${grow === 1 ? 'absolute top-1/3 right-5' : 'hidden'}`} onMouseEnter={() => setGrow(1)}>
+                        <div className='inline-flex justify-end items-center my-3 w-full'>
+                            <img src={freeman} className="w-24 bg-white rounded-md mr-3 py-1" alt="" srcset="" />
+                            <p className='bg-[#7956DC] shadow-inner shadow-[#c2b2ee] rounded-lg w-28 py-2 text-white text-center font-bold'>Live Now</p>
+                        </div>
+                        <div className='my-1'>
+                            <h1 className='text-white text-xl text-right font-extrabold'>LOCKET GOLDEN SNITCH NECKLACE</h1>
+                        </div>
+                        <div className='my-3'>
+                            <p className='text-white text-right text-md'>Harry Potter™</p>
+                        </div>
+                        <div className='inline-flex justify-end items-end my-3 w-full'>
+                            <Link to="/view-collections" className='bg-[#DBFF00] text-black rounded-full px-5 py-2 text-sm font-bold'>View Collections</Link>
+                        </div>
                 </div>
-                <div>
-                    <img src={Hero2} className="w-full" alt="" />
+                </div>
+                <div className={`${grow === 2 && 'col-span-2'} relative`}>
+                <img src={grow === 2 ? Banner3 : Hero2} className="cursor-pointer w-full h-screen" alt="" onMouseEnter={() => setGrow(2)} onMouseLeave={() => setGrow(0)} />
+                    <div className={`${grow === 2 ? 'absolute top-1/3 right-5' : 'hidden'}`} onMouseEnter={() => setGrow(2)}>
+                    <div className='inline-flex justify-end items-center my-3 w-full'>
+                            <img src={freeman} className="w-24 bg-white rounded-md mr-3 py-1" alt="" srcset="" />
+                            <p className='bg-[#7956DC] shadow-inner shadow-[#c2b2ee] rounded-lg w-28 py-2 text-white text-center font-bold'>Live Now</p>
+                        </div>
+                        <div className='my-1'>
+                            <h1 className='text-white text-lg text-right font-extrabold'>TIME TURNER DIAMOND NECKLACE</h1>
+                        </div>
+                        <div className='my-3'>
+                            <p className='text-white text-right text-md'>Harry Potter™</p>
+                        </div>
+                        <div className='inline-flex justify-end items-end my-3 w-full'>
+                            <Link to="/view-collections" className='bg-[#DBFF00] text-black rounded-full px-5 py-2 text-sm font-bold'>View Collections</Link>
+                        </div>
+                    </div>
                 </div>
             </div>
         </>

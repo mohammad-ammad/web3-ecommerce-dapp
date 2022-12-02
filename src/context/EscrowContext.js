@@ -349,9 +349,9 @@ const EscrowProvider = ({ children }) => {
                 )
             }
         } catch (error) {
-            console.log(error)
+            console.log(error.error.message)
             // toast.error(error.error.message)
-            // toast.error("Can't cancel after 24 hrs")
+            toast.error("Can't cancel after 24 hrs")
         }
     }
 
