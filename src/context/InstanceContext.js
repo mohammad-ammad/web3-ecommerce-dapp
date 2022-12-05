@@ -25,7 +25,7 @@ const InstanceProvider = ({ children }) => {
     //Intialized Provider
     const dic_net = {
         name: 'maticmum',
-        chainId: 80001,
+        chainId: 137,
         _defaultProvider: (providers) => new providers.JsonRpcProvider(`${process.env.React_App_INFURIA_KEY}`)
     };
 
@@ -39,10 +39,13 @@ const InstanceProvider = ({ children }) => {
     {
         try {
 
-            const signer = new ethers.Wallet(
-                `${process.env.React_App_ACCOUNT_PRIVATE_KEY}`,
-                 ethers.getDefaultProvider(dic_net)
-             );
+            // const signer = new ethers.Wallet(
+            //     `${process.env.React_App_ACCOUNT_PRIVATE_KEY}`,
+            //      ethers.getDefaultProvider(dic_net)
+            //  );
+
+             const provider = new ethers.providers.JsonRpcProvider("https://polygon-rpc.com/");
+            const signer = new ethers.Wallet(process.env.React_App_ACCOUNT_PRIVATE_KEY,provider);
 
             const contract = new ethers.Contract(`${process.env.React_App_IN_WALLET_CONTRACT_ADDRESS}`,InAppWalletAbi, signer);
             setInAppInstance(contract)

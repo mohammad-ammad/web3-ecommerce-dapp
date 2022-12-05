@@ -13,7 +13,7 @@ const WhatsInclude = () => {
                     <img src={v1} className="w-[40px] h-[40px] my-3" alt="" />
                     <p className='text-[24px] font-[700] my-2 text-black'>Physical</p>
                     <p className='text-[14px] font-[400] leading-[28px] text-slate-700'>
-                        Physical products will be available for redemption upon sucessful purchase. The physical product will be automatically shipped to the address provided unless storage option is selected during check-out.
+                        Physical products will be available for redemption upon successful purchase. The physical product will be automatically shipped to the address provided unless storage option is selected during check-out.
                     </p>
                 </div>
                 <div className='border-solid border-2 border-black rounded-lg p-3 w-[417px] h-[312px] mx-1 my-1'>
@@ -56,7 +56,7 @@ const WhatsInclude = () => {
                     <img src={v4} className="w-[40px] h-[40px] my-3" alt="" />
                     <p className='text-[24px] font-[700] my-2 text-black'>Digital</p>
                     <p className='text-[14px] font-[400] leading-[28px] text-slate-700'>
-                    Imagined by The Spot Room design lab. AR filter will be delivered via email.
+                    Imagined by <span className='italic'>The Spot Room</span> design lab. AR filter will be delivered via email.
                     </p>
                     {/* <div className='border-solid border-2 w-fit px-5 py-1 text-sm font-bold mt-3 cursor-pointer rounded-2xl border-slate-600'>
                         try now

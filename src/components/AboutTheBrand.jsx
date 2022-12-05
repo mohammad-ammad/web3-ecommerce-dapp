@@ -9,7 +9,7 @@ const AboutTheBrand = () => {
                 <img src={freemanLogo} className="" alt="" />
             </div>
             <div className='w-full md:w-5/12'>
-                <h1 className='bg-[#D9D9D9] w-fit px-3 py-2 rounded-full text-lg text-black mb-3'>About The Brand</h1>
+                <h1 className='bg-[#D9D9D9] w-fit px-3 py-2 rounded-full text-lg text-black mb-3'>About the Brand</h1>
                 <p className='text-md text-slate-900'>
                     As traditional fine jewelers, Freeman Jewelry applied the high standards of luxury craftsmanship to create a rich, realistic collection for the Wizarding World. Every piece of fine jewelry is carefully handcrafted in their Seattle studio.
                 </p>

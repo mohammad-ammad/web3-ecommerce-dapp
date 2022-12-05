@@ -12,12 +12,12 @@ const WhatToDo = () => {
             <div className='text-center'>
                 <img src={Banner1} className="mx-auto" alt="" />
                 <h2 className='my-3 text-md font-bold'>Phygitalization</h2>
-                <p className='text-sm text-slate-700'>All physical goods on The Spot Room are accompanied by a digital twin NFT and a digital wearable.</p>
+                <p className='text-sm text-slate-700'>All physical goods on <span className='font-bold italic'>The Spot Room</span> are accompanied by a digital twin NFT and a digital wearable.</p>
             </div>
             <div className='text-center'>
                 <img src={Banner2} className="mx-auto"  alt="" />
                 <h2 className='my-3 text-md font-bold'>Authentication</h2>
-                <p className='text-sm text-slate-700'>All physical goods are backed on the Blockchain through the NFT, which is the proof of provenance, authenticity and ownership.</p>
+                <p className='text-sm text-slate-700'>All physical goods are backed on the "blockchain through the NFT", which is the proof of provenance, authenticity and ownership.</p>
             </div>
             <div className='text-center'>
                 <img src={Banner3} className="mx-auto"  alt="" />

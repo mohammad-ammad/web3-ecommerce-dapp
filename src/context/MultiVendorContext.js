@@ -249,7 +249,10 @@ const MultiVendorProvider = ({ children }) => {
               }).then(_res => {
                 console.log(_res)
                 setGoToOrder(true)
-              }).catch(err => console.log(err))
+              }).catch(err => {
+                toast.error("Infuicient Funds")
+                console.log(err)
+              })
             }).catch(err => console.log(err))
             ,
             {
@@ -282,7 +285,10 @@ const MultiVendorProvider = ({ children }) => {
               }).then(_res => {
                 console.log(_res)
                 setGoToOrder(true)
-              }).catch(err => console.log(err))
+              }).catch(err =>{
+                toast.error("Infuicient Funds")
+                console.log(err)
+              })
             }).catch(err => console.log(err))
             ,
             {
@@ -396,7 +402,10 @@ const MultiVendorProvider = ({ children }) => {
                     }).then(_res => {
                       console.log(_res)
                       setGoToOrder(true)
-                    }).catch(err => console.log(err))
+                    }).catch(err => {
+                      toast.error("Infuicient Funds")
+                      console.log(err)
+                    })
                   }).catch(err => console.log(err))
                   ,
                   {
@@ -429,7 +438,10 @@ const MultiVendorProvider = ({ children }) => {
                     }).then(_res => {
                       console.log(_res)
                       setGoToOrder(true)
-                    }).catch(err => console.log(err))
+                    }).catch(err =>{
+                      toast.error("Infuicient Funds")
+                      console.log(err)
+                    })
                   }).catch(err => console.log(err))
                   ,
                   {

@@ -29,9 +29,9 @@ const ContactUs = () => {
     }
   return (
     <div className='bg-slate-100 flex justify-center items-center flex-col p-2 md:p-14'>
-        <h1 className='text-3xl text-center font-bold my-3 md:my-2'>Connect with Us</h1>
-        <p className='text-sm text-slate-700'>Join the community.</p>
-        <p className='text-sm text-slate-700 text-center'>Stay in the loop for the latest news, drops & collectibles.</p>
+        <h1 className='text-3xl text-center font-bold my-3 md:my-2'>Contact Us</h1>
+        <p className='text-sm text-slate-700'>Join the movement.</p>
+        <p className='text-sm text-slate-700 text-center'>Be featured on our Launch Pad or let us power your phygital website.</p>
         <div className='my-2 flex flex-col'>
             <div className='md:w-96 my-2 inline-flex justify-start items-center bg-white shadow-inner shadow-slate-200 rounded-lg'>
                 <AiOutlineMail className='ml-3 fill-slate-500'/>

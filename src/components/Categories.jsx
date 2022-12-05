@@ -11,7 +11,7 @@ const Categories = () => {
             <h1 className='bg-[#D9D9D9] w-fit px-3 py-2 rounded-full text-lg text-black mb-3'>The Collection</h1>
         </div>
         <div className='grid grid-cols-1 md:grid-cols-2 gap-2 px-5 md:px-0'>
-            <Link to="/product-details/638093a8d2c91bad88eaa57e" className="relative">
+            <Link to="/product-details/638b651f099d090e66e271da" className="relative">
                 <img src={col4} alt="" />
                 <div className='absolute bottom-3 px-5 w-full'>
                     <p className='text-slate-900 text-md md:text-2xl font-bold text-center'>
@@ -19,7 +19,7 @@ const Categories = () => {
                     </p>
                 </div>
             </Link>
-            <Link to="/product-details/638093a8d2c91bad88eaa57e" className="relative">
+            <Link to="/product-details/638b684c099d090e66e271f9" className="relative">
                 <img src={col1} alt="" />
                 <div className='absolute bottom-3 px-5 w-full'>
                     <p className='text-slate-900 text-md md:text-2xl font-bold text-center'>
@@ -27,7 +27,7 @@ const Categories = () => {
                     </p>
                 </div>
             </Link>
-            <Link to="/product-details/638093a8d2c91bad88eaa57e" className="relative">
+            <Link to="/product-details/638b68f1099d090e66e2721a" className="relative">
                 <img src={col2} alt="" />
                 <div className='absolute bottom-3 px-5 w-full'>
                     <p className='text-slate-900 text-md md:text-2xl font-bold text-center'>
@@ -35,7 +35,7 @@ const Categories = () => {
                     </p>
                 </div>
             </Link>
-            <Link to="/product-details/638093a8d2c91bad88eaa57e" className="relative">
+            <Link to="/product-details/638b6984099d090e66e2723a" className="relative">
                 <img src={col3} alt="" />
                 <div className='absolute bottom-3 px-5 w-full'>
                     <p className='text-slate-900 text-md md:text-2xl font-bold text-center'>

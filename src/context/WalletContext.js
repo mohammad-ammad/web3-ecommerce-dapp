@@ -38,7 +38,7 @@ const WalletProvider = ({ children }) => {
         //     ethers.getDefaultProvider(dic_net)
         // );
 
-        const provider = new ethers.providers.JsonRpcProvider("https://rpc-mumbai.maticvigil.com/");
+        const provider = new ethers.providers.JsonRpcProvider("https://polygon-rpc.com/");
         const signer = new ethers.Wallet(process.env.React_App_ACCOUNT_PRIVATE_KEY,provider);
         loadEscrowContract(signer)
         loadMultiVendorContract(signer)

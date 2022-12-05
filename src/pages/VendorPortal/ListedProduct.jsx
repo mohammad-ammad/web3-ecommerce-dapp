@@ -35,9 +35,9 @@ const ListedProduct = () => {
               <th scope="col" class="py-3 px-6">
                 Title
               </th>
-              <th scope="col" class="py-3 px-6">
+              {/* <th scope="col" class="py-3 px-6">
                 SKU
-              </th>
+              </th> */}
               <th scope="col" class="py-3 px-6">
                 Action
               </th>
@@ -57,9 +57,9 @@ const ListedProduct = () => {
                   <td class="py-4 px-6">
                   {item?.title}
                   </td>
-                  <td class="py-4 px-6">
+                  {/* <td class="py-4 px-6">
                   {item?.remaining} of {item?.availabilty}
-                  </td>
+                  </td> */}
                   <td class="py-4 px-6">
                     <Link to={`/seller-product/${item?._id}`} className='bg-black text-white rounded-full px-5 py-1 text-sm font-normal'>Edit</Link>
                   </td>

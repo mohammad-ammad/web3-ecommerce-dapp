@@ -112,7 +112,7 @@ const ConfirmOrderModel = ({ confirmModal, setConfirmModal, setShowModal, setAcc
                       wallet.type == "InApp" ? 
                       <StripeCheckout
                         token={stripeHandler}
-                        stripeKey="pk_test_51KBg9jG0gapMqUsS3yoMihYnaGrWojG7awmth7BpX5SUSvTICjTqtZ5mgFJCoCn71IMfo2c3Kt2f3x5prTSNgV0A00sEdlIgiv"
+                        stripeKey="pk_live_51M7BDBJsZo5RWeq3SWGYTmCkKsFQg3wfZ6pHwldLS6O6HsItmhDpBkD0mXhonpuPLbBUi2VFcaPyuuM3MkZYNcpv00phEyQfgU"
                         name="The Spot Room"
                         amount={pDetails[0]?.native_price * 100}
                       >
@@ -123,7 +123,7 @@ const ConfirmOrderModel = ({ confirmModal, setConfirmModal, setShowModal, setAcc
                       :
                       <StripeCheckout
                         token={stripeHandler}
-                        stripeKey="pk_test_51KBg9jG0gapMqUsS3yoMihYnaGrWojG7awmth7BpX5SUSvTICjTqtZ5mgFJCoCn71IMfo2c3Kt2f3x5prTSNgV0A00sEdlIgiv"
+                        stripeKey="pk_live_51M7BDBJsZo5RWeq3SWGYTmCkKsFQg3wfZ6pHwldLS6O6HsItmhDpBkD0mXhonpuPLbBUi2VFcaPyuuM3MkZYNcpv00phEyQfgU"
                         name="The Spot Room"
                         amount={pDetails[0]?.native_price * 100}
                       >

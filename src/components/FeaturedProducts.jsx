@@ -18,7 +18,7 @@ const FeaturedProducts = ({Heading}) => {
     <div className="py-10 px-2 md:px-24 bg-slate-100">
         <h1 className='text-3xl text-center font-bold my-3 md:my-2'>{Heading}</h1>
         <div className='flex justify-evenly items-center my-2 py-1 bg-white rounded-full w-44 mx-auto md:float-right shadow-inner shadow-slate-300 cursor-pointer'>
-            <div className={`mx-1 text-sm ${toggle === false ? 'bg-black text-white px-3 py-1 rounded-full' : 'px-1'} cursor-pointer`} onClick={()=>setToggle(false)}>US dollar</div>
+            <div className={`mx-1 text-sm ${toggle === false ? 'bg-black text-white px-3 py-1 rounded-full' : 'px-1'} cursor-pointer`} onClick={()=>setToggle(false)}>Us Dollar</div>
             <div className={`mx-1 text-sm ${toggle === true ? 'bg-black text-white  px-3 py-1 rounded-full' : 'px-1'} cursor-pointer`} onClick={()=>setToggle(true)}>Crypto</div>
         </div>
         <div className='w-full grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-3'>
