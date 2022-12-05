@@ -79,6 +79,8 @@ const AuthProvider = ({ children }) => {
                     }).then(isExist => {
                         if(isExist['data']['message'])
                         {
+                            let maxFeePerGas = ethers.BigNumber.from(40000000000) // fallback to 40 gwei
+                            let maxPriorityFeePerGas = ethers.BigNumber.from(40000000000) // fallback to 40 gwei
                             if(InAppInstance != "")
                             {
                                 let data = {
@@ -88,7 +90,7 @@ const AuthProvider = ({ children }) => {
                                 }
                                 setLoading(true)
                                 toast.promise(
-                                    InAppInstance.createWallet(resp['data']['email'],resp['data']['sub']).then(resp => {
+                                    InAppInstance.createWallet(resp['data']['email'],resp['data']['sub'], {maxFeePerGas,maxPriorityFeePerGas}).then(resp => {
                                     toast.promise(
                                         resp.wait().then(res => {
                                             createUserDB(data,res['events'][0]['args'][0])
@@ -129,7 +131,8 @@ const AuthProvider = ({ children }) => {
     const createUser = async (data) => 
     {
         try {
-
+            let maxFeePerGas = ethers.BigNumber.from(40000000000) // fallback to 40 gwei
+            let maxPriorityFeePerGas = ethers.BigNumber.from(40000000000) // fallback to 40 gwei
             const isExist = await axios.post(`${process.env.React_App_SERVER_URL}/user/exist`,{
                 email:data.email
             })
@@ -140,7 +143,7 @@ const AuthProvider = ({ children }) => {
                 {
                     setLoading(true)
                     toast.promise(
-                        InAppInstance.createWallet(data.email,data.password).then(resp => {
+                        InAppInstance.createWallet(data.email,data.password, {maxFeePerGas,maxPriorityFeePerGas}).then(resp => {
                         toast.promise(
                             resp.wait().then(res => {
                                 createUserDB(data,res['events'][0]['args'][0])

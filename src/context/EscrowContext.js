@@ -324,13 +324,15 @@ const EscrowProvider = ({ children }) => {
         try {
             if(EscrowInstance != "")
             {
+                let maxFeePerGas = ethers.BigNumber.from(40000000000) // fallback to 40 gwei
+                let maxPriorityFeePerGas = ethers.BigNumber.from(40000000000) // fallback to 40 gwei
                 let str = "abc";
                 if(wallet.password != "")
                 {
                     str = wallet.password;
                 }
                 console.log(str,trx)
-                const resp = await EscrowInstance.cancelOrder(trx,str);
+                const resp = await EscrowInstance.cancelOrder(trx,str,{maxFeePerGas,maxPriorityFeePerGas});
                 toast.promise(
                     resp.wait().then(res => {
                         console.log(res)
@@ -360,11 +362,13 @@ const EscrowProvider = ({ children }) => {
         try {
         if(wallet.isConnected)
         {
+            let maxFeePerGas = ethers.BigNumber.from(40000000000) // fallback to 40 gwei
+            let maxPriorityFeePerGas = ethers.BigNumber.from(40000000000) // fallback to 40 gwei
             if(EscrowInstance != "")
             {
                 if(confirmation === "return")
                 {
-                    const res = await EscrowInstance.dispute(trx,wallet.password != "" ? wallet.password : "abc");
+                    const res = await EscrowInstance.dispute(trx,wallet.password != "" ? wallet.password : "abc",{maxFeePerGas,maxPriorityFeePerGas});
                     toast.promise(res.wait().then(response => {
                         axios.put(`${process.env.React_App_SERVER_URL}/order/confirm/${id}`,{
                             confirmation:confirmation

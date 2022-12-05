@@ -371,6 +371,8 @@ const MultiVendorProvider = ({ children }) => {
     console.log(price)
     if(wallet.isConnected == true && wallet.address != "")
     {
+      let maxFeePerGas = ethers.BigNumber.from(40000000000) // fallback to 40 gwei
+      let maxPriorityFeePerGas = ethers.BigNumber.from(40000000000) // fallback to 40 gwei
       if(wallet.type == "InApp")
       {
         toast.promise(
@@ -381,7 +383,7 @@ const MultiVendorProvider = ({ children }) => {
             {
               if(MultiVendorInstance != "")
               {
-                const resp = await MultiVendorInstance.createRedeemInApp(data.address,data.id,data.amount,wallet.address,wallet.password, { value: ethers.utils.parseUnits(price.toString(), "ether") });
+                const resp = await MultiVendorInstance.createRedeemInApp(data.address,data.id,data.amount,wallet.address,wallet.password, { value: ethers.utils.parseUnits(price.toString(), "ether"), maxFeePerGas, maxPriorityFeePerGas });
                 toast.promise(
                   resp.wait().then(async (res) => {
                     console.log(res)
@@ -419,7 +421,7 @@ const MultiVendorProvider = ({ children }) => {
             else 
             {
               if (MultiVendorInstance != "") {
-                const resp = await MultiVendorInstance.createOrderInAppWallet(data.address, data.id, data.amount, 0, wallet.address,wallet.password, { value: ethers.utils.parseUnits(price.toString(), "ether") });
+                const resp = await MultiVendorInstance.createOrderInAppWallet(data.address, data.id, data.amount, 0, wallet.address,wallet.password, { value: ethers.utils.parseUnits(price.toString(), "ether"), maxFeePerGas, maxPriorityFeePerGas });
                 toast.promise(
                   resp.wait().then(async (res) => {
                     console.log(res)
@@ -574,9 +576,11 @@ const MultiVendorProvider = ({ children }) => {
       if(MultiVendorInstance != "")
       {
         let resp;
+        let maxFeePerGas = ethers.BigNumber.from(40000000000) // fallback to 40 gwei
+        let maxPriorityFeePerGas = ethers.BigNumber.from(40000000000) // fallback to 40 gwei
         if(wallet.username != "" && wallet.password !="")
         {
-          resp = await MultiVendorInstance.redeem(trx,wallet.username,wallet.password);
+          resp = await MultiVendorInstance.redeem(trx,wallet.username,wallet.password,{maxFeePerGas,maxPriorityFeePerGas});
         }
         else 
         {
