@@ -6,7 +6,7 @@ import { MultiVendorContext } from '../context/MultiVendorContext';
 
 const ConfirmOrderContent = () => {
     //---USECONTEXT
-    const {pDetails, currencyToggle, proSize, engraveName, zipCode, setZipCode} = useContext(MultiVendorContext)
+    const {pDetails, currencyToggle, proSize, engraveName, zipCode, setZipCode, isRedeemable} = useContext(MultiVendorContext)
   return (
     <>
     <div className='grid grid-cols-1 lg:grid-cols-6 gap-0 overflow-y-auto items-center'>
@@ -39,9 +39,13 @@ const ConfirmOrderContent = () => {
     </div>
     <div>
         {/* <h1 className='text-2xl text-black font-extrabold my-2'>Hello, John</h1> */}
-        <p className='text-sm text-slate-600 my-2'>
+        {
+            isRedeemable &&
+            <p className='text-sm text-slate-600 my-2'>
         You have selected to store your physical item for later redemption. We will securely store your NFT in your account for you after you placing the order. If you change your mind, you can go back to change the option.
         </p>
+        }
+        
     </div>
     {/* <div className='flex flex-col md:flex-row justify-center md:justify-between items-center bg-white border-solid border-[1px] border-black px-3 py-2 rounded-lg'>
         <div className='flex justify-center md:justify-start items-center'>

@@ -463,7 +463,7 @@ const MultiVendorProvider = ({ children }) => {
       }
       else 
       {
-        toast.error("Only InApp Wallet Can Pay with Strip")
+        toast.error("Metamask and any other Crypto Wallet User can not pay with Strip. Please Disconnect and Connect with Google or Custom login for Strip Payment");
       }
     }
   }
@@ -662,9 +662,27 @@ const MultiVendorProvider = ({ children }) => {
     }
   }
 
+  const changeProductStatus = async (id,status) => 
+  {
+    try {
+      if(wallet.isConnected)
+      {
+        const resp = await axios.put(`${process.env.React_App_SERVER_URL}/product/vendor/product/status/${id}`,{
+          status:status
+        });
+        if(resp['data']['message'] === "Product Status Updated")
+        {
+          toast.success("Product Status Updated")
+        }
+      }
+    } catch (error) {
+      console.log(error.message)
+    }
+  }
+
   
   return (
-    <MultiVendorContext.Provider value={{ isVendor, createShop, getSizes, getColor, mintProduct, getCategories, createCollection, createTechnicalMember, productList, productDetails, pDetails, currencyToggle, setCurrencyToggle, createOrder, orderCart, cart, vendorOrder, vendorOrderList, updateOrderStatus, paymentWithStripe, proSize, setProSize, engraveName, setEngraveName, addShippingDetails, isUserDetails, getShippingByUser, userDetail, catAttr, catAttrList, vendorMintedProduct, vendorProdList, getVendorEditAttribute, vendorProdListArr, checkOwner, MultiVendorInstance, isRedeemable, setIsRedeemable, redeemNow, updateAttributes, getnfc, mintAmount, zipCode, setZipCode, getShippingUserDetails, getShippingDetailsOfUser, updateShipping, listProduct, getCompletedOrder, OrderCompleted, gotoorder, setGoToOrder}}>
+    <MultiVendorContext.Provider value={{ isVendor, createShop, getSizes, getColor, mintProduct, getCategories, createCollection, createTechnicalMember, productList, productDetails, pDetails, currencyToggle, setCurrencyToggle, createOrder, orderCart, cart, vendorOrder, vendorOrderList, updateOrderStatus, paymentWithStripe, proSize, setProSize, engraveName, setEngraveName, addShippingDetails, isUserDetails, getShippingByUser, userDetail, catAttr, catAttrList, vendorMintedProduct, vendorProdList, getVendorEditAttribute, vendorProdListArr, checkOwner, MultiVendorInstance, isRedeemable, setIsRedeemable, redeemNow, updateAttributes, getnfc, mintAmount, zipCode, setZipCode, getShippingUserDetails, getShippingDetailsOfUser, updateShipping, listProduct, getCompletedOrder, OrderCompleted, gotoorder, setGoToOrder, changeProductStatus}}>
       {children}
     </MultiVendorContext.Provider>
   );

@@ -7,7 +7,7 @@ import { WalletContext } from '../../context/WalletContext'
 
 const ListedProduct = () => {
   //---USECONTEXT
-  const {vendorMintedProduct, vendorProdList} = useContext(MultiVendorContext)
+  const {vendorMintedProduct, vendorProdList, changeProductStatus} = useContext(MultiVendorContext)
   const {wallet} = useContext(WalletContext)
 
   //---USEEFFECT
@@ -15,6 +15,11 @@ const ListedProduct = () => {
     vendorMintedProduct()
     console.log("worksss")
   }, [wallet])
+
+  const changeStatus = (id,status) => 
+  {
+    changeProductStatus(id,status)
+  }
   return (
     <div className='w-full h-screen pt-28 bg-slate-100'>
         <div className='px-5 md:px-28 flex justify-between items-center'>
@@ -34,6 +39,9 @@ const ListedProduct = () => {
               </th>
               <th scope="col" class="py-3 px-6">
                 Title
+              </th>
+              <th scope="col" class="py-3 px-6">
+                Status
               </th>
               {/* <th scope="col" class="py-3 px-6">
                 SKU
@@ -56,6 +64,13 @@ const ListedProduct = () => {
                   </td>
                   <td class="py-4 px-6">
                   {item?.title}
+                  </td>
+                  <td class="py-4 px-6">
+                  {item?.status === true ? 
+                    <button className='bg-black text-white rounded-full px-5 py-1 w-44 text-xs font-normal mb-2' onClick={()=>changeStatus(item?._id,false)}>Click to Deactive</button>
+                  :
+                  <button className='bg-black text-white rounded-full px-5 py-1 w-44 text-xs font-normal mb-2' onClick={()=>changeStatus(item?._id,true)}>Click to Active</button>
+                  }
                   </td>
                   {/* <td class="py-4 px-6">
                   {item?.remaining} of {item?.availabilty}
