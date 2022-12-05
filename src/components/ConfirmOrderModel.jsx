@@ -48,7 +48,7 @@ const ConfirmOrderModel = ({ confirmModal, setConfirmModal, setShowModal, setAcc
     {
       let product = {
         name: pDetails[0]?.title,
-        price: Number(pDetails[0]?.native_price) + Number(5)
+        price: Number(pDetails[0]?.native_price)
       }
   
       if (wallet.isConnected && wallet.address != "") {
@@ -114,7 +114,7 @@ const ConfirmOrderModel = ({ confirmModal, setConfirmModal, setShowModal, setAcc
                         token={stripeHandler}
                         stripeKey="pk_live_51M7BDBJsZo5RWeq3SWGYTmCkKsFQg3wfZ6pHwldLS6O6HsItmhDpBkD0mXhonpuPLbBUi2VFcaPyuuM3MkZYNcpv00phEyQfgU"
                         name="The Spot Room"
-                        amount={pDetails[0]?.native_price * 100}
+                        amount={(pDetails[0]?.native_price * 100) + (Math.random()).toFixed(3)}
                       >
                         <button className='bg-black text-white rounded-full px-6 py-2 text-sm font-normal'>{wallet.isConnected ? 'Place Order with Stripe' : 'Next'}</button>
                       </StripeCheckout>
@@ -125,7 +125,7 @@ const ConfirmOrderModel = ({ confirmModal, setConfirmModal, setShowModal, setAcc
                         token={stripeHandler}
                         stripeKey="pk_live_51M7BDBJsZo5RWeq3SWGYTmCkKsFQg3wfZ6pHwldLS6O6HsItmhDpBkD0mXhonpuPLbBUi2VFcaPyuuM3MkZYNcpv00phEyQfgU"
                         name="The Spot Room"
-                        amount={pDetails[0]?.native_price * 100}
+                        amount={(pDetails[0]?.native_price * 100) + (Math.random()).toFixed(3)}
                       >
                         <button className='bg-black text-white rounded-full px-6 py-2 text-sm font-normal'>{wallet.isConnected ? 'Place Order with Stripe' : 'Next'}</button>
                       </StripeCheckout>
