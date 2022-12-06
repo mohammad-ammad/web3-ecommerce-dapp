@@ -1,4 +1,5 @@
 import React from 'react'
+import { useEffect } from 'react';
 import { useContext } from 'react';
 import p1 from '../assets/p1.png';
 import { MultiVendorContext } from '../context/MultiVendorContext';
@@ -6,6 +7,18 @@ import { MultiVendorContext } from '../context/MultiVendorContext';
 const ReviewOrderContent = () => {
     //---USECONTEXT 
     const {pDetails, currencyToggle, setCurrencyToggle,engraveName, setEngraveName, isRedeemable, setIsRedeemable} = useContext(MultiVendorContext)
+
+    useEffect(() => {
+        const check = document.getElementById("check");
+        if(isRedeemable)
+        {
+            check.checked = true;
+        }
+        else 
+        {
+            check.checked = false;
+        }
+    }, [isRedeemable])
   return (
     <>
     <div className='grid grid-cols-1 lg:grid-cols-6 gap-0 overflow-y-auto'>
@@ -39,7 +52,7 @@ const ReviewOrderContent = () => {
             - Physical item redemed at a later date is not eligible for return.
         </p>
         <div className='flex justify-start items-center'>
-            <input type="checkbox" className='mr-2' name="" id="" onChange={()=>setIsRedeemable(!isRedeemable)}/>
+            <input type="checkbox" className='mr-2' name="" id="check" onChange={()=>setIsRedeemable(!isRedeemable)} />
             <p className='text-sm md:text-md text-black font-bold'>
             Store the physical item for redemption at a later date.
             </p>

@@ -8,8 +8,8 @@ import {Link} from "react-router-dom";
 
 const BuyerOrders = () => {
     //---USECONTEXT
-    const { orderCart, cart, redeemNow, gotoorder, setGoToOrder } = useContext(MultiVendorContext)
-    const {cancelOrder} = useContext(EscrowContext)
+    const { orderCart, cart, redeemNow, gotoorder, setGoToOrder, redeemStatus, setRedeemStatus } = useContext(MultiVendorContext)
+    const {cancelOrder, cancelStatus, setCancelStatus} = useContext(EscrowContext)
     const {wallet} = useContext(WalletContext)
     
     //---useEffect
@@ -20,6 +20,22 @@ const BuyerOrders = () => {
     useEffect(() => {
         window.scrollTo(0, 0);
     }, [])
+
+    useEffect(() => {
+        if(cancelStatus === true)
+        {
+            orderCart();
+            setCancelStatus(false);
+        }
+    },[cancelStatus])
+
+    useEffect(() => {
+        if(redeemStatus === true)
+        {
+            orderCart();
+            setRedeemStatus(false);
+        }
+    },[redeemStatus])
 
     useEffect(() => {
         gotoorder === true && setGoToOrder(false)
@@ -108,21 +124,27 @@ const BuyerOrders = () => {
                                         Total: {Number(item?.payment[0]?.price) + Number(item?.payment[0]?.tax)}
                                         </td>
                                         <td class="py-4 px-6">
-                                            {item?.order[0]?.status === "Pending" ? 'Pending' : item?.order[0]?.status === "Progress" ? 'In Progress' : item?.order[0]?.status === "Complete" ? 'Completed' : item?.order[0]?.status === "Cancel" ? 'Cancelled' : null }
+                                            {item?.order[0]?.status === "Pending" ? 'Pending' : item?.order[0]?.status === "Progress" ? 'In Progress' : item?.order[0]?.status === "Complete" ? 'Completed' : item?.order[0]?.status === "Cancel" ? 'Cancelled' : item?.order[0]?.status === "Redeem not claim" ? 'Redeem not claim' : item?.order[0]?.status === "Redeemed" ? 'Redeemed' : null }
                                         </td>
                                         {
                                             item?.order[0]?.isRedeemable === true ? 
                                             <td class="py-4 px-6">
-                                                <button className='bg-black text-white rounded-full px-5 py-1 w-32 text-xs font-normal mb-2' onClick={()=>redeem(item?._id,item?.trxId)}>Redeem Now</button>
+                                                {
+                                                    item?.order[0]?.status != 'Redeemed' ? 
+                                                    <button className='bg-black text-white rounded-full px-5 py-1 w-32 text-xs font-normal mb-2' onClick={()=>redeem(item?._id,item?.trxId)}>Redeem Now</button>
+                                                    : null
+                                                }
                                                 <Link to="/account-settings" className='bg-black text-white rounded-full px-5 py-1 w-32 text-xs font-normal'>Shipping Details</Link>
                                             </td>
                                             : 
                                             <td class="py-4 px-6">
                                                 {
                                                     item?.order[0]?.status != 'Complete' ?
+                                                    item?.order[0]?.status != 'Cancel' ?
                                                     <button className='bg-black text-white rounded-full px-5 py-1 w-44 text-xs font-normal mb-2' onClick={()=>cancelHandler(item?._id,item?.trxId)}>Cancel Order</button>
-                                                    : null
+                                                    : null : null
                                                 }
+                                                
                                                 <Link to="/account-settings" className='bg-black text-white rounded-full px-5 py-1 w-44 text-xs font-normal inline-flex justify-center items-center'>Shipping Details</Link>
                                             </td>
                                         }

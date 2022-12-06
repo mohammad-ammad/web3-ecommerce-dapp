@@ -26,9 +26,9 @@ const ConfirmOrderContent = () => {
             }
             {
                 currencyToggle ? 
-                <p className='text-3xl text-black font-bold my-5'>{pDetails[0]?.crypto_price} Matic</p>
+                <p className='text-3xl text-black font-bold my-5'>{Number(pDetails[0]?.crypto_price).toFixed(2)} Matic</p>
                 :
-                <p className='text-3xl text-black font-bold my-5'>$ {pDetails[0]?.native_price}</p>
+                <p className='text-3xl text-black font-bold my-5'>$ {pDetails[0]?.native_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</p>
             }
             <div>
                 <div className='bg-white shadow-inner shadow-slate-200 rounded-lg my-1'>

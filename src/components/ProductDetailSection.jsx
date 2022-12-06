@@ -6,7 +6,7 @@ import vector from '../assets/label.png';
 import matic from '../assets/matic.png';
 import { Slide } from 'react-slideshow-image';
 import 'react-slideshow-image/dist/styles.css';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useContext } from 'react';
 import { MultiVendorContext } from '../context/MultiVendorContext';
@@ -21,6 +21,7 @@ const ProductDetailSection = ({setShowModal,isshowModal,setIsShowModal}) => {
     const {productDetails, pDetails, setProSize, proSize} = useContext(MultiVendorContext)
     const [activeIndex, setActiveIndex] = useState(0);
     const {wallet} = useContext(WalletContext);
+    const navigate = useNavigate();
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -42,6 +43,18 @@ const ProductDetailSection = ({setShowModal,isshowModal,setIsShowModal}) => {
         if(wallet.isConnected && wallet.address != "")
         {
             setShowModal(true)
+        }
+        else 
+        {
+            setIsShowModal(true)
+        }
+    }
+
+    const verifyNftHandler = () => 
+    {
+        if(wallet.isConnected)
+        {
+            navigate('/orders')
         }
         else 
         {
@@ -113,7 +126,7 @@ const ProductDetailSection = ({setShowModal,isshowModal,setIsShowModal}) => {
             :
             <button className='bg-black text-white rounded-full px-5 py-1 text-sm font-normal' onClick={() => buyHandler()}>Buy Now</button>
             }
-            <button className='bg-transparent border-[1px] border-[solid] border-black text-black rounded-full px-5 py-1 text-sm font-normal mx-3' onClick={()=>setIsShowModal(true)}>Login to Verify My NFT</button>
+            <button className='bg-transparent border-[1px] border-[solid] border-black text-black rounded-full px-5 py-1 text-sm font-normal mx-3' onClick={()=>verifyNftHandler()}>Login to Verify My NFT</button>
         </div>
     </div>
 </>

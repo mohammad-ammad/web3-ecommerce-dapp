@@ -30,7 +30,7 @@ const Redeemable = ({pending, redeemable, item}) => {
                 <Link to={`/product-details/${item?.product_id}`} className='text-sm text-blue-500 cursor-pointer'>Details</Link>
                 {
                     item?.order[0]?.isRedeemable ? 
-                    item?.order[0]?.status == "Pending" ?
+                    item?.order[0]?.status == "Redeem not claim" ?
                     <button className='bg-black text-white rounded-full px-5 py-1 text-sm font-normal' onClick={()=>redeem(item?._id,item?.trxId)}>Redeem Now</button>
                     : 
                     <button className='bg-black text-white rounded-full px-5 py-1 text-sm font-normal' >Redeemed</button>
@@ -98,6 +98,7 @@ const Redeemable = ({pending, redeemable, item}) => {
             </div>
         </div> */}
         {
+            item?.order[0]?.isRedeemable ? null :
             item.confirmation == "not Confirmed" ?
             <p className='text-center text-red-600 text-xs cursor-pointer font-bold py-2' onClick={()=>actionHandler(item._id,item?.trxId,"return")}>Return my Order</p>
             : ""

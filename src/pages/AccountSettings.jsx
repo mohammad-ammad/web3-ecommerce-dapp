@@ -10,8 +10,10 @@ import { WalletContext } from '../context/WalletContext'
 import { useState } from 'react'
 import toast from 'react-hot-toast'
 import axios from 'axios'
+import { EscrowContext } from '../context/EscrowContext'
 const AccountSettings = () => {
-    const {getShippingDetailsOfUser, getShippingUserDetails, updateShipping, OrderCompleted, getCompletedOrder} = useContext(MultiVendorContext);
+    const {getShippingDetailsOfUser, getShippingUserDetails, updateShipping, OrderCompleted, getCompletedOrder, redeemStatus, setRedeemStatus} = useContext(MultiVendorContext);
+    const {returnStatus, setReturnStatus} = useContext(EscrowContext);
     const {wallet, disConnect} = useContext(WalletContext)
     const [data, setData] = useState({
         firstname:"",
@@ -37,6 +39,22 @@ const AccountSettings = () => {
             getCompletedOrder()
         }
     },[wallet])
+
+    useEffect(() => {
+        if(returnStatus)
+        {
+            getCompletedOrder();
+            setReturnStatus(false);
+        }
+    }, [returnStatus])
+
+    useEffect(() => {
+        if(redeemStatus)
+        {
+            getCompletedOrder();
+            setRedeemStatus(false);
+        }
+    }, [redeemStatus])
 
     useEffect(() => {
         setData({

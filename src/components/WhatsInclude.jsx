@@ -4,7 +4,10 @@ import v2 from '../assets/v2.png'
 import v3 from '../assets/v3.png'
 import v4 from '../assets/v4.png'
 import {Link} from 'react-router-dom'
+import { useContext } from 'react'
+import { MultiVendorContext } from '../context/MultiVendorContext'
 const WhatsInclude = () => {
+    const {pDetails} = useContext(MultiVendorContext)
     return (
         <div className=''>
             <h1 className='text-center text-black text-[28px] font-[800] leading-[29px] my-10'>What's Included</h1>
@@ -37,11 +40,11 @@ const WhatsInclude = () => {
                     <p className='text-[24px] font-[700] my-2 text-black'>NFT</p>
                     <div className='flex justify-start items-center'>
                         <h4 className='text-[14px] font-[800] leading-[28px] text-slate-700 mr-1'>Contract Address</h4>
-                        <p className='text-[14px] font-[400] leading-[28px] text-blue-500'>0x47e3cd892akl5c6r394d3fuf...</p>
+                        <p className='text-[14px] font-[400] leading-[28px] text-blue-500'>{pDetails[0]?.collection_address.slice(0,15)}...{pDetails[0]?.collection_address.slice(37,42)}</p>
                     </div>
                     <div className='flex justify-start items-center'>
                         <h4 className='text-[14px] font-[800] leading-[28px] text-slate-700 mr-3'>Token ID</h4>
-                        <p className='text-[14px] font-[400] leading-[28px] text-slate-700'>7</p>
+                        <p className='text-[14px] font-[400] leading-[28px] text-slate-700'>{pDetails[0]?.tokenId}</p>
                     </div>
                     <div className='flex justify-start items-center'>
                         <h4 className='text-[14px] font-[800] leading-[28px] text-slate-700 mr-3'>Token Standard</h4>

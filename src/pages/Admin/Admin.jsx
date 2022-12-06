@@ -10,11 +10,13 @@ import { WalletContext } from '../../context/WalletContext';
 import { ethers } from 'ethers';
 import toast from 'react-hot-toast';
 import {CopyToClipboard} from 'react-copy-to-clipboard';
+import { EscrowContext } from '../../context/EscrowContext';
 
 const Admin = () => {
     //---USECONTEXT 
     const {createCollection, createTechnicalMember, checkOwner, MultiVendorInstance} = useContext(MultiVendorContext);
     const {wallet, setWallet} = useContext(WalletContext)
+    const {withdrawMoney} = useContext(EscrowContext)
     //---USESTATE
     const [collection, setCollection] = useState("");
     const [serial, setSerial] = useState("");
@@ -22,6 +24,9 @@ const Admin = () => {
     const [engrave, setEngrave] = useState(false);
     const [team, setTeam] = useState("");
     const [val, setVal] = useState([])
+
+    const [receiver, setReceiver] = useState("");
+    const [wamount, setWAmount] = useState(0);
 
     useEffect(() => {
         const loadSession = async () => 
@@ -109,8 +114,21 @@ const Admin = () => {
         setVal(deleteData)
     }
 
+    const withdrawHandler = () => 
+    {
+        if(receiver != "" && wamount != 0)
+        {
+            console.log(receiver,wamount)
+            withdrawMoney(receiver,wamount)
+        }
+        else 
+        {
+            toast.error("Please Fill All Fields");
+        }
+    }
+
   return (
-    <div className='bg-slate-100 w-full h-screen flex justify-center items-start pt-20 md:pt-28'>
+    <div className='bg-slate-100 w-full h-full flex justify-center items-start pt-20 md:pt-28'>
         <div className='w-full md:w-1/3 px-5'>
             <h1 className='text-md font-bold text-black'>Add Collection</h1>
             <div className='bg-white shadow-inner shadow-slate-200 rounded-lg my-1'>
@@ -169,6 +187,18 @@ const Admin = () => {
             </div>
             <div className='flex justify-center items-center my-5'>
                  <button onClick={teamHandler} className='bg-black text-white rounded-full w-full px-5 py-1 text-sm font-normal'>Add Member</button>
+            </div>
+
+            <hr />
+            <h1 className='text-md font-bold text-black'>Withdraw Amount</h1>
+            <div className='bg-white shadow-inner shadow-slate-200 rounded-lg my-1'>
+                <input type="text" value={receiver} onChange={(e)=>setReceiver(e.target.value)}  className='w-full p-2 text-xs bg-transparent outline-none' placeholder='Receiver Address' name="" id="" />
+            </div>
+            <div className='bg-white shadow-inner shadow-slate-200 rounded-lg my-1'>
+                <input type="number" value={wamount} onChange={(e)=>setWAmount(e.target.value)}  className='w-full p-2 text-xs bg-transparent outline-none' placeholder='Amount' name="" id="" />
+            </div>
+            <div className='flex justify-center items-center my-5'>
+                 <button onClick={withdrawHandler} className='bg-black text-white rounded-full w-full px-5 py-1 text-sm font-normal'>Withdraw</button>
             </div>
         </div>
     </div>

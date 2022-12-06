@@ -31,7 +31,7 @@ const Product = ({img, tag, title, price, id, toggle}) => {
         <h1 className='text-md font-bold'>{title}</h1>
         {
           toggle ? 
-          <p className='text-md font-extrabold my-2'>{price} Matic</p>
+          <p className='text-md font-extrabold my-2'>{Number(price).toFixed(2)} Matic</p>
           :
           <p className='text-md font-extrabold my-2'>$ {price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</p>
         }

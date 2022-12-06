@@ -10,9 +10,11 @@ import StripeCheckout from 'react-stripe-checkout';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
+import { useState } from 'react';
 
 const ConfirmOrderModel = ({ confirmModal, setConfirmModal, setShowModal, setAccountInfo }) => {
   const navigate = useNavigate();
+  const [tamount, setTamount] = useState(0);
   //---USECONTEXT 
   const { wallet } = useContext(WalletContext)
   const { pDetails, currencyToggle, createOrder, paymentWithStripe, engraveName, zipCode, gotoorder } = useContext(MultiVendorContext)
@@ -32,12 +34,19 @@ const ConfirmOrderModel = ({ confirmModal, setConfirmModal, setShowModal, setAcc
 
   const nextHandler = () => {
     if (wallet.isConnected && wallet.address != "") {
-      createOrder(obj)
+      if(zipCode != "")
+      {
+        createOrder(obj)
+        setConfirmModal(false)
+      }
+      else 
+      {
+        toast.error("Zip Code is Required")
+      }
     }
     else {
       setAccountInfo(true)
     }
-    setConfirmModal(false)
   }
 
   //---STRIPE HANDLER
@@ -69,6 +78,17 @@ const ConfirmOrderModel = ({ confirmModal, setConfirmModal, setShowModal, setAcc
   useEffect(() => {
     gotoorder === true && navigate('/orders')
   }, [gotoorder])
+
+  useEffect(() => {
+    if(zipCode != "")
+    {
+      setTamount(8.875)
+    }
+    else 
+    {
+      setTamount(0);
+    }
+  }, [zipCode])
   return (
     <>
       <Transition
@@ -114,7 +134,7 @@ const ConfirmOrderModel = ({ confirmModal, setConfirmModal, setShowModal, setAcc
                         token={stripeHandler}
                         stripeKey="pk_live_51M7BDBJsZo5RWeq3SWGYTmCkKsFQg3wfZ6pHwldLS6O6HsItmhDpBkD0mXhonpuPLbBUi2VFcaPyuuM3MkZYNcpv00phEyQfgU"
                         name="The Spot Room"
-                        amount={(pDetails[0]?.native_price * 100) + (Math.random()).toFixed(3)}
+                        amount={(pDetails[0]?.native_price * 100)}
                       >
                         <button className='bg-black text-white rounded-full px-6 py-2 text-sm font-normal'>{wallet.isConnected ? 'Place Order with Stripe' : 'Next'}</button>
                       </StripeCheckout>
@@ -125,7 +145,7 @@ const ConfirmOrderModel = ({ confirmModal, setConfirmModal, setShowModal, setAcc
                         token={stripeHandler}
                         stripeKey="pk_live_51M7BDBJsZo5RWeq3SWGYTmCkKsFQg3wfZ6pHwldLS6O6HsItmhDpBkD0mXhonpuPLbBUi2VFcaPyuuM3MkZYNcpv00phEyQfgU"
                         name="The Spot Room"
-                        amount={(pDetails[0]?.native_price * 100) + (Math.random()).toFixed(3)}
+                        amount={Number(pDetails[0]?.native_price * 100) + tamount}
                       >
                         <button className='bg-black text-white rounded-full px-6 py-2 text-sm font-normal'>{wallet.isConnected ? 'Place Order with Stripe' : 'Next'}</button>
                       </StripeCheckout>

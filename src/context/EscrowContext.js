@@ -19,6 +19,8 @@ const EscrowProvider = ({ children }) => {
     //---GETTING THE INSTANCE CONTEXT
     const {EscrowInstance, loadEscrowContract} = useContext(InstanceContext)
     const {wallet} = useContext(WalletContext)
+    const [cancelStatus, setCancelStatus] = useState(false);
+    const [returnStatus, setReturnStatus] = useState(false);
 
     useEffect(() => {
         if(wallet.isConnected)
@@ -340,6 +342,7 @@ const EscrowProvider = ({ children }) => {
                             status:"Cancel"
                         }).then(_res => {
                             console.log(_res)
+                            setCancelStatus(true)
                         }).catch(err => console.log(err))
                     }).catch(err => console.log(err))
                     ,
@@ -373,7 +376,7 @@ const EscrowProvider = ({ children }) => {
                         axios.put(`${process.env.React_App_SERVER_URL}/order/confirm/${id}`,{
                             confirmation:confirmation
                         }).then(resp => {
-
+                            setReturnStatus(true);
                         }).catch(err => console.log(err))
                     }).catch(err => console.log(err)),{
                         loading: 'Please Wait',
@@ -397,6 +400,7 @@ const EscrowProvider = ({ children }) => {
                     if(resp['data']['message'] === "Order updated")
                     {
                         toast.success("Order updated");
+                        setReturnStatus(true);
                     }
                 }
             }
@@ -407,10 +411,29 @@ const EscrowProvider = ({ children }) => {
         }
     }
 
+    const withdrawMoney = async (receiver,amount) => 
+    {
+        try {
+            const resp = await EscrowInstance.withdraw(receiver,ethers.utils.parseUnits((amount).toString(), "ether"));
+            toast.promise(
+                resp.wait().then(response => {
+                    console.log(response)
+                }).catch(err => console.log(err)),
+                {
+                    loading: 'Creating Transaction Please Wait',
+                    success: 'Withdraw Successfully',
+                    error: 'Something Went Wrong',
+                }
+            )
+        } catch (error) {
+            console.log(error.message)
+        }
+    }
+
     return (
         <EscrowContext.Provider value={{createEscrowOrder, createCoinList, 
         releaseEscrowPayment, disputeEscrowPayment, lockEscrow, 
-        createTokenList, createSellerCoinList, createSellerTokenList, cancelOrder, returnOrder }}>
+        createTokenList, createSellerCoinList, createSellerTokenList, cancelOrder, returnOrder, cancelStatus, setCancelStatus, returnStatus, setReturnStatus, withdrawMoney }}>
           {children}
         </EscrowContext.Provider>
     )

@@ -44,7 +44,7 @@ const Faq = () => {
             <Queries question="What are the fees?" 
             answer="Shipping fees and duties will be charged to the redeemer upon redemption if outside of the free shipping zone."/>
             <Queries question="How do I redeem?" 
-            answer="Physical items will be shipped automatically upon order confirmation, unless the ‘redemption at a later date’ option is selected. Unredeemed goods can be redeemed at any point from the ‘My NFT Collection’ page within the specified redemption window.  Items redeemed at a later date are not eligible for return."/>
+            answer="Physical items will be shipped automatically upon order confirmation, unless the ‘redemption at a later date’ option is selected. Unredeemed goods can be redeemed at any point from ‘Order Summary’ within the specified redemption window. Once the NFT is redeemed, it will be moved from ‘Order Summary’ to your account.  Items redeemed at a later date are not eligible for return. "/>
              <Queries question="What is made-to-order?" 
             answer="Due to the exclusivity of the brands we work with, some drops will be made-to-order. Once the order is confirmed, you can expect to receive the physical item within the specified delivery window."/>
             <Queries question="Does TheSpotRoom only offer jewelry and handbags?" 
@@ -58,10 +58,12 @@ const Faq = () => {
             <Queries question="What happens if I sell my digital NFT?" 
             answer="The NFT is attached to the physical product as its digital twin. Therefore, the NFT represents the physical item in Blockchain transactions. By selling the NFT, you are also expected to sell and transfer the physical product accordingly. On the rare occasion that one decides to decouple the NFT from its physical twin, the physical twin product may lose value, as its provenance, authenticity and ownership can no longer be verified on the Blockchain. "/>
             <Queries question="What can I do after I make a purchase?" 
-            answer="You can enjoy the physical product like you always do with any purchase. The NFT gives you the digital style, whilst also providing the security of ownership. Your wallet or account will act as your digital closet to organize and showcase your phygital collections. 
-            
-            If you choose to redeem the physical product at a later date, you can still enjoy the digital wearable virtually without taking possession of the physical. The NFT representing the physical can be traded easily and securely without the hassle of shipping. 
+            answer="You will have 24 hours to cancel your order, unless the option to redeem at a later date was selected during check-out. The physical product will be shipped to the address provided and a tracking number will be communicated via email. Upon delivery of the physical product, you will have 7 days to inspect and confirm the order. Go to your ‘Order Summary’ for order confirmation.
+ 
+            If you choose to redeem the physical product at a later date, the NFT will be available in your ‘Order Summary’ and is ready for physical product redemption any time during the redemption window. The NFT representing the physical can be traded easily and securely without the hassle of shipping.
             "/>
+             <Queries question="Where is ‘Order Summary’ and ‘Profile’?" 
+            answer="Both ‘Order Summary’ and ‘Profile’ are on the global header under ‘More’. You can find all pending or unredeemed orders under ‘Order Summary’. Once an order is confirmed and/or redeemed, it will be under ‘Profile’. "/>
             <Queries question="Where is the digital NFT stored?" 
             answer="If you don’t already have a wallet, your NFTs will be stored in your account on our platform. They can be easily transferred to your wallet once you have it ready. "/>
             <Queries question="How do transactions work on TheSpotRoom?" 

@@ -31,6 +31,7 @@ const MultiVendorProvider = ({ children }) => {
   const [getShippingUserDetails, setGetShippingUserDetails] = useState([]);
   const [OrderCompleted, setOrderCompleted] = useState([]);
   const [gotoorder, setGoToOrder] = useState(false);
+  const [redeemStatus, setRedeemStatus] = useState(false);
  
 
   //---GETTING THE INSTANCE CONTEXT
@@ -242,7 +243,7 @@ const MultiVendorProvider = ({ children }) => {
                 quantity: data.amount,
                 engraveName: data.engraveName,
                 trxId: parseInt(trx._hex, 16),
-                status: "Redeem not calim",
+                status: "Redeem not claim",
                 type: data.type,
                 price: data.price,
                 isRedeemable:true
@@ -397,7 +398,7 @@ const MultiVendorProvider = ({ children }) => {
                       quantity: data.amount,
                       engraveName: data.engraveName,
                       trxId: parseInt(trx._hex, 16),
-                      status: "Pending",
+                      status: "Redeem not claim",
                       type: data.type,
                       price: data.price,
                       isRedeemable:true
@@ -593,6 +594,7 @@ const MultiVendorProvider = ({ children }) => {
               status:'Redeemed'
             }).then(res => {
               console.log("Redeem Successful")
+              setRedeemStatus(true)
             }).catch(err => console.log(err))
 
           }).catch(err => console.log(err))
@@ -686,7 +688,7 @@ const MultiVendorProvider = ({ children }) => {
 
   
   return (
-    <MultiVendorContext.Provider value={{ isVendor, createShop, getSizes, getColor, mintProduct, getCategories, createCollection, createTechnicalMember, productList, productDetails, pDetails, currencyToggle, setCurrencyToggle, createOrder, orderCart, cart, vendorOrder, vendorOrderList, updateOrderStatus, paymentWithStripe, proSize, setProSize, engraveName, setEngraveName, addShippingDetails, isUserDetails, getShippingByUser, userDetail, catAttr, catAttrList, vendorMintedProduct, vendorProdList, getVendorEditAttribute, vendorProdListArr, checkOwner, MultiVendorInstance, isRedeemable, setIsRedeemable, redeemNow, updateAttributes, getnfc, mintAmount, zipCode, setZipCode, getShippingUserDetails, getShippingDetailsOfUser, updateShipping, listProduct, getCompletedOrder, OrderCompleted, gotoorder, setGoToOrder, changeProductStatus}}>
+    <MultiVendorContext.Provider value={{ isVendor, createShop, getSizes, getColor, mintProduct, getCategories, createCollection, createTechnicalMember, productList, productDetails, pDetails, currencyToggle, setCurrencyToggle, createOrder, orderCart, cart, vendorOrder, vendorOrderList, updateOrderStatus, paymentWithStripe, proSize, setProSize, engraveName, setEngraveName, addShippingDetails, isUserDetails, getShippingByUser, userDetail, catAttr, catAttrList, vendorMintedProduct, vendorProdList, getVendorEditAttribute, vendorProdListArr, checkOwner, MultiVendorInstance, isRedeemable, setIsRedeemable, redeemNow, updateAttributes, getnfc, mintAmount, zipCode, setZipCode, getShippingUserDetails, getShippingDetailsOfUser, updateShipping, listProduct, getCompletedOrder, OrderCompleted, gotoorder, setGoToOrder, changeProductStatus, redeemStatus, setRedeemStatus}}>
       {children}
     </MultiVendorContext.Provider>
   );
