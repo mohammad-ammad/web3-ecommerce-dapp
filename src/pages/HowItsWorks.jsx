@@ -13,7 +13,7 @@ import abt6 from '../assets/abt6.png';
 let list = [
   {
       title:"Phygitalization",
-      desc:'The Spot Room works directly with brands and designers to create the digital twin NFT for each "physcial" product. The NFT is not only a collectible artwork, but also the proof of provenance, authenticity and ownership. A digital wearable is also created to enhance the enjoyment of the physical product.',
+      desc:'The Spot Room works directly with brands and designers to create the digital twin NFT for each physical product. The NFT is not only a collectible artwork, but also the proof of provenance, authenticity and ownership. A digital wearable is also created to enhance the enjoyment of the physical product.',
       image:abt1,
       position:"left"
   },
@@ -37,7 +37,7 @@ let list = [
   },
   {
       title:"Physical Redemption",
-      desc:'If storage option is selected during check-out, customers have the flexibility to redeem the "physcial" product at anytime during the redemption window. Simply request the redemption online and confirm your address, the physical product will be delivered to your door.',
+      desc:'If storage option is selected during check-out, customers have the flexibility to redeem the physical product at anytime during the redemption window. Simply request the redemption online and confirm your address, the physical product will be delivered to your door.',
       image:abt2,
       position:"left"
   },

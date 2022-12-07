@@ -88,6 +88,9 @@ const BuyerOrders = () => {
                                 Total Price
                             </th>
                             <th scope="col" class="py-3 px-6">
+                                Order Date
+                            </th>
+                            <th scope="col" class="py-3 px-6">
                                 Status
                             </th>
                             <th scope="col" class="py-3 px-6">
@@ -120,11 +123,14 @@ const BuyerOrders = () => {
                                         </td>
                                         <td class="py-4 px-1">
                                         Net Price: {item?.payment[0]?.price} <br/>
-                                        Tax: {item?.payment[0]?.tax} <br/>
+                                        Tax: {item?.payment[0]?.tax} % <br/>
                                         Total: {Number(item?.payment[0]?.price) + Number(item?.payment[0]?.tax)}
                                         </td>
-                                        <td class="py-4 px-6">
-                                            {item?.order[0]?.status === "Pending" ? 'Pending' : item?.order[0]?.status === "Progress" ? 'In Progress' : item?.order[0]?.status === "Complete" ? 'Completed' : item?.order[0]?.status === "Cancel" ? 'Cancelled' : item?.order[0]?.status === "Redeem not claim" ? 'Redeem not claim' : item?.order[0]?.status === "Redeemed" ? 'Redeemed' : null }
+                                        <td class="py-4 px-1">
+                                            {item?.order[0]?.createAt.substr(0, 10)}
+                                        </td>
+                                        <td class="py-4 px-1">
+                                            {item?.order[0]?.status === "Pending" ? 'Pending' : item?.order[0]?.status === "In-Progress" ? 'In-Progress' : item?.order[0]?.status === "Complete" ? 'Completed' : item?.order[0]?.status === "Cancel" ? 'Cancelled' : item?.order[0]?.status === "Redeem not claim" ? 'Redeem not claim' : item?.order[0]?.status === "Redeemed" ? 'Redeemed' : null }
                                         </td>
                                         {
                                             item?.order[0]?.isRedeemable === true ? 

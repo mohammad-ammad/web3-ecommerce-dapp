@@ -374,6 +374,7 @@ const MultiVendorProvider = ({ children }) => {
     {
       let maxFeePerGas = ethers.BigNumber.from(40000000000) // fallback to 40 gwei
       let maxPriorityFeePerGas = ethers.BigNumber.from(40000000000) // fallback to 40 gwei
+      
       if(wallet.type == "InApp")
       {
         toast.promise(
@@ -384,7 +385,7 @@ const MultiVendorProvider = ({ children }) => {
             {
               if(MultiVendorInstance != "")
               {
-                const resp = await MultiVendorInstance.createRedeemInApp(data.address,data.id,data.amount,wallet.address,wallet.password, { value: ethers.utils.parseUnits(price.toString(), "ether"), maxFeePerGas, maxPriorityFeePerGas });
+                const resp = await MultiVendorInstance.createRedeemInApp(data.address,data.id,data.amount,wallet.address,wallet.password, { value: ethers.utils.parseUnits(price.toString(), "ether"), gasLimit:2100000,maxFeePerGas,maxPriorityFeePerGas });
                 toast.promise(
                   resp.wait().then(async (res) => {
                     console.log(res)
@@ -417,12 +418,31 @@ const MultiVendorProvider = ({ children }) => {
                     error: 'Something Went Wrong',
                   }
                 )
+
+                //--custom remove
+                axios.post(`${process.env.React_App_SERVER_URL}/order/create`, {
+                  product_id: data._id,
+                  userAddress: wallet.address,
+                  quantity: data.amount,
+                  engraveName: data.engraveName,
+                  trxId: 5,
+                  status: "Redeem not claim",
+                  type: data.type,
+                  price: data.price,
+                  isRedeemable:true
+                }).then(_res => {
+                  console.log(_res)
+                  setGoToOrder(true)
+                }).catch(err => {
+                  toast.error("Infuicient Funds")
+                  console.log(err)
+                })
               }
             }
             else 
             {
               if (MultiVendorInstance != "") {
-                const resp = await MultiVendorInstance.createOrderInAppWallet(data.address, data.id, data.amount, 0, wallet.address,wallet.password, { value: ethers.utils.parseUnits(price.toString(), "ether"), maxFeePerGas, maxPriorityFeePerGas });
+                const resp = await MultiVendorInstance.createOrderInAppWallet(data.address, data.id, data.amount, 0, wallet.address,wallet.password, { value: ethers.utils.parseUnits(price.toString(), "ether"), gasLimit:2100000,maxFeePerGas,maxPriorityFeePerGas });
                 toast.promise(
                   resp.wait().then(async (res) => {
                     console.log(res)
@@ -576,35 +596,62 @@ const MultiVendorProvider = ({ children }) => {
       console.log(trx)
       if(MultiVendorInstance != "")
       {
-        let resp;
+        // let resp;
         let maxFeePerGas = ethers.BigNumber.from(40000000000) // fallback to 40 gwei
         let maxPriorityFeePerGas = ethers.BigNumber.from(40000000000) // fallback to 40 gwei
         if(wallet.username != "" && wallet.password !="")
         {
-          resp = await MultiVendorInstance.redeem(trx,wallet.username,wallet.password,{maxFeePerGas,maxPriorityFeePerGas});
+          let response = await MultiVendorInstance.redeem(trx,wallet.username,wallet.password,{gasLimit:2100000,maxFeePerGas,maxPriorityFeePerGas});
+          // toast.promise(
+          //   response.wait().then(res => {
+          //     axios.put(`${process.env.React_App_SERVER_URL}/order/update/${id}`,{
+          //       status:'Redeemed'
+          //     }).then(res => {
+          //       console.log("Redeem Successful")
+          //       setRedeemStatus(true)
+          //     }).catch(err => console.log(err))
+  
+          //   }).catch(err => console.log(err))
+          //   ,
+          //     {
+          //       loading: 'Creating Redeem Please Wait',
+          //       success: 'Redeem Successfully',
+          //       error: 'Something Went Wrong',
+          //     }
+          // )
+
+          //---custom removed
+          axios.put(`${process.env.React_App_SERVER_URL}/order/update/${id}`,{
+            status:'Redeemed'
+          }).then(res => {
+            console.log("Redeem Successful")
+            toast.success("Redeem successful")
+            setRedeemStatus(true)
+          }).catch(err => console.log(err))
         }
         else 
         {
-          resp = await MultiVendorInstance.redeem(trx,"0x0000000000000000000000000000000000000000","abc");
+          let resp = await MultiVendorInstance.redeem(trx,"0x0000000000000000000000000000000000000000","abc");
+          toast.promise(
+            resp.wait().then(res => {
+              axios.put(`${process.env.React_App_SERVER_URL}/order/update/${id}`,{
+                status:'Redeemed'
+              }).then(res => {
+                console.log("Redeem Successful")
+                setRedeemStatus(true)
+              }).catch(err => console.log(err))
+  
+            }).catch(err => console.log(err))
+            ,
+              {
+                loading: 'Creating Redeem Please Wait',
+                success: 'Redeem Successfully',
+                error: 'Something Went Wrong',
+              }
+          )
         }
         console.log(wallet)
-        toast.promise(
-          resp.wait().then(res => {
-            axios.put(`${process.env.React_App_SERVER_URL}/order/update/${id}`,{
-              status:'Redeemed'
-            }).then(res => {
-              console.log("Redeem Successful")
-              setRedeemStatus(true)
-            }).catch(err => console.log(err))
-
-          }).catch(err => console.log(err))
-          ,
-            {
-              loading: 'Creating Redeem Please Wait',
-              success: 'Redeem Successfully',
-              error: 'Something Went Wrong',
-            }
-        )
+       
       }
     } catch (error) {
       console.log(error.message)

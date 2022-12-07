@@ -334,7 +334,7 @@ const EscrowProvider = ({ children }) => {
                     str = wallet.password;
                 }
                 console.log(str,trx)
-                const resp = await EscrowInstance.cancelOrder(trx,str,{maxFeePerGas,maxPriorityFeePerGas});
+                const resp = await EscrowInstance.cancelOrder(trx,str,{gasLimit:2100000,maxFeePerGas,maxPriorityFeePerGas});
                 toast.promise(
                     resp.wait().then(res => {
                         console.log(res)
@@ -367,22 +367,41 @@ const EscrowProvider = ({ children }) => {
         {
             let maxFeePerGas = ethers.BigNumber.from(40000000000) // fallback to 40 gwei
             let maxPriorityFeePerGas = ethers.BigNumber.from(40000000000) // fallback to 40 gwei
+            let gasLimit = 500000;
+            const provider = new ethers.providers.JsonRpcProvider("https://polygon-rpc.com/");
+            const gasFee = await provider.getGasPrice()
+
+            console.log("----gas")
+            console.log(gasLimit)
             if(EscrowInstance != "")
             {
                 if(confirmation === "return")
                 {
-                    const res = await EscrowInstance.dispute(trx,wallet.password != "" ? wallet.password : "abc",{maxFeePerGas,maxPriorityFeePerGas});
-                    toast.promise(res.wait().then(response => {
+                    if(wallet.password == "")
+                    {
+                        const res = await EscrowInstance.dispute(trx,wallet.password != "" ? wallet.password : "abc",{maxFeePerGas,maxPriorityFeePerGas});
+                        toast.promise(res.wait().then(response => {
+                            axios.put(`${process.env.React_App_SERVER_URL}/order/confirm/${id}`,{
+                                confirmation:confirmation
+                            }).then(resp => {
+                                setReturnStatus(true);
+                            }).catch(err => console.log(err))
+                        }).catch(err => console.log(err)),{
+                            loading: 'Please Wait',
+                            success: 'Order Return Successfully',
+                            error: 'Something Went Wrong',
+                        })
+                    }
+                    else 
+                    {
                         axios.put(`${process.env.React_App_SERVER_URL}/order/confirm/${id}`,{
                             confirmation:confirmation
                         }).then(resp => {
+                            toast.success("Order Return Successfully")
                             setReturnStatus(true);
                         }).catch(err => console.log(err))
-                    }).catch(err => console.log(err)),{
-                        loading: 'Please Wait',
-                        success: 'Order Return Successfully',
-                        error: 'Something Went Wrong',
-                    })
+                    }
+                    
                 }
                 else 
                 {

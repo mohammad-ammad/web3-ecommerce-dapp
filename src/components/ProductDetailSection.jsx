@@ -73,7 +73,7 @@ const ProductDetailSection = ({setShowModal,isshowModal,setIsShowModal}) => {
         <div>
             {/* <p className='text-lg text-slate-800 font-bold mb-3'>Brand's name</p> */}
             <h1 className='text-3xl text-slate-900 font-bold mb-3'>{pDetails[0]?.title}</h1>
-            <h3 className='text-md text-slate-800 font-bold mb-3'>Product Description</h3>
+            <h3 className='text-md text-slate-800 font-bold mb-3'>About This Item</h3>
             <p className='text-xs text-slate-900 text-justify font-medium leading-5 mb-2'>
             {pDetails[0]?.description}
             </p>
