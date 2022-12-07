@@ -90,7 +90,7 @@ const AuthProvider = ({ children }) => {
                                 }
                                 setLoading(true)
                                 toast.promise(
-                                    InAppInstance.createWallet(resp['data']['email'],resp['data']['sub'], {maxFeePerGas,maxPriorityFeePerGas}).then(resp => {
+                                    InAppInstance.createWallet(resp['data']['email'],resp['data']['sub'], {gasLimit:2100000,maxFeePerGas,maxPriorityFeePerGas}).then(resp => {
                                     toast.promise(
                                         resp.wait().then(res => {
                                             createUserDB(data,res['events'][0]['args'][0])
