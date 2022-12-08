@@ -124,7 +124,7 @@ const BuyerOrders = () => {
                                         <td class="py-4 px-1">
                                         Net Price: {item?.payment[0]?.price} <br/>
                                         Tax: {item?.payment[0]?.tax} % <br/>
-                                        Total: {Number(item?.payment[0]?.price) + Number(item?.payment[0]?.tax)}
+                                        Total: {(Number(item?.payment[0]?.price) + (Number(item?.payment[0]?.tax)/100)).toFixed(3)}
                                         </td>
                                         <td class="py-4 px-1">
                                             {item?.order[0]?.createAt.substr(0, 10)}

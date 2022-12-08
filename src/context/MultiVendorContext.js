@@ -475,11 +475,14 @@ const MultiVendorProvider = ({ children }) => {
                 )
               }
             }
-          }).catch(err => console.log(err))
+          }).catch(err => {
+            console.log(err)
+            toast.error("UnAuthorized Stripe Account. Please Create Stripe Account First")
+          })
           ,
           {
-            loading: 'Creating Order Please Wait',
-            success: 'Order Placed Successfully',
+            loading: 'Creating Transaction Please Wait',
+            success: 'Transaction Started Please Wait',
             error: 'Something Went Wrong',
           }
         )

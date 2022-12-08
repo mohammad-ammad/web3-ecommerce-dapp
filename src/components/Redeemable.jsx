@@ -89,6 +89,14 @@ const Redeemable = ({pending, redeemable, item}) => {
                 <p className='text-xs text-blue-600'>{item?._id}</p>
             </div>
         </div>
+        <div className='grid grid-cols-1 lg:grid-cols-5 gap-1 items-center my-2'>
+            <div className='col-span-2'>
+                <h1 className='text-sm text-black font-bold'>Order Date</h1>
+            </div>
+            <div className='col-span-3'>
+                <p className='text-xs text-blue-600'>{item?.order[0]?.createAt.substr(0, 10)}</p>
+            </div>
+        </div>
         {/* <div className='grid grid-cols-1 lg:grid-cols-5 gap-1 items-center my-2'>
             <div className='col-span-2'>
                 <h1 className='text-sm text-black font-bold'>Redeemed On</h1>
