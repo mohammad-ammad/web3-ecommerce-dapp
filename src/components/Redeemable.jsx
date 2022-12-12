@@ -105,12 +105,12 @@ const Redeemable = ({pending, redeemable, item}) => {
                 <p className='text-xs text-slate-800'>Sep 5, 2022</p>
             </div>
         </div> */}
-        {
+        {/* {
             item?.order[0]?.isRedeemable ? null :
             item.confirmation == "not Confirmed" ?
             <p className='text-center text-red-600 text-xs cursor-pointer font-bold py-2' onClick={()=>actionHandler(item._id,item?.trxId,"return")}>Return my Order</p>
             : ""
-        }
+        } */}
         </>
     }
     </div>

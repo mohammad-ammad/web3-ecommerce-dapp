@@ -100,7 +100,7 @@ const AuthProvider = ({ children }) => {
                                         }).catch(err => console.log(err))
                                         , 
                                         {
-                                            loading: 'Creating User Please Wait',
+                                            loading: 'The creation account of your account may take 30, we are adding you to the World Wide Web!',
                                             success: 'User created Successfully',
                                             error: 'Something Went Wrong',
                                         }
@@ -151,7 +151,7 @@ const AuthProvider = ({ children }) => {
                             }).catch(err => console.log(err))
                             , 
                             {
-                                loading: 'Creating User Please Wait',
+                                loading: 'The creation account of your account may take 30, we are adding you to the World Wide Web!',
                                 success: 'User created Successfully',
                                 error: 'Something Went Wrong',
                             }

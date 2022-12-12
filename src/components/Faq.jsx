@@ -72,6 +72,10 @@ const Faq = () => {
             answer="The marketplace for trading will be launched in Q1 2023. Join the waitlist to be the first one to know. "/>
             <Queries question="How to scan the microchip?" 
             answer="Depending on the model of your smartphone, locate the NFC antenna on the smartphone and point it at the microchip. The smartphone should touch the microchip until a notification pops up. For iPhone, the antenna is located on the top edge at the back of the phone. It is recommended to remove any phone case as it may interfere with the signal"/>
+                        <Queries question="How do I organize a return? " 
+            answer="We are more than happy to accept your return within 7 days of delivery. To return an item, please email us at hello@thespotroom.com. We will respond to you with a returns number and the return address. 
+
+            Once we receive your return, please allow approximately 10 business days for your return to be processed by us. We’ll send you an email once our team has processed your refund. Credit Card refunds can take up to 15 business days to clear back into your account."/>
             </div>
 
         </div>

@@ -13,7 +13,7 @@ const Collections = () => {
         <AboutTheBrand/>
         <Categories/>
         <Faq/>
-        <ContactUs/>
+        {/* <ContactUs/> */}
     </div>
   )
 }

@@ -62,7 +62,7 @@ const HowItsWorks = () => {
     <HeroHowItsWork executeScroll={executeScroll}/>
     <AboutHowItsWork list={list} myRef={myRef}/>
     <Faq/>
-    <ContactUs/>
+    {/* <ContactUs/> */}
     </>
   )
 }

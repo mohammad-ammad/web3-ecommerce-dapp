@@ -22,7 +22,7 @@ const Landing = () => {
         <WhatToDo/>
         <FeaturedProducts Heading="Featured Products"/>
         <Faq/>
-        <ContactUs/>
+        {/* <ContactUs/> */}
     </>
   )
 }

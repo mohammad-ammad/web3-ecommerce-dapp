@@ -25,7 +25,7 @@ const ProductDetails = ({showModal : authmodel,setShowModal : setAuthModel}) => 
         <MoreDetails/>
         <WhatsInclude/>
         <Faq/>
-        <ContactUs/>
+        {/* <ContactUs/> */}
         <ReviewModel showModal={showModal} setShowModal={setShowModal} setConfirmModal={setConfirmModal} setAccountInfo={setAccountInfo} />
         <ConfirmOrderModel confirmModal={confirmModal} setConfirmModal={setConfirmModal} setShowModal={setShowModal} setAccountInfo={setAccountInfo}/>
         <AccountInfoModel accountInfo={accountInfo} setAccountInfo={setAccountInfo} setConfirmModal={setConfirmModal}/>
